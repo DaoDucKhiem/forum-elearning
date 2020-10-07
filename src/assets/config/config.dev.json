@@ -1,0 +1,6 @@
+{
+    "apiServer": "http://localhost:/api/",
+    "urlConfig": "http://localhost:4200",
+    "MaxLengthFile": 30,
+    "MaxFileSize": 10485760
+}

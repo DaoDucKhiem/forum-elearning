@@ -1,0 +1,22 @@
+:host {
+    .nav {
+        display: flex;
+        padding-left: 24px;
+        padding-right: 24px;
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            width: 200px;
+            .label {
+                margin-top: -4px;
+            }
+        }
+    }
+}
