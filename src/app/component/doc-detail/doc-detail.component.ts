@@ -10,25 +10,34 @@ import { ActivatedRoute } from '@angular/router';
 export class DocDetailComponent implements OnInit {
 
   public documents = [];
-  public document = {};
+  public document: any;
   public documentID: Number;
+  public showPopupUpload = false
 
 
   constructor(
     private documentService: DocumentService,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) { }
+
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.documentID = Number.parseInt(params['id']);
+      this.documentService.getDocuments().subscribe((data) => {
+        this.documents = data
+        this.documents.forEach((data) => {
+          if (data.ID == this.documentID) {
+            this.document = data;
+          }
+        })
+      });
     })
-    this.documentService.getDocuments().subscribe(data => this.documents = data);
-    this.documents.forEach((data)=>{
-      if(data.id == this.documentID){
-        this.document = data;
-      }
-    })
+
+  }
+
+  showUpload() {
+    this.showPopupUpload = true;
   }
 
 }
