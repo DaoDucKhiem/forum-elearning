@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ConfigService } from 'src/common/service/config.service';
 import { ForumAppConfig } from './share/model/config/forum-app-config';
 import { HttpClientModule } from '@angular/common/http'
+import { DocumentService } from 'src/common/documentService/document.service';
 
 export function initializeApp(appConfig: ConfigService<ForumAppConfig>) {
   return () => appConfig.load();
@@ -21,6 +22,7 @@ export function initializeApp(appConfig: ConfigService<ForumAppConfig>) {
     HttpClientModule
   ],
   providers: [
+    DocumentService,
     ConfigService,
     {
       provide: APP_INITIALIZER,
