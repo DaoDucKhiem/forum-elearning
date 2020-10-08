@@ -1,3 +1,5 @@
+@import '../../../../assets/scss/var-color.scss';
+
 :host {
     .nav {
         display: flex;
@@ -13,9 +15,13 @@
         .nav-right {
             display: flex;
             align-items: center;
-            width: 200px;
-            .label {
-                margin-top: -4px;
+            width: 250px;
+
+            .btn-navbar {
+                border-radius: 4px;
+                &:hover {
+                    background-color: $border;
+                }
             }
         }
     }

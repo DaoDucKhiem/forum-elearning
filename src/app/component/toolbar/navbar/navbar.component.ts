@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,9 @@ export class NavbarComponent implements OnInit {
 
   showPopupUpload = false;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +23,14 @@ export class NavbarComponent implements OnInit {
 
   closePopup(e) {
     this.showPopupUpload = false;
+  }
+
+  showLogin() {
+    this.router.navigate([`/login`]);
+  }
+
+  showRegister() {
+    this.router.navigate([`/register`]);
   }
 
 }
