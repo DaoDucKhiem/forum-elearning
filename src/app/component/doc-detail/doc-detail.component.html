@@ -1,1 +1,18 @@
-<p>doc-detail works!</p>
+<div class="detail-container">
+    <div class="header">
+        <div class="title">Tiêu đề</div>
+    </div>
+    <div class="content">
+        <div class="preview">
+            <iframe  class="preview-file" src="../../../assets/images/demo.pdf" title="W3Schools Free Online Web Tutorials"></iframe>
+        </div>
+        <div class="list-document">
+            <div class="title">
+            Các file liên quan
+            </div>
+            <ng-container *ngFor="let item of documents" [ngSwitch]="item.FileExtension">
+
+            </ng-container>
+        </div>
+    </div>
+</div>
