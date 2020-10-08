@@ -7,6 +7,7 @@ import { ConfigService } from 'src/common/service/config.service';
 import { ForumAppConfig } from './share/model/config/forum-app-config';
 import { HttpClientModule } from '@angular/common/http'
 import { DocumentService } from 'src/common/documentService/document.service';
+import { SafePipe } from './share/pipe/safe.pipe';
 
 export function initializeApp(appConfig: ConfigService<ForumAppConfig>) {
   return () => appConfig.load();
@@ -14,7 +15,8 @@ export function initializeApp(appConfig: ConfigService<ForumAppConfig>) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
