@@ -2,7 +2,7 @@
     <div class="list-document">
         <ng-container *ngFor="let item of documents" [ngSwitch]="item.FileExtension">
 
-            <div class="document">
+            <div class="document" (click)="showDetail(item)">
                 <div class="icon-container">
 
                     <img *ngSwitchCase="'docx'" src="../../../assets/images/docx.png" class="icon" />

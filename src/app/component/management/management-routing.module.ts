@@ -13,14 +13,14 @@ const routes: Routes = [
         loadChildren: ()=> import('../document/document.module').then(x=>x.DocumentModule)
       },
       {
-        path: "doc-detail",
+        path: ":id",
         loadChildren: ()=> import('../doc-detail/doc-detail.module').then(x=>x.DocDetailModule)
       },
       {
         path: "",
         redirectTo: "document",
         pathMatch: "full"
-      }
+      },
     ]
   }
 ];

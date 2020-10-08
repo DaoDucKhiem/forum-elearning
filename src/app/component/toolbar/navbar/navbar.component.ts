@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  showPopupUpload = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  showUpload() {
+    this.showPopupUpload = true;
+  }
+
+  closePopup(e) {
+    this.showPopupUpload = false;
   }
 
 }

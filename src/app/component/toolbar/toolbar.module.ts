@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DxButtonModule } from 'devextreme-angular';
+import { PopupUploadModule } from 'src/common/component/popup-upload/popup-upload.module';
 
 
 
@@ -9,7 +10,8 @@ import { DxButtonModule } from 'devextreme-angular';
   declarations: [NavbarComponent],
   imports: [
     CommonModule,
-    DxButtonModule
+    DxButtonModule,
+    PopupUploadModule
   ],
   exports: [NavbarComponent]
 })
