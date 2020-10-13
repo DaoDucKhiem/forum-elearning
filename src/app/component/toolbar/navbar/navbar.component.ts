@@ -26,11 +26,14 @@ export class NavbarComponent implements OnInit {
   }
 
   showLogin() {
-    this.router.navigate([`/login`]);
+    this.router.navigate([`account/login`]);
   }
 
   showRegister() {
-    this.router.navigate([`/register`]);
+    this.router.navigate([`account/register`]);
   }
 
+  backToHome() {
+    this.router.navigate([`document`]);
+  }
 }
