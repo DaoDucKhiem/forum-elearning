@@ -99,3 +99,78 @@
 @include margin-element(bottom);
 @include margin-element(left);
 @include margin-element(all);
+
+
+
+@mixin m-element($side) {
+        // nếu là một phía cụ thể
+    @for $i from 1 through 300 {
+        @if $side == t {
+            .m-#{$side}-#{$i} {
+                margin-top: #{$i}px;
+            }
+        }
+
+        @if $side == b {
+            .m-#{$side}-#{$i} {
+                margin-bottom: #{$i}px;
+            }
+        }
+
+        @if $side == l {
+            .m-#{$side}-#{$i} {
+                margin-left: #{$i}px;
+            }
+        }
+
+        @if $side == r {
+            .m-#{$side}-#{$i} {
+                margin-right: #{$i}px;
+            }
+        }
+        
+    }
+}
+
+// build ra hàng loạt class
+@include m-element(t);
+@include m-element(r);
+@include m-element(b);
+@include m-element(l);
+
+
+@mixin p-element($side) {
+    // nếu là một phía cụ thể
+    @for $i from 1 through 300 {
+        @if $side == t {
+            .p-#{$side}-#{$i} {
+                padding-top: #{$i}px;
+            }
+        }
+
+        @if $side == b {
+            .p-#{$side}-#{$i} {
+                padding-bottom: #{$i}px;
+            }
+        }
+
+        @if $side == l {
+            .p-#{$side}-#{$i} {
+                padding-left: #{$i}px;
+            }
+        }
+
+        @if $side == r {
+            .p-#{$side}-#{$i} {
+                padding-right: #{$i}px;
+            }
+        }
+        
+    }
+}
+
+// build ra hàng loạt class
+@include p-element(t);
+@include p-element(r);
+@include p-element(b);
+@include p-element(l);

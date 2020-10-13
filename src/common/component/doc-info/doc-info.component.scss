@@ -1,0 +1,50 @@
+:host {
+    .document{
+        width: 220px;
+        height: 300px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        margin: 24px 0 0 24px;
+        display: flex;
+        flex-direction: column;
+        &:hover{
+            box-shadow: 3px 2px 3px 2px #888888;
+            cursor: pointer;
+        }
+        .icon-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            height: 70%;
+            .icon{
+                width: 150px;
+                height: 150px;
+            }
+        }
+        .content{
+            .author{
+                color: #333;
+                font-size: 14px;
+            }
+            .filename{
+                color: #00a888;
+                font-size: 18px;
+                &:hover{
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+            .number{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                .sub-icon{
+                    width: 16px;
+                    height: 16px;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}

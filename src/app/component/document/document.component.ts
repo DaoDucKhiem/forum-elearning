@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Doc } from 'src/app/share/model/document';
 import { DocumentService } from 'src/common/documentService/document.service';
 
 @Component({
@@ -9,19 +9,14 @@ import { DocumentService } from 'src/common/documentService/document.service';
 })
 export class DocumentComponent implements OnInit {
 
-  public documents = [];
+  documents: Doc[] = [];
 
   constructor(
     private documentService: DocumentService,
-    private router: Router
     ) { }
 
   ngOnInit(): void {
     this.documentService.getDocuments().subscribe(data => this.documents = data);
-  }
-
-  showDetail(data: any) {
-    this.router.navigate([`home/${data.ID}`]);
   }
 
 }

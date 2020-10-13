@@ -1,41 +1,20 @@
-<div class="detail-container">
-    <div class="header">
-        <div class="title">{{ document?.FileName }}</div>
-        <dx-button stylingMode="contained" text="Tải xuống" type="normal" [width]="120" (onClick)="showUpload()">
-        </dx-button>
+<div class="w-100 h-100 d-flex padding-24">
+    <div class="flex-1">
+        <div class="d-flex mb-4">
+            <div class="title flex-1">{{ document?.FileName }}</div>
+            <dx-button stylingMode="contained" text="Tải xuống" type="normal" [width]="120" (onClick)="showUpload()">
+            </dx-button>
+        </div>
+        <div class="w-100 h-100">
+            <iframe class="w-100 h-100" src="../../../assets/images/demo.pdf"></iframe>
+        </div>
     </div>
-    <div class="content">
-        <div class="preview">
-            <iframe  class="preview-file" src="../../../assets/images/demo.pdf" ></iframe>
-        </div>
-        <div class="list-document">
-            <div class="title">
+    <div class="list-document mb-4 m-l-16">
+        <div class="title">
             CÁC TÀI LIỆU LIÊN QUAN
-            </div>
-            <ng-container *ngFor="let item of documents" [ngSwitch]="item.FileExtension">
-                <div class="document">
-                    <img *ngSwitchCase="'docx'" src="../../../assets/images/docx.png" class="icon" />
-                    <img *ngSwitchCase="'xlsx'" src="../../../assets/images/xlsx.png" class="icon" />
-                    <img *ngSwitchCase="'pptx'" src="../../../assets/images/pptx.png" class="icon" />
-                    <img *ngSwitchCase="'pdf'" src="../../../assets/images/pdf.svg" class="icon" />
-                    <div class="name">{{ item.FileName }}</div>
-                </div>
-                <div class="author">{{ item.Author }}</div>
-                <div class="number">
-                    <div class="flex">
-                        <img src="../../../assets/images/price.svg" class="sub-icon" />
-                        <div>{{ item.Price }}</div>
-                    </div> 
-                    <div class="flex">
-                        <img src="../../../assets/images/eyes.svg" class="sub-icon" />
-                        <div>{{ item.View }}</div>
-                    </div>
-                    <div class="flex">
-                        <img src="../../../assets/images/download.svg" class="sub-icon" />
-                        <div>{{ item.Download }}</div>
-                    </div>
-                </div>
-            </ng-container>
         </div>
+        <ng-container *ngFor="let item of documents">
+            <app-doc-info [document]="item"></app-doc-info>
+        </ng-container>
     </div>
 </div>

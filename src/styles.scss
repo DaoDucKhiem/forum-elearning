@@ -21,6 +21,12 @@ body {
 	min-width: 790px;
 }
 
-.m-t-4 {
-    margin-top: 8px;
+.flex-c-m {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.flex-1 {
+	flex: 1 !important;
 }
