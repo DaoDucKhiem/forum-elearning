@@ -1,0 +1,10 @@
+<div class="user-container">
+    <div class="flex">
+        <div class="sidebar">
+            <app-user-management-sidebar (tab)="switchTab($event)"></app-user-management-sidebar>
+        </div>
+        <div class="content">
+            <app-user-management-content [tab]="tab"></app-user-management-content>
+        </div>
+    </div>
+</div>
