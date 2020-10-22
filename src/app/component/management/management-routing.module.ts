@@ -13,6 +13,10 @@ const routes: Routes = [
         loadChildren: ()=> import('../document/document.module').then(x=>x.DocumentModule)
       },
       {
+        path: "user",
+        loadChildren: ()=> import('../user-management/user-management.module').then(x=>x.UserManagementModule)
+      },
+      {
         path: ":id",
         loadChildren: ()=> import('../doc-detail/doc-detail.module').then(x=>x.DocDetailModule)
       },
