@@ -1,2 +1,25 @@
-<dx-popup [width]="900" [height]="500" [showTitle]="true" [(visible)]="popupVisible" title="Đăng tài liệu" (onHidden)="closePopup()">
+<dx-popup [width]="900" [height]="'auto'" [showTitle]="true" [(visible)]="popupVisible" title="Đăng tài liệu"
+    (onHidden)="closePopup()" position="{offset: '0 40'}">
+    <div class="h-100 d-flex flex-column">
+        <div class="description">
+            <div>Mô tả</div>
+            <dx-text-area [height]="60" maxLength="355" [(value)]="description" placeholder="Nhập mô tả">
+            </dx-text-area>
+        </div>
+        <div class="uploadfilecontainer flex-c-m" (click)="fileInput.click()" appUpload
+            (onFileDropped)="uploadFile($event)">
+            <div>Nhấn hoặc kéo thả file vào đây</div>
+            <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+        </div>
+        <div class="flex-1 w-100">
+            <dx-scroll-view class="list-file">
+                <div class="files-list flex-c-m" *ngFor="let file of files;let i= index">
+                    <p class="ml-4"> {{ file }} </p>
+                    <button class="delete-file mr-4" (click)="deleteAttachment(i)" name="upload">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </dx-scroll-view>
+        </div>
+    </div>
 </dx-popup>
