@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PopupUploadComponent } from './popup-upload.component';
-import { DxPopupModule, DxScrollViewModule, DxTextAreaModule } from 'devextreme-angular';
+import { DxButtonModule, DxPopupModule, DxScrollViewModule, DxTextAreaModule } from 'devextreme-angular';
 import { UploadDirective } from 'src/app/share/directive/upload';
 
 
@@ -11,6 +11,7 @@ import { UploadDirective } from 'src/app/share/directive/upload';
   imports: [
     CommonModule,
     DxPopupModule,
+    DxButtonModule,
     DxScrollViewModule,
     DxTextAreaModule
   ],

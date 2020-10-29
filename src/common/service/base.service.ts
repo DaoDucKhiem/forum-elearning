@@ -27,6 +27,6 @@ export class BaseService<T extends BaseEntity> {
 
   // lưu dữ liệu
   save(data: T, opt?: object): Observable<ServerResponse> {
-    return this.http.post<ServerResponse>(`${this.getApiURL()}/save`, data);
+    return this.http.post(`${this.getApiURL()}/save`, data);
   }
 }

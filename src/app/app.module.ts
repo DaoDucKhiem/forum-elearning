@@ -8,6 +8,8 @@ import { ForumAppConfig } from './share/model/config/forum-app-config';
 import { HttpClientModule } from '@angular/common/http'
 import { DocumentService } from 'src/common/documentService/document.service';
 import { SafePipe } from './share/pipe/safe.pipe';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function initializeApp(appConfig: ConfigService<ForumAppConfig>) {
   return () => appConfig.load();
@@ -21,7 +23,13 @@ export function initializeApp(appConfig: ConfigService<ForumAppConfig>) {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [
     DocumentService,
