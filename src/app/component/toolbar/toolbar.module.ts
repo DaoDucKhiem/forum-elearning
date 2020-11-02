@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
-import { DxButtonModule } from 'devextreme-angular';
+import { DxButtonModule, DxPopoverModule } from 'devextreme-angular';
 import { PopupUploadModule } from 'src/common/component/popup-upload/popup-upload.module';
 
 
@@ -11,7 +11,8 @@ import { PopupUploadModule } from 'src/common/component/popup-upload/popup-uploa
   imports: [
     CommonModule,
     DxButtonModule,
-    PopupUploadModule
+    PopupUploadModule,
+    DxPopoverModule
   ],
   exports: [NavbarComponent]
 })
