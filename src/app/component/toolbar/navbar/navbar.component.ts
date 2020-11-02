@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   showPopupUpload = false;
+  defaultVisible: boolean = false;
 
   constructor(
     private router: Router
@@ -35,7 +36,14 @@ export class NavbarComponent implements OnInit {
   showUserManegement(){
     this.router.navigate([`user`]);
   }
+  showHelpManegement(){
+    this.router.navigate([`help`]);
+  }
   backToHome() {
     this.router.navigate([`document`]);
+  }
+  togglePopover(e){
+    this.defaultVisible = !this.defaultVisible
+    e.stopPropagation()
   }
 }

@@ -1,0 +1,30 @@
+<div class="user-container">
+    <div class="flex">
+        <div class="sidebar">
+            <div class="sidebar-container">
+                <div class="tab" (click)="switchTab(1)">
+                    <i class="fa fa-info-circle mr-2"></i>
+                    <div>Giới thiệu</div>
+                </div>
+                <div class="tab" (click)="switchTab(2)">
+                    <i class="fa fa-file mr-2"></i>
+                    <div>Câu hỏi thường gặp</div>
+                </div>
+                <div class="tab" (click)="switchTab(3)">
+                    <i class="fa fa-history mr-2"></i>
+                    <div>Điều khoản sử dụng</div>
+                </div>
+                <div class="tab" (click)="switchTab(4)">
+                    <i class="fa fa-history mr-2"></i>
+                    <div>Chính sách bảo mật</div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <app-introduce *ngIf="tab == 1"></app-introduce>
+            <app-question *ngIf="tab == 2"></app-question>
+            <app-rules *ngIf="tab == 3"></app-rules>
+            <app-security *ngIf="tab == 4"></app-security>
+        </div>
+    </div>
+</div>
