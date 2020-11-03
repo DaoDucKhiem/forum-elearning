@@ -13,6 +13,7 @@
             <div>Nhấn hoặc kéo thả file vào đây</div>
             <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
         </div>
+        <div *ngIf="isFileError" class="description text-error">Mô tả không được để trống</div>
         <div class="flex-1 w-100">
             <dx-scroll-view class="list-file">
                 <div class="files-list flex-c-m" *ngFor="let file of files;let i= index">
@@ -24,9 +25,9 @@
             </dx-scroll-view>
         </div>
         <div class="d-flex justify-content-end">
-            <dx-button class="mr-3" stylingMode="contained" text="Hủy bỏ" type="danger" (click)="closePopup()">
+            <dx-button class="mr-3" text="Hủy bỏ" type="danger" (click)="closePopup()">
             </dx-button>
-            <dx-button stylingMode="contained" text="Đăng" type="success" [width]="80" (click)="saveDocument()">
+            <dx-button text="Đăng" type="success" [width]="80" (click)="saveDocument()">
             </dx-button>
         </div>
     </div>

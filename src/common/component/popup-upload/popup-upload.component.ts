@@ -22,6 +22,7 @@ export class PopupUploadComponent implements OnInit {
   currentParam: ParamDoc = new ParamDoc();
 
   sizeUpload = 0;
+  isFileError = false;
 
   constructor(private documentSV: DocumentService, private uploadSV: UploadService, private toastr: ToastrService) { }
 
@@ -54,6 +55,7 @@ export class PopupUploadComponent implements OnInit {
             }
             this.sizeUpload += element.size;
             this.files.push(file);
+            this.isFileError = false;
           }
         });
       }
@@ -86,6 +88,14 @@ export class PopupUploadComponent implements OnInit {
   validateBeforeSave(): boolean {
     if (!this.description) {
       this.isDescriptionError = true;
+      if (this.files.length === 0) {
+        this.isFileError = true;
+      }
+      return false;
+    }
+
+    if (this.files.length === 0) {
+      this.isFileError = true;
       return false;
     }
 
