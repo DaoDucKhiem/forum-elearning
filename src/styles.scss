@@ -36,15 +36,15 @@ body {
 	flex: 1 !important;
 }
 .flex{
-	display: flex;
+	display: flex !important;
 }
 
 .border-error {
-	border: 1px solid red;
+	border: 1px solid red !important;
 }
 
 .text-error {
-	color: red;
+	color: red !important;
 }
 
 .align-items-center{

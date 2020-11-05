@@ -1,0 +1,6 @@
+<div class="w-100 d-flex flex-column">
+    <div class="title mb-2">{{title}} <span *ngIf="required" class="text-error">*</span></div>
+    <dx-select-box [dataSource]="_dataSource" [class.border-error]="isError" [placeholder]="placeholder" [displayExpr]="displayExpr"
+        [valueExpr]="valueExpr" [value]="value" (onValueChanged)="valueChange($event)"></dx-select-box>
+    <div *ngIf="isError" class="text-error">{{textError}}</div>
+</div>

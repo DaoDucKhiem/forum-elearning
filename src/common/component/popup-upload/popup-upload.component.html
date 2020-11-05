@@ -1,20 +1,33 @@
-<dx-popup [width]="900" [height]="'auto'" [showTitle]="true" [(visible)]="popupVisible" title="Đăng tài liệu"
-    (onHidden)="closePopup()" position="{offset: '0 40'}">
+<dx-popup [width]="900" [height]="'100vh'" [showTitle]="true" [dragEnabled]="true" [(visible)]="popupVisible"
+    title="Đăng tài liệu" (onHidden)="closePopup()" position="{offset: '0 40'}">
     <div class="h-100 d-flex flex-column">
+        <div class="description mb-3">
+            <div class="w-50">
+                <select-box title="Chuyên mục" [required]="true" [placeholder]="'Chọn chuyên mục'"
+                    [isError]="isCategoryError" [textError]="'Chuyên mục không được để trống'"
+                    [dataSource]="listCategory" [displayExpr]="'Name'" [valueExpr]="'ID'"
+                    (onValueChanged)="setCategory($event)"></select-box>
+            </div>
+        </div>
+        <div class="description mb-3">
+            <text-box title="Tên tài liệu" [required]="true" [isError]="isDocumentNameError"
+                [placeholder]="'Nhập tên tài liệu'" [textError]="'Tên tài liệu không được bỏ trống'"
+                (onValueChanged)="setDocumentName($event)"></text-box>
+        </div>
         <div class="description">
             <div class="mb-2">Mô tả <span class="text-error"> *</span></div>
             <dx-text-area [class.border-danger]="isDescriptionError" [height]="60" maxLength="355" [value]="description"
                 placeholder="Nhập mô tả" (onValueChanged)="validateDescription($event)">
             </dx-text-area>
-            <div *ngIf="isDescriptionError" class="mt-2 text-error">Mô tả không được để trống</div>
+            <div *ngIf="isDescriptionError" class="mt-2 text-error">File không được để trống</div>
         </div>
-        <div class="uploadfilecontainer flex-c-m" (click)="fileInput.click()" appUpload
+        <div *ngIf="files.length === 0" class="uploadfilecontainer flex-c-m" (click)="fileInput.click()" appUpload
             (onFileDropped)="uploadFile($event)">
             <div>Nhấn hoặc kéo thả file vào đây</div>
             <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
         </div>
         <div *ngIf="isFileError" class="description text-error">Mô tả không được để trống</div>
-        <div class="flex-1 w-100">
+        <div class="flex-1 w-100 mt-3">
             <dx-scroll-view class="list-file">
                 <div class="files-list flex-c-m" *ngFor="let file of files;let i= index">
                     <p class="ml-4"> {{ file.name }} </p>

@@ -25,6 +25,11 @@ export class BaseService<T extends BaseEntity> {
     return `${this.hostApi}/${this.controller}`;
   }
 
+  // lấy tất cả dữ liệu
+  getAll(): Observable<ServerResponse> {
+    return this.http.get(`${this.getApiURL()}`);
+  }
+
   // lưu dữ liệu
   save(data: T, opt?: object): Observable<ServerResponse> {
     return this.http.post(`${this.getApiURL()}/save`, data);

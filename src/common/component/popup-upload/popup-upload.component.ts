@@ -16,17 +16,40 @@ export class PopupUploadComponent implements OnInit {
 
   files: any = [];
 
+  listCategory = [];
+
   description = "";
   isDescriptionError = false;
+
+  isDocumentNameError = false;
 
   currentParam: ParamDoc = new ParamDoc();
 
   sizeUpload = 0;
   isFileError = false;
+  isCategoryError: boolean;
 
   constructor(private documentSV: DocumentService, private uploadSV: UploadService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.listCategory = [
+      {
+        ID: 1,
+        Name: "Giáo trình"
+      },
+      {
+        ID: 2,
+        Name: "Đề Thi"
+      },
+      {
+        ID: 3,
+        Name: "Phương pháp học tập"
+      },
+      {
+        ID: 4,
+        Name: "Tài liệu tham khảo"
+      },
+    ]
   }
 
   closePopup() {
@@ -53,7 +76,11 @@ export class PopupUploadComponent implements OnInit {
               url: res.filename,
               size: element.size
             }
+            this.currentParam.DocumentType = file.name.split(".").pop();
             this.sizeUpload += element.size;
+            this.currentParam.DocumentLink = res.filename;
+            this.currentParam.DocumentSize = (((file.size) / 1024) / 1024).toFixed(5);
+            ;
             this.files.push(file);
             this.isFileError = false;
           }
@@ -86,6 +113,33 @@ export class PopupUploadComponent implements OnInit {
    * ddkhiem
    */
   validateBeforeSave(): boolean {
+    if (!this.currentParam.CategoryID) {
+      this.isCategoryError = true;
+      if (!this.currentParam.DocumentName || this.currentParam.DocumentName.trim() === '') {
+        this.isDocumentNameError = true;
+      }
+      if (!this.description) {
+        this.isDescriptionError = true;
+      }
+
+      if (this.files.length === 0) {
+        this.isFileError = true;
+      }
+      return false;
+    }
+
+    if (!this.currentParam.DocumentName || this.currentParam.DocumentName.trim() === '') {
+      this.isDocumentNameError = true;
+      if (!this.description) {
+        this.isDescriptionError = true;
+      }
+
+      if (this.files.length === 0) {
+        this.isFileError = true;
+      }
+      return false;
+    }
+
     if (!this.description) {
       this.isDescriptionError = true;
       if (this.files.length === 0) {
@@ -103,18 +157,37 @@ export class PopupUploadComponent implements OnInit {
   }
 
   prepareDataBeforeSave() {
-    this.currentParam.Description = this.description;
-    console.log(this.files);
-
+    this.currentParam.Description = this.description.trim();
+    this.currentParam.DocumentName = this.currentParam.DocumentName.trim();
+    this.currentParam.UserID="64a59a25-2488-54b0-f6b4-c8af08a50cbf"; // fix cứng
   }
 
   saveDocument() {
     if (this.validateBeforeSave()) {
       this.prepareDataBeforeSave();
-      // this.documentSV.save().subscribe(res => {
-      //   console.log(res);
-      // });
+      this.documentSV.save(this.currentParam).subscribe(res => {
+        if (res && res.Data) {
+          this.toastr.success("Đăng tài liệu thành công!");
+        }
+      });
+
       this.closePopup();
+    }
+  }
+
+  setCategory(e) {
+    if (e) {
+      this.currentParam.CategoryID = e.value;
+      this.isCategoryError = false;
+    }
+  }
+
+  setDocumentName(e) {
+    if (e) {
+      this.currentParam.DocumentName = e.value;
+      if (this.currentParam.DocumentName && this.currentParam.DocumentName.trim() !== '') {
+        this.isDocumentNameError = false;
+      }
     }
   }
 }

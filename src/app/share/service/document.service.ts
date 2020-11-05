@@ -10,6 +10,6 @@ export class DocumentService extends BaseService<object>{
   constructor(
     public http: HttpService
   ) {
-    super(http, "document");
+    super(http, "documents");
   }
 }
