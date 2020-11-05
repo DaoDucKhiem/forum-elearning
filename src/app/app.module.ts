@@ -6,10 +6,10 @@ import { AppComponent } from './app.component';
 import { ConfigService } from 'src/common/service/config.service';
 import { ForumAppConfig } from './share/model/config/forum-app-config';
 import { HttpClientModule } from '@angular/common/http'
-import { DocumentService } from 'src/common/documentService/document.service';
 import { SafePipe } from './share/pipe/safe.pipe';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DocumentService } from './share/service/document.service';
 
 export function initializeApp(appConfig: ConfigService<ForumAppConfig>) {
   return () => appConfig.load();

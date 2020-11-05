@@ -1,9 +1,23 @@
 
 <div class="document-management">
-    <dx-data-grid
+    <dx-data-grid 
     id="gridContainer"
     [dataSource]="customers"
-    [columns]="['CompanyName', 'City', 'State', 'Phone', 'Fax']"
+    [rowAlternationEnabled]="true"
     [showBorders]="true">
+    <dxi-column dataField="CompanyName" caption="Title"></dxi-column>
+    <dxi-column dataField="City"></dxi-column>
+    <dxi-column dataField="State"></dxi-column>
+    <dxi-column dataField="Phone"></dxi-column>
+    <dxi-column cellTemplate="deleteTemplate" [width]="46">
+        <div *dxTemplate="let data of 'deleteTemplate'">
+            <img class="icon" src="src/assets/images/delete.png"/>
+        </div>
+    </dxi-column>
+    <dxi-column cellTemplate="editTemplate"  [width]="46">
+        <div *dxTemplate="let data of 'editTemplate'">
+            <img class="icon" src="src/assets/images/edit.png"/>
+        </div>
+    </dxi-column>
 </dx-data-grid>
 </div>

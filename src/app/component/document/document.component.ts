@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Doc } from 'src/app/share/model/document';
-import { DocumentService } from 'src/common/documentService/document.service';
+import { DocumentService } from 'src/common/service/documentService/document.service';
 
 @Component({
   selector: 'app-document',
