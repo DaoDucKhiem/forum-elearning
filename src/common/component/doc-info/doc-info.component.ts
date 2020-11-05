@@ -17,7 +17,7 @@ export class DocInfoComponent implements OnInit {
   }
 
   showDetail() {
-    this.router.navigate([`/${this.document.ID}`]);
+    this.router.navigate([`/${this.document.DocumentID}`]);
   }
 
 }

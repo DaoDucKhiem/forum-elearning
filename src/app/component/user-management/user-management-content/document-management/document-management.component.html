@@ -1,9 +1,38 @@
-
 <div class="document-management">
-    <dx-data-grid
-    id="gridContainer"
-    [dataSource]="customers"
-    [columns]="['CompanyName', 'City', 'State', 'Phone', 'Fax']"
-    [showBorders]="true">
-</dx-data-grid>
+    <div class="header">Quản lý tài liệu</div>
+    <dx-data-grid id="gridContainer" [dataSource]="customers" [rowAlternationEnabled]="true" [showBorders]="true">
+        <dxi-column dataField="CompanyName" caption="Title"></dxi-column>
+        <dxi-column dataField="City"></dxi-column>
+        <dxi-column dataField="State"></dxi-column>
+        <dxi-column dataField="Phone"></dxi-column>
+        <dxi-column cellTemplate="deleteTemplate" [width]="46">
+            <div *dxTemplate="let data of 'deleteTemplate'">
+                <img class="icon" src="../../../../../assets/images/delete.png" (click)="deleteVisible = true" />
+            </div>
+        </dxi-column>
+        <dxi-column cellTemplate="editTemplate" [width]="46">
+            <div *dxTemplate="let data of 'editTemplate'">
+                <img class="icon" src="../../../../../assets/images/edit.png" (click)="editVisible = true" />
+            </div>
+        </dxi-column>
+    </dx-data-grid>
 </div>
+
+<dx-popup [width]="500" [height]="150" [showTitle]="true" title="Xóa tài liệu" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [(visible)]="deleteVisible">
+    <div>Bạn có chắc chắn muốn xóa tài liệu này?</div>
+    <div class="button-action-popup" style="
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 12px;">
+        <dx-button stylingMode="contained" class="m-r-12" text="Hủy bỏ" type="normal" [width]="120" (onClick)="click($event)">
+        </dx-button>
+        <dx-button stylingMode="contained" text="Xóa" type="danger" [width]="120" (onClick)="click($event)">
+        </dx-button>
+    </div>
+</dx-popup>
+
+<dx-popup [width]="300" [height]="250" [showTitle]="true" title="Chỉnh sửa tài liệu" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [(visible)]="editVisible">
+</dx-popup>

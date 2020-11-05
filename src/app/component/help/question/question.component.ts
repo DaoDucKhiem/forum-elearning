@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestionComponent implements OnInit {
 
+  isActive1: boolean = false;
+  isActive2: boolean = false;
+  isActive3: boolean = false;
+  isActive4: boolean = false;
+  isActive5: boolean = false;
+  isActive6: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {

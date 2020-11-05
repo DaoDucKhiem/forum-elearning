@@ -10,6 +10,8 @@ import { Customer, Service } from './app.service';
 export class DocumentManagementComponent implements OnInit {
 
   customers: Customer[];
+  editVisible: boolean = false;
+  deleteVisible: boolean = false;
 
   constructor(service: Service) {
       this.customers =  service.getCustomers();
@@ -18,4 +20,7 @@ export class DocumentManagementComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  click(e){
+
+  }
 }

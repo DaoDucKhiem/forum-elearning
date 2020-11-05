@@ -1,4 +1,4 @@
-<div class="w-100" [ngSwitch]="document.FileExtension">
+<div class="w-100" [ngSwitch]="document.DocumentType">
     <div class="document flex-c-m padding-16" (click)="showDetail()">
         <div class="icon-container">
             <img *ngSwitchCase="'docx'" src="../../../assets/images/docx.png" class="icon" />
@@ -7,12 +7,12 @@
             <img *ngSwitchCase="'pdf'" src="../../../assets/images/pdf.svg" class="icon" />
         </div>
         <div class="content w-100">
-            <div class="filename">{{ document?.FileName }}</div>
+            <div class="filename">{{ document?.DocumentName }}</div>
             <div class="author">{{ document?.AuthorName }}</div>
             <div class="number">
                 <div class="flex-c-m m-r-16">
                     <img src="../../../assets/images/price.svg" class="sub-icon" />
-                    <div class="m-t-4">{{ document?.Price }}</div>
+                    <div class="m-t-4">{{ document?.Point }}</div>
                 </div>
                 <div class="flex-c-m m-r-16">
                     <img src="../../../assets/images/eyes.svg" class="sub-icon" />
