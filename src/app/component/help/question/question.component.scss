@@ -1,0 +1,39 @@
+:host{
+    .question {
+        font-size: 16px;
+        font-family: arial;
+        color: #307f00;
+        font-variant: normal;
+        text-decoration: none;
+        vertical-align: baseline;
+        white-space: pre-wrap;
+        background-color: transparent;
+    }
+    
+    .step {
+        line-height: 1.5;
+        margin-top: 4pt;
+        margin-bottom: 4pt;
+    }
+    .menu-header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .menu-item{
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 24px 16px;
+        margin-bottom: 24px;
+    }
+    .menu-item:hover {
+        cursor: pointer;
+    }
+    
+    .text {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        padding: 16px
+    }
+}

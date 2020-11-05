@@ -11,7 +11,7 @@
             .sidebar{
                 width: 300px;
                 height: 100%;
-                border-right: 1px solid black;
+                background-color:#E0F2F7;      
                 .sidebar-container{
                     display: flex;
                     flex-direction: column;
@@ -25,7 +25,7 @@
                         padding-left: 16px;
                         &:hover{
                             cursor: pointer;
-                            box-shadow: 0px 10px 5px #888, 0px -10px 5px #888;
+                box-shadow: 0px 2px #888, 0px -2px #888;
                         }
                     }
                 }
@@ -33,8 +33,15 @@
             .content{
                 width: calc(100% - 300px);
                 height: 100%;
+                background-color:#EFFBFB;      
             }
         }
         border-bottom: 2px solid white;
+    }
+    .text {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        padding: 16px
     }
 }

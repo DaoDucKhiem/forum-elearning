@@ -1,1 +1,14 @@
-<p>history works!</p>
+<div class="document-management">
+    <div class="header">Lịch sử hoạt động</div>
+    <dx-data-grid id="gridContainer" [dataSource]="customers" [rowAlternationEnabled]="true" [showBorders]="true">
+        <dxi-column dataField="CompanyName" caption="Title"></dxi-column>
+        <dxi-column dataField="City"></dxi-column>
+        <dxi-column dataField="State"></dxi-column>
+        <dxi-column dataField="Phone"></dxi-column>
+        <dxi-column cellTemplate="deleteTemplate" [width]="46">
+            <div *dxTemplate="let data of 'deleteTemplate'">
+                <img class="icon" src="../../../../../assets/images/info.png"/>
+            </div>
+        </dxi-column>
+    </dx-data-grid>
+</div>

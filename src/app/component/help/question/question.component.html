@@ -1,1 +1,136 @@
-<p>Màn câu hỏi thường gặp</p>
+<div class="container">
+    <div class="text">Những câu hỏi thường gặp</div>
+    <div class="menu-item" (click)="isActive1 = !isActive1">
+        <div class="menu-header">
+            <b><i><span class="question">1. Đăng tải tài liệu, bài viết như thế nào? Các bước đăng tải tài liệu, bài
+                        viết?</span></i></b>
+            <i class="fa fa-caret-down" *ngIf="isActive1"></i>
+            <i class="fa fa-caret-left" *ngIf="!isActive1"></i>
+        </div>
+        <ul *ngIf="isActive1" class="p-l-32">
+            <li class="padding-8">
+                <div>Bước 1: Đăng nhập vào phần mềm</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 2: Đến mục tài liệu chọn tải tài liệu</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 3: ghim tài liệu của bạn vào </div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 4: nhấn nút chấp nhận</div>
+            </li>
+        </ul>
+    </div>
+    <!-- 2 -->
+    <div class="menu-item" (click)="isActive2 = !isActive2">
+        <div class="menu-header">
+            <b><i><span class="question">2. Đăng ký thành viên như thế nào?
+                Các bước đăng ký thành viên</span></i></b>
+            <i class="fa fa-caret-down" *ngIf="isActive2"></i>
+            <i class="fa fa-caret-left" *ngIf="!isActive2"></i>
+        </div>
+        <ul *ngIf="isActive2" class="p-l-32">
+            <li class="padding-8">
+                <div>Bước 1: Đăng nhập vào phần mềm</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 2: Đến mục tài liệu chọn tải tài liệu</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 3: ghim tài liệu của bạn vào </div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 4: nhấn nút chấp nhận</div>
+            </li>
+        </ul>
+    </div>
+    <!-- 3 -->
+    <div class="menu-item" (click)="isActive3 = !isActive3">
+        <div class="menu-header">
+            <b><i><span class="question">3. Chỉnh sửa bài viết như thế nào ?</span></i></b>
+            <i class="fa fa-caret-down" *ngIf="isActive3"></i>
+            <i class="fa fa-caret-left" *ngIf="!isActive3"></i>
+        </div>
+        <ul *ngIf="isActive3" class="p-l-32">
+            <li class="padding-8">
+                <div>Bước 1: Đăng nhập vào phần mềm</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 2: Đến mục tài liệu chọn tải tài liệu</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 3: ghim tài liệu của bạn vào </div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 4: nhấn nút chấp nhận</div>
+            </li>
+        </ul>
+    </div>
+    <!-- 4 -->
+    <div class="menu-item" (click)="isActive4 = !isActive4">
+        <div class="menu-header">
+            <b><i><span class="question">4. Xóa bài viết như thế nào ?</span></i></b>
+            <i class="fa fa-caret-down" *ngIf="isActive4"></i>
+            <i class="fa fa-caret-left" *ngIf="!isActive4"></i>
+        </div>
+        <ul *ngIf="isActive4" class="p-l-32">
+            <li class="padding-8">
+                <div>Bước 1: Đăng nhập vào phần mềm</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 2: Đến mục tài liệu chọn tải tài liệu</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 3: ghim tài liệu của bạn vào </div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 4: nhấn nút chấp nhận</div>
+            </li>
+        </ul>
+    </div>
+    <!-- 5 -->
+    <div class="menu-item" (click)="isActive5 = !isActive5">
+        <div class="menu-header">
+            <b><i><span class="question">5. Làm thế nào để lấy lại mật khẩu khi mất hoặc quên?</span></i></b>
+            <i class="fa fa-caret-down" *ngIf="isActive5"></i>
+            <i class="fa fa-caret-left" *ngIf="!isActive5"></i>
+        </div>
+        <ul *ngIf="isActive5" class="p-l-32">
+            <li class="padding-8">
+                <div>Bước 1: Đăng nhập vào phần mềm</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 2: Đến mục tài liệu chọn tải tài liệu</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 3: ghim tài liệu của bạn vào </div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 4: nhấn nút chấp nhận</div>
+            </li>
+        </ul>
+    </div>
+    <!-- 6 -->
+    <div class="menu-item" (click)="isActive6 = !isActive6">
+        <div class="menu-header">
+            <b><i><span class="question">6. Làm thế nào để download tài liệu ?</span></i></b>
+            <i class="fa fa-caret-down" *ngIf="isActive6"></i>
+            <i class="fa fa-caret-left" *ngIf="!isActive6"></i>
+        </div>
+        <ul *ngIf="isActive6" class="p-l-32">
+            <li class="padding-8">
+                <div>Bước 1: Đăng nhập vào phần mềm</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 2: Đến mục tài liệu chọn tải tài liệu</div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 3: ghim tài liệu của bạn vào </div>
+            </li>
+            <li  class="padding-8">
+                <div>Bước 4: nhấn nút chấp nhận</div>
+            </li>
+        </ul>
+    </div>
+</div>

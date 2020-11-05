@@ -1,0 +1,31 @@
+::ng-deep{
+    
+}
+
+.question {
+    font-size: 16px;
+    font-family: arial;
+    color: #307f00;
+    font-variant: normal;
+    text-decoration: none;
+    vertical-align: baseline;
+    white-space: pre-wrap;
+    background-color: transparent;
+}
+
+.step {
+    line-height: 1.5;
+    margin-top: 4pt;
+    margin-bottom: 4pt;
+}
+
+.menu-item:hover {
+    cursor: pointer;
+}
+
+.text {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 16px
+}
