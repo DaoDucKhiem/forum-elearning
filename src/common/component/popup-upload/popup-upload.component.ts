@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ParamDoc } from 'src/app/share/model/param/param-doc';
+import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 import { DocumentService } from 'src/app/share/service/document.service';
 import { UploadService } from 'src/app/share/service/upload.service';
 
@@ -12,6 +13,7 @@ import { UploadService } from 'src/app/share/service/upload.service';
 export class PopupUploadComponent implements OnInit {
 
   @Input() popupVisible = false;
+  @Input() title: string;
   @Output() hiddenPopup = new EventEmitter<boolean>();
 
   files: any = [];
@@ -29,7 +31,12 @@ export class PopupUploadComponent implements OnInit {
   isFileError = false;
   isCategoryError: boolean;
 
-  constructor(private documentSV: DocumentService, private uploadSV: UploadService, private toastr: ToastrService) { }
+  constructor(
+    private documentSV: DocumentService,
+    private uploadSV: UploadService,
+    private toastr: ToastrService,
+    private datatransferSV: DataTransferService
+  ) { }
 
   ngOnInit(): void {
     this.listCategory = [
@@ -159,15 +166,16 @@ export class PopupUploadComponent implements OnInit {
   prepareDataBeforeSave() {
     this.currentParam.Description = this.description.trim();
     this.currentParam.DocumentName = this.currentParam.DocumentName.trim();
-    this.currentParam.UserID="64a59a25-2488-54b0-f6b4-c8af08a50cbf"; // fix cứng
+    this.currentParam.UserID = "64a59a25-2488-54b0-f6b4-c8af08a50cbf"; // fix cứng
   }
 
   saveDocument() {
     if (this.validateBeforeSave()) {
       this.prepareDataBeforeSave();
       this.documentSV.save(this.currentParam).subscribe(res => {
-        if (res && res.Data) {
+        if (res && res.data) {
           this.toastr.success("Đăng tài liệu thành công!");
+          this.datatransferSV.postDocumentSuccess(); // thong bao dang tai lieu thanh cong cho document
         }
       });
 

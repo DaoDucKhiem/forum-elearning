@@ -1,10 +1,10 @@
 export class ServerResponse {
-    ValidateInfo: any;
-    Success: boolean;
-    Code: string;
-    SubCode: number;
-    UserMessage: string;
-    SystemMessage: string;
-    Data: any;
-    ServerTime?: Date;
+    validateInfo: any;
+    success: boolean;
+    code: string;
+    subCode: number;
+    userMessage: string;
+    systemMessage: string;
+    data: any;
+    serverTime?: Date;
 }

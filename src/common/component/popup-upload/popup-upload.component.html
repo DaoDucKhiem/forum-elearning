@@ -1,5 +1,5 @@
 <dx-popup [width]="900" [height]="'100vh'" [showTitle]="true" [dragEnabled]="true" [(visible)]="popupVisible"
-    title="Đăng tài liệu" (onHidden)="closePopup()" position="{offset: '0 40'}">
+    [title]="title" (onHidden)="closePopup()" position="{offset: '0 40'}">
     <div class="h-100 d-flex flex-column">
         <div class="description mb-3">
             <div class="w-50">
@@ -19,14 +19,14 @@
             <dx-text-area [class.border-danger]="isDescriptionError" [height]="60" maxLength="355" [value]="description"
                 placeholder="Nhập mô tả" (onValueChanged)="validateDescription($event)">
             </dx-text-area>
-            <div *ngIf="isDescriptionError" class="mt-2 text-error">File không được để trống</div>
+            <div *ngIf="isDescriptionError" class="mt-2 text-error">Mô tả không được để trống</div>
         </div>
         <div *ngIf="files.length === 0" class="uploadfilecontainer flex-c-m" (click)="fileInput.click()" appUpload
             (onFileDropped)="uploadFile($event)">
             <div>Nhấn hoặc kéo thả file vào đây</div>
             <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
         </div>
-        <div *ngIf="isFileError" class="description text-error">Mô tả không được để trống</div>
+        <div *ngIf="isFileError" class="description text-error">File không được để trống</div>
         <div class="flex-1 w-100 mt-3">
             <dx-scroll-view class="list-file">
                 <div class="files-list flex-c-m" *ngFor="let file of files;let i= index">

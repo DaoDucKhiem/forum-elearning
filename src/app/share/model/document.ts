@@ -1,20 +1,18 @@
 export class Doc {
-    DocumentID?: number;
-    DocumentName?: string;
-    DocumentSize?: number;
-    CategoryID?: number;
-    DocumentLink?: string;
-    DocumentType?: string;
-    Point?: number;
-    ViewCount?: number;
-    DownloadCount?: number;
-    UserID?: string;
-    AuthorName?: string;
-    Price?: number;
-    Description?: string;
-    ReportCount?: number;
+    documentID: number;
+    documentName: string;
+    documentSize: number;
+    categoryID: number;
+    documentLink: string;
+    documentType: string;
+    point: number;
+    viewCount: number;
+    downloadCount?: number;
+    userID?: string;
+    description?: string;
+    reportCount?: number;
+    posterName?: string;
 
     constructor() {
-        this.AuthorName = "Nhóm ABC"
     }
 }

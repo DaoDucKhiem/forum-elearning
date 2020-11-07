@@ -5,7 +5,7 @@
       <input class="form-control mr-3 w-75" type="text" placeholder="Tìm kiếm" aria-label="Search">
     </div>
     <div class="btn-upload">
-      <dx-button stylingMode="contained" text="Tải lên" type="normal" [width]="120" (onClick)="showUpload()">
+      <dx-button stylingMode="contained" text="Tải lên" type="success" [width]="120" (onClick)="showUpload()">
       </dx-button>
     </div>
   </div>
@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<app-popup-upload *ngIf="showPopupUpload" [popupVisible]="showPopupUpload" (hiddenPopup)="closePopup($event)">
+<app-popup-upload *ngIf="showPopupUpload" [title]="'Đăng tài liệu'" [popupVisible]="showPopupUpload" (hiddenPopup)="closePopup($event)">
 </app-popup-upload>
 
 <dx-popover target="#link1" position="top" [width]="300" [(visible)]="defaultVisible">
