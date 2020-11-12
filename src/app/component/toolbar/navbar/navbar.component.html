@@ -1,32 +1,3 @@
-<div class="nav h-100 w-100 container-fluid">
-  <div class="nav-left">
-    <div class="logo cursor-pointer" (click)="backToHome()"><img src="../../../../assets//images/logo.PNG" alt=""></div>
-    <div class="form-inline d-flex justify-content-center md-form form-sm mt-2 mb-2 w-50">
-      <input class="form-control mr-3 w-75" type="text" placeholder="Tìm kiếm" aria-label="Search">
-    </div>
-    <div class="btn-upload">
-      <dx-button stylingMode="contained" text="Tải lên" type="success" [width]="120" (onClick)="showUpload()">
-      </dx-button>
-    </div>
-  </div>
-  <div class="nav-right">
-    <div class="d-flex justify-content-center align-content-center">
-      <div class="d-flex btn-navbar padding-8 mr-4 cursor-pointer" (click)="showLogin()"><i
-          class="fa fa-sign-in mt-1 mr-2"></i><span>Đăng nhập</span></div>
-      <div class="d-flex btn-navbar padding-8 cursor-pointer" (click)="showRegister()"><i
-          class="fa fa-user mt-1 mr-2"></i><span>Đăng ký</span></div>
-      <img src="../../../../assets/images/Ditto.png" class="avatar mt-1 mr-2 d-flex btn-navbar padding-8 cursor-pointer"
-        id="link1" (click)="togglePopover($event)">
-    </div>
-    <div>
-      <div class="user-infor"></div>
-    </div>
-  </div>
-</div>
-
-<app-popup-upload *ngIf="showPopupUpload" [title]="'Đăng tài liệu'" [popupVisible]="showPopupUpload" (hiddenPopup)="closePopup($event)">
-</app-popup-upload>
-
 <dx-popover target="#link1" position="top" [width]="300" [(visible)]="defaultVisible">
   <div *dxTemplate="let data = model of 'content'">
     <div class="popover-user">
@@ -45,3 +16,20 @@
     </div>
   </div>
 </dx-popover>
+
+<div class="forum-container">
+  <div class="forum-name cursor-pointer" (click)="backToHome()">DShared</div>
+  <div class="d-flex align-items-center justify-content-center">
+    <input class="search-input small-input" type="text" placeholder="Tìm kiếm" aria-label="Search">
+    <button type="button" class="search-button"></button>
+  </div>
+  <div class="d-flex align-items-center justify-content-center">
+    <div class="button-forum m-r-24" (click)="showLogin()">
+      Đăng nhập
+    </div>
+    <div class="button-forum m-r-32" (click)="showRegister()">
+      Đăng ký
+    </div>
+    <img src="../../../../assets/images/Ditto.png" class="avatar" id="link1" (click)="togglePopover($event)">
+  </div>
+</div>

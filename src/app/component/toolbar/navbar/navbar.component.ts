@@ -18,13 +18,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showUpload() {
-    this.showPopupUpload = true;
-  }
-
-  closePopup(e) {
-    this.showPopupUpload = false;
-  }
 
   showLogin() {
     this.router.navigate([`account/login`]);
