@@ -1,7 +1,119 @@
 <div class="document-container">
-    <div class="list-document mb-4">
-        <ng-container *ngFor="let item of documents">
-            <app-doc-info [document]="item"></app-doc-info>
-        </ng-container>
+    <div class="home-forum p-t-100">
+        <div class="file-upload">
+            <div class="slogan-1 m-b-20">Tìm kiếm, Lưu trữ và Chia sẻ dễ dàng</div>
+            <div class="slogan-2 m-b-32">Đăng tải, tìm kiếm và chia sẻ dữ liệu chưa bao giờ đơn giản đến thế!
+            </div>
+            <div class="d-flex align-items-center justify-content-center m-l-80">
+                <input class="search-input big-input" type="text" placeholder="Tìm kiếm" aria-label="Search">
+                <button type="button" class="search-button"></button>
+            </div>
+            <div class="or-label m-b-25">hoặc</div>
+            <div class="big-button w-b m-b-40" (click)="showUpload()">Tải lên tệp tin</div>
+            <div class="d-flex align-items-center justify-content-center m-b-40">
+                <a class="category-item m-r-24">
+                    <img style="width: 50px; height: 50px;" src="https://pamcit.unon.org/sites/default/files/2017-06/teach.png" alt="" />
+                    <div class="m-t-12">Bài giảng</div>
+                </a>
+                <a class="category-item m-r-24">
+                    <img style="width: 50px; height: 50px;" src="https://cdn.iconscout.com/icon/free/png-256/require-personal-qualities-planning-responsibility-checkmark-list-18-5628.png" alt="" />
+                    <div class="m-t-12">Đề thi</div></a>
+                <a class="category-item">
+                    <img style="width: 50px; height: 50px;" src="https://i.dlpng.com/static/png/1534271-circle-document-documents-extension-file-page-sheet-icon-document-png-512_512_preview.png" alt="" />
+                    <div class="m-t-12">Tài liệu</div></a>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="next-list-document mb-4">
+        <div class="go-next-button" (click)="scroll(recent)"></div>
+    </div>
+    <div class="list-item mb-4" #recent>
+        <div class="list-document-label">
+            <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
+                style="width: 40px; height: 40px;" alt="">
+            Cập nhật gần đây</div>
+        <div class="document-type">
+            <div class="list-document">
+                <ng-container *ngFor="let item of documents">
+                    <app-doc-info [document]="item"></app-doc-info>
+                </ng-container>
+            </div>
+            <div>
+                <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
+                    class="show-more-button" alt="" />
+            </div>
+        </div>
+    </div>
+    <div class="list-item mb-4">
+        <div class="list-document-label">
+            <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
+                style="width: 40px; height: 40px;" alt="">
+            Phổ biến nhất</div>
+        <div class="document-type">
+            <div class="list-document">
+                <ng-container *ngFor="let item of documents">
+                    <app-doc-info [document]="item"></app-doc-info>
+                </ng-container>
+            </div>
+            <div>
+                <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
+                    class="show-more-button" alt="" />
+            </div>
+        </div>
+    </div>
+    <div class="list-item mb-4">
+        <div class="list-document-label">
+            <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
+                style="width: 40px; height: 40px;" alt="">
+            Bài giảng</div>
+        <div class="document-type">
+            <div class="list-document">
+                <ng-container *ngFor="let item of documents">
+                    <app-doc-info [document]="item"></app-doc-info>
+                </ng-container>
+            </div>
+            <div>
+                <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
+                    class="show-more-button" alt="" />
+            </div>
+        </div>
+    </div>
+    <div class="list-item mb-4">
+        <div class="list-document-label">
+            <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
+                style="width: 40px; height: 40px;" alt="">
+            Đề thi
+        </div>
+        <div class="document-type">
+            <div class="list-document">
+                <ng-container *ngFor="let item of documents">
+                    <app-doc-info [document]="item"></app-doc-info>
+                </ng-container>
+            </div>
+            <div>
+                <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
+                    class="show-more-button" alt="" />
+            </div>
+        </div>
+    </div>
+    <div class="list-item mb-4">
+        <div class="list-document-label">
+            <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
+                style="width: 40px; height: 40px;" alt="">
+            Tài liệu</div>
+        <div class="document-type">
+            <div class="list-document">
+                <ng-container *ngFor="let item of documents">
+                    <app-doc-info [document]="item"></app-doc-info>
+                </ng-container>
+            </div>
+            <div>
+                <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
+                    class="show-more-button" alt="" />
+            </div>
+        </div>
+    </div>
+
+    <app-popup-upload *ngIf="showPopupUpload" [title]="'Đăng tài liệu'" [popupVisible]="showPopupUpload"
+        (hiddenPopup)="closePopup($event)">
+    </app-popup-upload>

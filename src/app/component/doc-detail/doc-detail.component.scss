@@ -8,3 +8,33 @@
     font-weight: 700;
     width: 100%;
 }
+.big-input {
+    display: block;
+    height: 56px;
+    width: 100%;
+    padding: 17px 26px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #414851;
+    border: 1px solid #e8e9ea;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 28px;
+    margin: 15px 0 25px;
+    box-shadow: none !important;
+    outline: none !important;
+    -webkit-appearance: none;
+}
+.search-input {
+    padding: 12px 118px 14px 26px;
+    color: #414851;
+    background-color: #e8e8e8;
+    margin: 0;
+    position: relative;
+    z-index: 102;
+}
+.text-gray{
+    color: gray;
+    font-size: 13px;
+}
+

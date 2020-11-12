@@ -4,8 +4,7 @@ import { DocDetailComponent } from './doc-detail.component';
 import { DocDetailRoutingModule } from './doc-detail-routing.module';
 import { DxButtonModule } from 'devextreme-angular';
 import { DocInfoModule } from 'src/common/component/doc-info/doc-info.module';
-
-
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [DocDetailComponent],
@@ -13,7 +12,8 @@ import { DocInfoModule } from 'src/common/component/doc-info/doc-info.module';
     CommonModule,
     DxButtonModule,
     DocDetailRoutingModule,
-    DocInfoModule
+    DocInfoModule,
+    AvatarModule
   ]
 })
 export class DocDetailModule { }

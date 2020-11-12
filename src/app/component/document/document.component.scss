@@ -1,13 +1,177 @@
 .document-container{
     width: 100%;
-    .list-document{
-        width: 1220px;
+    .home-forum{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: white;
+        .file-upload{
+            height: max-content;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            .slogan-1{
+                font-size: 30px;
+                line-height: 36px;
+                color: #414851;
+                font-weight: bold;
+            }
+            .slogan-2{
+                font-size: 18px;
+                color: #8d9197;
+            }
+            .search-input {
+                padding: 12px 118px 14px 26px;
+                color: #414851;
+                background-color: #e8e8e8;
+                margin: 0;
+                position: relative;
+                z-index: 102;
+            }
+            .big-input {
+                display: block;
+                width: 500px;
+                height: 50px;
+                padding: 17px 26px;
+                font-size: 14px;
+                line-height: 20px;
+                color: #414851;
+                border: 1px solid #e8e9ea;
+                background-color: #fff;
+                background-image: none;
+                border-radius: 28px;
+                margin: 15px 0 25px;
+                box-shadow: none !important;
+                outline: none !important;
+                -webkit-appearance: none;
+            }
+            .search-button {
+                position: relative;
+                right: 87px;
+                top: -5px;
+                width: 80px;
+                height: 44px;
+                border-radius: 28px;
+                border: 0;
+                background: #008bf6 url(https://icon-library.com/images/white-search-icon-transparent-background/white-search-icon-transparent-background-5.jpg) no-repeat center center; 
+                background-size: 70px 50px;
+                z-index: 105;
+                &:hover{
+                    background-color: #00afff;
+                    cursor: pointer;
+                }
+            }
+            .or-label {
+                color: #414851;
+                font-size: 14px;
+                font-weight: bold;
+                width: 100%;
+                top: -33px;
+                left: 0;
+                text-align: center;
+            }
+            .w-b{
+                background: transparent !important;
+                border-color: #008bf6 !important;
+                color: #008bf6 !important;
+            }
+            .big-button {
+                font-size: 18px;
+                font-weight: bold;
+                padding: 14px 0;
+                border: 2px solid transparent;
+                border-radius: 28px;
+                display: block;
+                width: 350px;
+                text-align: center;
+                cursor: pointer;
+                text-decoration: none !important;
+                background: transparent;
+                color: #008bf6;
+                &:hover{
+                    background-color: #0894FF !important;
+                    color: #fff !important;
+                }
+            }
+            .category-item {
+                height: 124px;
+                width: 124px;
+                border: 2px solid #e8e9ea;
+                border-radius: 4px;
+                display: block;
+                padding-top: 18px;
+                text-align: center;
+                font-size: 12px;
+                color: #414851;
+                text-decoration: none;
+                margin-bottom: 15px;
+                &:hover{
+                    box-shadow: 0 0 10px #e2e1e1;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+    .next-list-document{
+        width: 100%;
         margin: auto;
-        min-width: 1220px;
         display: flex;
         align-items: center;
         flex-wrap: wrap;
+        .go-next-button {
+            position: relative;
+            width: 72px;
+            height: 72px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: white url(https://image.flaticon.com/icons/png/512/16/16895.png) no-repeat center center;
+            background-size: 32px 32px;
+            cursor: pointer;
+            border-radius: 36px;
+        }   
     }
+    .list-item{
+        display: block;
+        .list-document-label{
+            font-size: 24px;
+            line-height: 1.4;
+            color: #8a8a8a;
+            margin-left: 66px;
+        }
+        .document-type{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 50px;
+            .list-document{
+                width: 100%;
+                margin: auto;
+                min-width: 1220px;
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            .show-more-button{
+                width: 50px;
+                height: 50px;
+                &:hover{
+                    cursor: pointer;
+                    border-radius: 50%;
+                    background-color: #f7f7f7;
+                    padding: 3px;
+                }
+            }
+        }
+        
+    }
+    
 }
 .flex{
     display: flex;
