@@ -118,6 +118,11 @@
         }
 
     }
+
+    .common-doc {
+        background-color: #008bf6;
+        scroll-behavior: smooth;
+    }
     .next-list-document{
         width: 100%;
         margin: auto;
@@ -142,7 +147,7 @@
         .list-document-label{
             font-size: 24px;
             line-height: 1.4;
-            color: #8a8a8a;
+            color: white;
             margin-left: 66px;
         }
         .document-type{

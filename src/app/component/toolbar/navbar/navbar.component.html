@@ -19,7 +19,7 @@
 
 <div class="forum-container">
   <div class="forum-name cursor-pointer" (click)="backToHome()">DShared</div>
-  <div class="d-flex align-items-center justify-content-center">
+  <div *ngIf="showDetail" class="d-flex align-items-center justify-content-center">
     <input class="search-input small-input" type="text" placeholder="Tìm kiếm" aria-label="Search">
     <button type="button" class="search-button"></button>
   </div>

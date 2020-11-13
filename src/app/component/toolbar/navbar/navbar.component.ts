@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +10,7 @@ export class NavbarComponent implements OnInit {
 
   showPopupUpload = false;
   defaultVisible: boolean = false;
+  showDetail = false;
 
   constructor(
     private router: Router

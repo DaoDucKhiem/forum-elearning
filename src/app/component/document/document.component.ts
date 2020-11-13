@@ -20,25 +20,16 @@ export class DocumentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    for (var i = 0; i < 5; i++) {
-      let doc: Doc = new Doc();
-      doc.documentName = "Tên tài liệu"
-      doc.documentType = "pdf"
-      doc.posterName = "Hải Dương"
-      doc.point = 1
-      doc.viewCount = 2
-      doc.downloadCount = 1999;
-      this.documents.push(doc)
-    }
-    // this.getDocument();
+    this.getDocument();
 
-    // this.dataTransferSV.postSuccess.subscribe(data => {
-    //   this.getDocument();
-    // });
+    this.dataTransferSV.postSuccess.subscribe(data => {
+      this.getDocument();
+    });
   }
   scroll(el: HTMLElement) {
-    el.scrollIntoView();
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
   getDocument() {
     this.documentService.getAll().subscribe(res => {
       if (res && res.data) {

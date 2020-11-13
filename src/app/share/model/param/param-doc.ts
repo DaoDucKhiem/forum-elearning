@@ -11,6 +11,7 @@ export class ParamDoc {
     Description: string; // mô tả
     UserID: string; // id tác giả
     ReportCount: number; // số lần bị report
+    keyWord: string; // từ khóa tìm kiếm
 
     constructor() {
         this.DownloadCount = 0;

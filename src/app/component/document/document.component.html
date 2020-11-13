@@ -12,104 +12,114 @@
             <div class="big-button w-b m-b-40" (click)="showUpload()">Tải lên tệp tin</div>
             <div class="d-flex align-items-center justify-content-center m-b-40">
                 <a class="category-item m-r-24">
-                    <img style="width: 50px; height: 50px;" src="https://pamcit.unon.org/sites/default/files/2017-06/teach.png" alt="" />
+                    <img style="width: 50px; height: 50px;"
+                        src="https://pamcit.unon.org/sites/default/files/2017-06/teach.png" alt="" />
                     <div class="m-t-12">Bài giảng</div>
                 </a>
                 <a class="category-item m-r-24">
-                    <img style="width: 50px; height: 50px;" src="https://cdn.iconscout.com/icon/free/png-256/require-personal-qualities-planning-responsibility-checkmark-list-18-5628.png" alt="" />
-                    <div class="m-t-12">Đề thi</div></a>
+                    <img style="width: 50px; height: 50px;"
+                        src="https://cdn.iconscout.com/icon/free/png-256/require-personal-qualities-planning-responsibility-checkmark-list-18-5628.png"
+                        alt="" />
+                    <div class="m-t-12">Đề thi</div>
+                </a>
                 <a class="category-item">
-                    <img style="width: 50px; height: 50px;" src="https://i.dlpng.com/static/png/1534271-circle-document-documents-extension-file-page-sheet-icon-document-png-512_512_preview.png" alt="" />
-                    <div class="m-t-12">Tài liệu</div></a>
+                    <img style="width: 50px; height: 50px;"
+                        src="https://i.dlpng.com/static/png/1534271-circle-document-documents-extension-file-page-sheet-icon-document-png-512_512_preview.png"
+                        alt="" />
+                    <div class="m-t-12">Tài liệu</div>
+                </a>
             </div>
         </div>
     </div>
-    <div class="next-list-document mb-4">
-        <div class="go-next-button" (click)="scroll(recent)"></div>
-    </div>
-    <div class="list-item mb-4" #recent>
-        <div class="list-document-label">
-            <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
-                style="width: 40px; height: 40px;" alt="">
-            Cập nhật gần đây</div>
-        <div class="document-type">
-            <div class="list-document">
-                <ng-container *ngFor="let item of documents">
-                    <app-doc-info [document]="item"></app-doc-info>
-                </ng-container>
+    <div class="common-doc">
+        <div class="next-list-document mb-4">
+            <div class="go-next-button" (click)="scroll(recent)"></div>
+        </div>
+        <div class="list-item mb-4" #recent>
+            <div class="list-document-label">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
+                    style="width: 40px; height: 40px;" alt="">
+                Cập nhật gần đây
             </div>
-            <div>
-                <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
-                    class="show-more-button" alt="" />
+            <div class="document-type">
+                <div class="list-document">
+                    <ng-container *ngFor="let item of documents">
+                        <app-doc-info [document]="item"></app-doc-info>
+                    </ng-container>
+                </div>
+                <div>
+                    <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
+                        class="show-more-button" alt="" />
+                </div>
             </div>
         </div>
-    </div>
-    <div class="list-item mb-4">
-        <div class="list-document-label">
-            <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
-                style="width: 40px; height: 40px;" alt="">
-            Phổ biến nhất</div>
-        <div class="document-type">
-            <div class="list-document">
-                <ng-container *ngFor="let item of documents">
-                    <app-doc-info [document]="item"></app-doc-info>
-                </ng-container>
-            </div>
-            <div>
-                <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
-                    class="show-more-button" alt="" />
-            </div>
-        </div>
-    </div>
-    <div class="list-item mb-4">
-        <div class="list-document-label">
-            <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
-                style="width: 40px; height: 40px;" alt="">
-            Bài giảng</div>
-        <div class="document-type">
-            <div class="list-document">
-                <ng-container *ngFor="let item of documents">
-                    <app-doc-info [document]="item"></app-doc-info>
-                </ng-container>
-            </div>
-            <div>
-                <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
-                    class="show-more-button" alt="" />
+        <div class="list-item mb-4">
+            <div class="list-document-label">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
+                    style="width: 40px; height: 40px;" alt="">
+                Phổ biến nhất</div>
+            <div class="document-type">
+                <div class="list-document">
+                    <ng-container *ngFor="let item of documents">
+                        <app-doc-info [document]="item"></app-doc-info>
+                    </ng-container>
+                </div>
+                <div>
+                    <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
+                        class="show-more-button" alt="" />
+                </div>
             </div>
         </div>
-    </div>
-    <div class="list-item mb-4">
-        <div class="list-document-label">
-            <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
-                style="width: 40px; height: 40px;" alt="">
-            Đề thi
+        <div class="list-item mb-4">
+            <div class="list-document-label">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
+                    style="width: 40px; height: 40px;" alt="">
+                Bài giảng</div>
+            <div class="document-type">
+                <div class="list-document">
+                    <ng-container *ngFor="let item of documents">
+                        <app-doc-info [document]="item"></app-doc-info>
+                    </ng-container>
+                </div>
+                <div>
+                    <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
+                        class="show-more-button" alt="" />
+                </div>
+            </div>
         </div>
-        <div class="document-type">
-            <div class="list-document">
-                <ng-container *ngFor="let item of documents">
-                    <app-doc-info [document]="item"></app-doc-info>
-                </ng-container>
+        <div class="list-item mb-4">
+            <div class="list-document-label">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
+                    style="width: 40px; height: 40px;" alt="">
+                Đề thi
             </div>
-            <div>
-                <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
-                    class="show-more-button" alt="" />
+            <div class="document-type">
+                <div class="list-document">
+                    <ng-container *ngFor="let item of documents">
+                        <app-doc-info [document]="item"></app-doc-info>
+                    </ng-container>
+                </div>
+                <div>
+                    <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
+                        class="show-more-button" alt="" />
+                </div>
             </div>
         </div>
-    </div>
-    <div class="list-item mb-4">
-        <div class="list-document-label">
-            <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
-                style="width: 40px; height: 40px;" alt="">
-            Tài liệu</div>
-        <div class="document-type">
-            <div class="list-document">
-                <ng-container *ngFor="let item of documents">
-                    <app-doc-info [document]="item"></app-doc-info>
-                </ng-container>
-            </div>
-            <div>
-                <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
-                    class="show-more-button" alt="" />
+        <div class="list-item pb-4">
+            <div class="list-document-label">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
+                    style="width: 40px; height: 40px;" alt="">
+                Tài liệu</div>
+            <div class="document-type">
+                <div class="list-document">
+                    <ng-container *ngFor="let item of documents">
+                        <app-doc-info [document]="item"></app-doc-info>
+                    </ng-container>
+                </div>
+                <div>
+                    <img src="https://cdn0.iconfinder.com/data/icons/flat-design-database-set-1/24/button-circle-browse-next-512.png"
+                        class="show-more-button" alt="" />
+                </div>
             </div>
         </div>
     </div>
