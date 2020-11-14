@@ -7,22 +7,20 @@ import { ServerResponse } from '../model/server-response';
 @Injectable({
   providedIn: 'root'
 })
-export class DocumentService extends BaseService<object>{
+export class UserService extends BaseService<object> {
 
   constructor(
     public http: HttpService
   ) {
-    super(http, "documents");
+    super(http, "users");
   }
 
   /**
-   * lấy danh sách document paging
-   * dùng cho tìm kiếm global,
-   * tìm kiếm theo chuyên mục
-   * @param param 
-   * ddkhiem
+   * lấy thông tin user khi đăng nhập
+   * call api tách thông tin từ token
+   * gen thêm token để call lên stringee
    */
-  getDocPaging(param: object): Observable<ServerResponse> {
-    return this.http.post(`${this.getApiURL()}/documentPaging`, param)
+  getCurrentUser():Observable<ServerResponse> {
+    return this.http.get(`${this.getApiURL()}/GetUserLogin`);
   }
 }
