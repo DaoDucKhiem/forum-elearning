@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Doc } from 'src/app/share/model/document';
+import { ParamDoc } from 'src/app/share/model/param/param-doc';
 
 @Component({
   selector: 'app-doc-info',
@@ -9,16 +9,15 @@ import { Doc } from 'src/app/share/model/document';
 })
 export class DocInfoComponent implements OnInit {
 
-  @Input() document: Doc;
+  @Input() document: ParamDoc;
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.document)
   }
 
   showDetail() {
-    this.router.navigate([`/${this.document.documentID}`]);
+    this.router.navigate([`/${this.document.DocumentID}`]);
   }
 
 }

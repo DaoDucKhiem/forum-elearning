@@ -1,27 +1,29 @@
 <div class="w-100">
     
     <div class="document flex-c-m padding-16" (click)="showDetail()">
-        <div class="icon-container">
-            <img *ngIf="document.documentType === 'docx'" src="../../../assets/images/docx.png" class="icon" />
-            <img *ngIf="document.documentType === 'xlsx'" src="../../../assets/images/xlsx.png" class="icon" />
-            <img *ngIf="document.documentType === 'pptx'" src="../../../assets/images/pptx.png" class="icon" />
-            <img *ngIf="document.documentType === 'pdf'" src="../../../assets/images/pdf.svg" class="icon" />
+        <div *ngIf="!document.ImageFeature" class="icon-container">
+            <img *ngIf="document.DocumentType === 'docx'" src="../../../assets/images/docx.png" class="icon" />
+            <img *ngIf="document.DocumentType === 'xlsx'" src="../../../assets/images/xlsx.png" class="icon" />
+            <img *ngIf="document.DocumentType === 'pptx'" src="../../../assets/images/pptx.png" class="icon" />
+            <img *ngIf="document.DocumentType === 'pdf'" src="../../../assets/images/pdf.svg" class="icon" />
+        </div>
+        <div *ngIf="document.ImageFeature" class="icon-container">
+            <img [src]="document.ImageFeature" alt="" class="w-100 h-100 cover-fill">
         </div>
         <div class="content w-100">
-            <div class="filename">{{ document?.documentName }}</div>
-            <div class="author">{{ document?.posterName }}</div>
+            <div class="filename">{{ document?.DocumentName }}</div>
             <div class="number">
                 <div class="flex-c-m m-r-16">
                     <img src="../../../assets/images/price.svg" class="sub-icon" />
-                    <div class="m-t-4">{{ document?.point }}</div>
+                    <div class="m-t-4">{{ document?.Point }}</div>
                 </div>
                 <div class="flex-c-m m-r-16">
                     <img src="../../../assets/images/eyes.svg" class="sub-icon" />
-                    <div class="m-t-4">{{ document?.viewCount }}</div>
+                    <div class="m-t-4">{{ document?.ViewCount }}</div>
                 </div>
                 <div class="flex-c-m m-r-16">
                     <img src="../../../assets/images/download.svg" class="sub-icon" />
-                    <div class="m-t-4">{{ document?.downloadCount }}</div>
+                    <div class="m-t-4">{{ document?.DownloadCount }}</div>
                 </div>
             </div>
         </div>

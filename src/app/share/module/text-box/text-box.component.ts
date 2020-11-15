@@ -17,6 +17,8 @@ export class TextBoxComponent implements OnInit {
 
   @Output() onValueChanged = new EventEmitter<any>();
 
+  @Output() onKeyUp = new EventEmitter<any>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -25,6 +27,12 @@ export class TextBoxComponent implements OnInit {
   valueChanged(e) {
     if (e) {
       this.onValueChanged.emit(e);
+    }
+  }
+
+  keyUp(e) {
+    if (e) {
+      this.onKeyUp.emit(e);
     }
   }
 

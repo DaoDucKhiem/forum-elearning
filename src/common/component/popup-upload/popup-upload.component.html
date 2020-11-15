@@ -1,42 +1,71 @@
 <dx-popup [width]="900" [height]="'100vh'" [showTitle]="true" [dragEnabled]="true" [(visible)]="popupVisible"
     [title]="title" (onHidden)="closePopup()" position="{offset: '0 40'}">
     <div class="h-100 d-flex flex-column">
-        <div class="description mb-3">
-            <div class="w-50">
-                <select-box title="Chuyên mục" [required]="true" [placeholder]="'Chọn chuyên mục'"
-                    [isError]="isCategoryError" [textError]="'Chuyên mục không được để trống'"
-                    [dataSource]="listCategory" [displayExpr]="'Name'" [valueExpr]="'ID'"
-                    (onValueChanged)="setCategory($event)"></select-box>
-            </div>
-        </div>
-        <div class="description mb-3">
-            <text-box title="Tên tài liệu" [required]="true" [isError]="isDocumentNameError"
-                [placeholder]="'Nhập tên tài liệu'" [textError]="'Tên tài liệu không được bỏ trống'"
-                (onValueChanged)="setDocumentName($event)"></text-box>
-        </div>
-        <div class="description">
-            <div class="mb-2">Mô tả <span class="text-error"> *</span></div>
-            <dx-text-area [class.border-danger]="isDescriptionError" [height]="60" maxLength="355" [value]="description"
-                placeholder="Nhập mô tả" (onValueChanged)="validateDescription($event)">
-            </dx-text-area>
-            <div *ngIf="isDescriptionError" class="mt-2 text-error">Mô tả không được để trống</div>
-        </div>
-        <div *ngIf="files.length === 0" class="uploadfilecontainer flex-c-m" (click)="fileInput.click()" appUpload
-            (onFileDropped)="uploadFile($event)">
-            <div>Nhấn hoặc kéo thả file vào đây</div>
-            <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
-        </div>
-        <div *ngIf="isFileError" class="description text-error">File không được để trống</div>
-        <div class="flex-1 w-100 mt-3">
-            <dx-scroll-view class="list-file">
-                <div class="files-list flex-c-m" *ngFor="let file of files;let i= index">
-                    <p class="ml-4"> {{ file.name }} </p>
-                    <button class="delete-file mr-4" (click)="deleteAttachment(i)" name="upload">
-                        <i class="fa fa-trash"></i>
-                    </button>
+        <dx-scroll-view class="flex-1 content-upload">
+            <div class="flex-1 d-flex flex-column">
+                <div class="description mb-3">
+                    <div class="w-50">
+                        <select-box title="Chuyên mục" [required]="true" [placeholder]="'Chọn chuyên mục'"
+                            [isError]="isCategoryError" [textError]="'Chuyên mục không được để trống'"
+                            [dataSource]="listCategory" [displayExpr]="'Name'" [valueExpr]="'ID'"
+                            (onValueChanged)="setCategory($event)"></select-box>
+                    </div>
                 </div>
-            </dx-scroll-view>
-        </div>
+                <div class="description document-name mb-3">
+                    <text-box #documentName title="Tên tài liệu" [required]="true" [isError]="isDocumentNameError"
+                        [placeholder]="'Nhập tên tài liệu'" [textError]="'Tên tài liệu không được bỏ trống'" (onKeyUp)="onEnterTextBox($event)"
+                        (onValueChanged)="setDocumentName($event)"></text-box>
+                </div>
+                <div class="description">
+                    <div class="mb-2 bold">Mô tả <span class="text-error"> *</span>
+                        <div class="font-weight-normal"> (mô tả chi tiết thuận tiện cho việc tìm kiếm tài liệu dễ dàng
+                            hơn).
+                        </div>
+                    </div>
+                    <dx-text-area [class.border-danger]="isDescriptionError" [height]="60" maxLength="355"
+                        [value]="description" placeholder="Nhập mô tả" (onValueChanged)="validateDescription($event)">
+                    </dx-text-area>
+                    <div *ngIf="isDescriptionError" class="mt-2 text-error">Mô tả không được để trống</div>
+                </div>
+                <div *ngIf="files.length === 0" class="uploadfilecontainer flex-c-m" (click)="fileInput.click()"
+                    appUpload (onFileDropped)="uploadFile($event)">
+                    <div>Nhấn hoặc kéo thả file vào đây</div>
+                    <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+                </div>
+                <div *ngIf="isFileError" class="description text-error">File không được để trống</div>
+                <div *ngIf="files.length > 0" class="w-100 mt-3">
+                    <dx-scroll-view class="list-file">
+                        <div class="files-list flex-c-m" *ngFor="let file of files;let i= index">
+                            <p class="ml-4"> {{ file.name }} </p>
+                            <button class="delete-file mr-4" (click)="deleteAttachment(i)" name="upload">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </dx-scroll-view>
+                </div>
+                <div *ngIf="files.length > 0" class="flex-1 description">
+                    <div class="mb-2 bold">Ảnh đại diện</div>
+                    <div class="feature-image cursor-pointer position-relative flex-c-m">
+                        <img *ngIf="currentParam?.ImageFeature && !imageLoading" class="w-100 h-100 img-feature"
+                            [src]="currentParam?.ImageFeature" alt="">
+                        <div *ngIf="!imageLoading" class="w-100 h-100 position-absolute input-image flex-c-m"
+                            (click)="inputImage.click()">
+                            <img src="../../../assets/icon/image.svg" width="80" height="80" alt="">
+                        </div>
+                        <div *ngIf="imageLoading" class="w-100 h-100 loading flex-c-m" (click)="inputImage.click()">
+                            <dx-load-indicator id="large-indicator" height="60" width="60"></dx-load-indicator>
+                        </div>
+                        <div *ngIf="currentParam?.ImageFeature && !imageLoading" class="position-absolute icon-close"
+                            (click)="clearImageFeature()">
+                            <img src="../../../assets/icon/close.svg" width="30" height="30" alt="">
+                        </div>
+                    </div>
+
+                </div>
+                <input #inputImage type="file" hidden accept="image/x-png,image/gif,image/jpeg"
+                    (change)="uploadImageFeature($event.target.files)" />
+            </div>
+        </dx-scroll-view>
         <div class="d-flex justify-content-end">
             <dx-button class="mr-3" text="Hủy bỏ" type="danger" (click)="closePopup()">
             </dx-button>

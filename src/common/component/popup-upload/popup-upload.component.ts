@@ -5,6 +5,8 @@ import { DataTransferService } from 'src/app/share/service/data-transfer.service
 import { DocumentService } from 'src/app/share/service/document.service';
 import { UploadService } from 'src/app/share/service/upload.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-popup-upload',
   templateUrl: './popup-upload.component.html',
@@ -30,6 +32,7 @@ export class PopupUploadComponent implements OnInit {
   sizeUpload = 0;
   isFileError = false;
   isCategoryError: boolean;
+  imageLoading = false;
 
   constructor(
     private documentSV: DocumentService,
@@ -99,8 +102,29 @@ export class PopupUploadComponent implements OnInit {
     }
   }
 
+  /**
+   * upload avatar cho tài liệu
+   * @param event 
+   * ddkhiem
+   */
+  uploadImageFeature(event) {
+    this.imageLoading = true;
+    const file: File = event[0];
+    var formData = new FormData();
+    formData.set('file', file);
+    this.uploadSV.uploadFile(formData).subscribe(res => {
+      if (res.filename) {
+        this.currentParam.ImageFeature = res.filename;
+      }
+      setTimeout(() => {
+        this.imageLoading = false;
+      }, 200);
+    });
+  }
+
   deleteAttachment(index) {
-    this.files.splice(index, 1)
+    this.files.splice(index, 1);
+    this.currentParam.ImageFeature = null;
   }
 
   validateDescription(e) {
@@ -144,6 +168,7 @@ export class PopupUploadComponent implements OnInit {
       if (this.files.length === 0) {
         this.isFileError = true;
       }
+      $(".document-name").find("input").focus();
       return false;
     }
 
@@ -152,6 +177,7 @@ export class PopupUploadComponent implements OnInit {
       if (this.files.length === 0) {
         this.isFileError = true;
       }
+      $("dx-text-area").find("textarea").focus();
       return false;
     }
 
@@ -173,7 +199,7 @@ export class PopupUploadComponent implements OnInit {
     if (this.validateBeforeSave()) {
       this.prepareDataBeforeSave();
       this.documentSV.save(this.currentParam).subscribe(res => {
-        if (res && res.data) {
+        if (res && res.Data) {
           this.toastr.success("Đăng tài liệu thành công!");
           this.datatransferSV.postDocumentSuccess(); // thong bao dang tai lieu thanh cong cho document
         }
@@ -187,6 +213,7 @@ export class PopupUploadComponent implements OnInit {
     if (e) {
       this.currentParam.CategoryID = e.value;
       this.isCategoryError = false;
+      $(".document-name").find("input").focus();
     }
   }
 
@@ -196,6 +223,16 @@ export class PopupUploadComponent implements OnInit {
       if (this.currentParam.DocumentName && this.currentParam.DocumentName.trim() !== '') {
         this.isDocumentNameError = false;
       }
+    }
+  }
+
+  clearImageFeature() {
+    this.currentParam.ImageFeature = null;
+  }
+
+  onEnterTextBox(e) {
+    if (e && e.event && e.event.keyCode === 13) {
+      $("dx-text-area").find("textarea").focus();
     }
   }
 }

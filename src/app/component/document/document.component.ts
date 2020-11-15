@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Doc } from 'src/app/share/model/document';
+import { ParamDoc } from 'src/app/share/model/param/param-doc';
 import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 import { DocumentService } from 'src/app/share/service/document.service';
 
@@ -10,7 +10,7 @@ import { DocumentService } from 'src/app/share/service/document.service';
 })
 export class DocumentComponent implements OnInit {
 
-  documents: Doc[] = [];
+  documents: ParamDoc[] = [];
   showPopupUpload = false;
 
 
@@ -32,8 +32,8 @@ export class DocumentComponent implements OnInit {
 
   getDocument() {
     this.documentService.getAll().subscribe(res => {
-      if (res && res.data) {
-        this.documents = res.data;
+      if (res && res.Data) {
+        this.documents = res.Data;
       }
     });
   }

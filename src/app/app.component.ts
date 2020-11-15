@@ -10,12 +10,12 @@ export class AppComponent implements OnInit {
   constructor(private userSV: UserService) { }
   ngOnInit() {
     this.userSV.getCurrentUser().subscribe(data => {
-      if (data && data.success && data.data) {
-        if (data.data.userData.stringeeToken) {
-          localStorage.setItem("StringeeToken", data.data.userData.stringeeToken);
+      if (data && data.Success && data.Data) {
+        if (data.Data.UserData.StringeeToken) {
+          localStorage.setItem("StringeeToken", data.Data.UserData.StringeeToken);
         }
-        if (data.data.userData.token) {
-          localStorage.setItem("Token", data.data.userData.token);
+        if (data.Data.UserData.Token) {
+          localStorage.setItem("Token", data.Data.UserData.Token);
         }
       }
     })

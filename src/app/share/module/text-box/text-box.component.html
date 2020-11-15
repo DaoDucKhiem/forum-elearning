@@ -1,6 +1,6 @@
 <div class="w-100 d-flex flex-column">
     <div class="title mb-2">{{title}} <span *ngIf="required" class="text-error">*</span></div>
     <dx-text-box [value]="value" [class.border-error]="isError" [placeholder]="placeholder" valueChangeEvent="keyup"
-        (onValueChanged)="valueChanged($event)"></dx-text-box>
+        (onKeyUp)="keyUp($event)" (onValueChanged)="valueChanged($event)"></dx-text-box>
     <div *ngIf="isError" class="text-error">{{textError}}</div>
 </div>

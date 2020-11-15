@@ -4,6 +4,7 @@ export class ParamDoc {
     DocumentSize: any; // dung lượng
     DocumentType: string; // đuôi file
     DocumentLink: string; // file path
+    ImageFeature: string; // link ảnh đại diện cho tài liệu
     Point: number; // điểm
     ViewCount: number; //số lượt xem
     DownloadCount: number; // số lượt tải
@@ -11,7 +12,6 @@ export class ParamDoc {
     Description: string; // mô tả
     UserID: string; // id tác giả
     ReportCount: number; // số lần bị report
-    keyWord: string; // từ khóa tìm kiếm
 
     constructor() {
         this.DownloadCount = 0;
