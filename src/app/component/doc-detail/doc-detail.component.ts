@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DocumentService } from 'src/common/service/documentService/document.service';
+import { DocumentService } from 'src/app/share/service/document.service';
 
 @Component({
   selector: 'app-doc-detail',
@@ -11,7 +11,7 @@ export class DocDetailComponent implements OnInit {
 
   public documents = [];
   public document: any;
-  public documentID: Number;
+  public documentID: number;
   public showPopupUpload = false
 
 
@@ -24,14 +24,20 @@ export class DocDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.documentID = Number.parseInt(params['id']);
-      this.documentService.getDocuments().subscribe((data) => {
-        this.documents = data
-        this.documents.forEach((data) => {
-          if (data.ID == this.documentID) {
-            this.document = data;
-          }
-        })
-      });
+      this.documentService.getByID(this.documentID).subscribe((res)=>{
+
+      })
+      let param = {
+        SearchKey: "",
+        CategoryID: null,
+        PageSize: 5,
+        PageIndex: 1
+      }
+      this.documentService.getDocPaging(param).subscribe((res) => {
+        if (res?.Success) {
+          this.documents = res.Data;
+        }
+      })
     })
 
   }
