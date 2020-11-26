@@ -53,7 +53,7 @@ export class DocumentComponent implements OnInit {
       SearchKey: "",
       CategoryID: category,
       PageSize: 5,
-      PageIndex: 1
+      PageIndex: 0
     }
     this.documentService.getDocPaging(param).subscribe((res) => {
       if (res?.Success) {
@@ -67,9 +67,8 @@ export class DocumentComponent implements OnInit {
   getDocument(category = null) {
     let param = {
       SearchKey: "",
-      CategoryID: category,
       PageSize: 5,
-      PageIndex: 1
+      PageIndex: 0
     }
     this.documentService.getDocPaging(param).subscribe((res) => {
       if (res?.Success) {
@@ -95,9 +94,8 @@ export class DocumentComponent implements OnInit {
     this.searchDocument = true;
     let param = {
       SearchKey: this.searchKey,
-      CategoryID: null,
       PageSize: 20,
-      PageIndex: 1
+      PageIndex: 0
     }
     this.documentService.getDocPaging(param).subscribe((res) => {
       if (res?.Success) {
