@@ -12,7 +12,20 @@ export class DocumentComponent implements OnInit {
 
   documents: ParamDoc[] = [];
   showPopupUpload = false;
-
+  searchKey: string = "";
+  searchDocument: boolean = false;
+  //Danh sách theo tìm kiếm
+  listSearchDocument: ParamDoc[] = [];
+  //Danh sách theo gần nhất
+  listRecentDocument: ParamDoc[] = [];
+  //Danh sách theo xem nhiều nhất
+  listMostDocument: ParamDoc[] = [];
+  //Danh sách theo CateID = 1
+  listCate1Document: ParamDoc[] = [];
+  //Danh sách theo CateID = 2
+  listCate2Document: ParamDoc[] = [];
+  //Danh sách theo CateID = 3
+  listCate3Document: ParamDoc[] = [];
 
   constructor(
     private documentService: DocumentService,
@@ -21,21 +34,49 @@ export class DocumentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDocument();
-
+    this.getDocumentByCategoryID(1)
+    this.getDocumentByCategoryID(2)
+    this.getDocumentByCategoryID(3)
     this.dataTransferSV.postSuccess.subscribe(data => {
       this.getDocument();
+      this.getDocumentByCategoryID(1)
+      this.getDocumentByCategoryID(2)
+      this.getDocumentByCategoryID(3)
     });
   }
   scroll(el: HTMLElement) {
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  getDocument() {
-    this.documentService.getAll().subscribe(res => {
-      if (res && res.Data) {
-        this.documents = res.Data;
+  getDocumentByCategoryID(category = null) {
+    let param = {
+      SearchKey: "",
+      CategoryID: category,
+      PageSize: 5,
+      PageIndex: 1
+    }
+    this.documentService.getDocPaging(param).subscribe((res) => {
+      if (res?.Success) {
+        category == 1 && (this.listCate1Document = res.Data);
+        category == 2 && (this.listCate2Document = res.Data);
+        category == 3 && (this.listCate3Document = res.Data);
       }
-    });
+    })
+  }
+
+  getDocument(category = null) {
+    let param = {
+      SearchKey: "",
+      CategoryID: category,
+      PageSize: 5,
+      PageIndex: 1
+    }
+    this.documentService.getDocPaging(param).subscribe((res) => {
+      if (res?.Success) {
+        this.listMostDocument = res.Data;
+        this.listRecentDocument = res.Data;
+      }
+    })
   }
 
   showUpload() {
@@ -44,5 +85,24 @@ export class DocumentComponent implements OnInit {
 
   closePopup(e) {
     this.showPopupUpload = false;
+  }
+
+  onSearch() {
+    this.scroll(document.getElementById('search'))
+  }
+  changeValue(e) {
+    this.searchKey = e.target.value
+    this.searchDocument = true;
+    let param = {
+      SearchKey: this.searchKey,
+      CategoryID: null,
+      PageSize: 20,
+      PageIndex: 1
+    }
+    this.documentService.getDocPaging(param).subscribe((res) => {
+      if (res?.Success) {
+        this.listSearchDocument = res.Data;
+      }
+    })
   }
 }

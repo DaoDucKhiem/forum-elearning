@@ -29,6 +29,10 @@ export class BaseService<T extends BaseEntity> {
   getAll(): Observable<ServerResponse> {
     return this.http.get(`${this.getApiURL()}`);
   }
+   // lấy tất cả dữ liệu
+  getByID(id: number): Observable<ServerResponse> {
+    return this.http.get(`${this.getApiURL()}/${id}`);
+  }
 
   // lưu dữ liệu
   save(data: T, opt?: object): Observable<ServerResponse> {
