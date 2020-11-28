@@ -1,101 +1,118 @@
-@import '../../../../assets/scss/var-color.scss';
-::ng-deep{
-    .popover-user{
+@import "../../../../assets/scss/var-color.scss";
+::ng-deep {
+    .popover-user {
         width: auto;
         height: auto;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         flex-direction: column;
-        .tab-user{
+        .tab-user {
             width: 100%;
-            &:hover{
-                background-color: #f5f5f5 !important;
+            &:hover {
+                background-color: rgba(163, 212, 252, 1) !important;
                 border-radius: 8px;
             }
         }
     }
 }
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
-:host{
-    .forum-container{
+:host {
+    .forum-container {
         height: 60px;
         border-bottom: 1px solid #f7f7f7;
+        background-color: rgba(163, 212, 252, 1);
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 25px;
+        padding: 0 25px;
+        .category-item {
+            height: 100%;
+            width: 160px;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            padding: 0 16px;
+            color: #1f1f1f;
+            cursor: pointer;
+            &:hover {
+                box-shadow: 0 0 10px #333;
+                background-color: #0073d2;
+                color: #ffffff;
+            }
+        }
+
+        .active {
+            box-shadow: 0 0 10px #333;
+            background-color: #0073d2;
+            color: #ffffff;
+        }
+
+        .nav-right {
+            .upload {
+                width: 36px;
+                height: 36px;
+                margin-right: 16px;
+                cursor: pointer;
+            }
+        }
     }
-    .forum-name{
+    .forum-name {
+        display: flex;
+        align-items: center;
         font-size: 24px;
         font-weight: 900;
         font-style: italic;
         color: #008cf6;
-        width: 30%;
     }
-    .justify-content-center{
+    .justify-content-center {
         justify-content: center;
     }
-    .button-forum{
+    .button-forum {
         border-radius: 25px;
-        border: 3px solid #B2DCFC;
+        border: 3px solid #b2dcfc;
         padding: 4px;
         text-align: center;
         height: 36px;
         width: 150px;
         color: #008cf6;
         font-weight: bold;
-        &:hover{
+        &:hover {
             cursor: pointer;
-            background-color: #B2DCFC;
+            background-color: #b2dcfc;
         }
     }
-    .avatar{
+    .avatar {
         border-radius: 25px;
-        border: 3px solid #B2DCFC;
+        border: 3px solid #ffffff;
         text-align: center;
         height: 36px;
         width: 36px;
-        &:hover{
+        &:hover {
             cursor: pointer;
-            background-color: #B2DCFC;
+            background-color: #b2dcfc;
         }
     }
     .search-input {
         padding: 12px 118px 14px 26px;
         color: #414851;
-        background-color: #e8e8e8;
+        background-color: #ffffff;
         margin: 0;
-        position: relative;
-        z-index: 102;
+        &:focus {
+            box-shadow: 0 0 10px #333 !important;
+        }
     }
     .small-input {
-        height: 40px;
+        height: 45px;
         width: 300px;
         padding: 12px 20px;
+        padding-left: 40px;
         font-size: 14px;
         line-height: 20px;
         border-radius: 23px;
         box-shadow: none !important;
         outline: none !important;
-    }
-    .search-button {
-        position: relative;
-        right: 66px;
-        top: 0px;
-        width: 64px;
-        height: 36px;
-        border-radius: 18px;
-        border: 0;
-        background: #008bf6 url(https://icon-library.com/images/white-search-icon-transparent-background/white-search-icon-transparent-background-5.jpg) no-repeat center center; 
-        background-size: 49px 35px;
-        z-index: 105;
-        &:hover{
-            background-color: #00afff;
-            cursor: pointer;
-        }
     }
 }

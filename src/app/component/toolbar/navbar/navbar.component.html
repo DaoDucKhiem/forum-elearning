@@ -18,18 +18,34 @@
 </dx-popover>
 
 <div class="forum-container">
-  <div class="forum-name cursor-pointer" (click)="backToHome()">DShared</div>
-  <div *ngIf="showDetail" class="d-flex align-items-center justify-content-center">
-    <input class="search-input small-input" type="text" placeholder="Tìm kiếm" aria-label="Search">
-    <button type="button" class="search-button"></button>
+  <div class="h-100 flex-1 d-flex">
+    <div class="h-100 flex-c-m">
+      <img style="width: 55px; height: 55px;" class="mr-3 cursor-pointer" src="../../../assets/icon/digital-library.svg"
+        alt="" (click)="backToHome()" />
+      <div class="forum-name">DShared</div>
+    </div>
+    <div class="flex-1 d-flex align-items-center m-l-40">
+      <div class="category-item" [class.active]="currentCategoryID == category.ID"
+        *ngFor="let category of listCategory" (click)="selectCategory(category.ID)">
+        <img style="width: 36px; height: 36px;" [src]="category?.Icon" alt="" />
+        <div class="ml-2 bold">{{category?.Name}}</div>
+      </div>
+    </div>
   </div>
-  <div class="d-flex align-items-center justify-content-center">
-    <div class="button-forum m-r-24" (click)="showLogin()">
-      Đăng nhập
+  <div class="d-flex nav-right">
+    <div class="mr-4 position-relative">
+      <span class="icon position-absolute h-100 flex-c-m ml-4"><i class="fa fa-search"></i></span>
+      <input class="search-input small-input" type="text" placeholder="Tìm kiếm" [(ngModel)]="searchKey"
+        (ngModelChange)="search()">
     </div>
-    <div class="button-forum m-r-32" (click)="showRegister()">
-      Đăng ký
+    <div class="flex-c-m">
+      <img class="upload" src="../../../assets/icon/upload-in-cloud.svg" title="tải lên tài liệu" alt=""
+        (click)="showUpload()" />
+      <img src="../../../../assets/images/Ditto.png" class="avatar" id="link1" (click)="togglePopover($event)">
     </div>
-    <img src="../../../../assets/images/Ditto.png" class="avatar" id="link1" (click)="togglePopover($event)">
   </div>
 </div>
+
+<app-popup-upload *ngIf="showPopupUpload" [title]="'Đăng tài liệu'" [popupVisible]="showPopupUpload"
+  (hiddenPopup)="closePopup($event)">
+</app-popup-upload>

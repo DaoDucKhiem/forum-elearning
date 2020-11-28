@@ -12,8 +12,7 @@ import { PopupUploadModule } from 'src/common/component/popup-upload/popup-uploa
   imports: [
     CommonModule,
     DocumentRoutingModule,
-    DocInfoModule,
-    PopupUploadModule
+    DocInfoModule
   ]
 })
 export class DocumentModule { }

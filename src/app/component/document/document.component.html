@@ -1,41 +1,6 @@
 <div class="document-container">
-    <div class="home-forum p-t-100">
-        <div class="file-upload">
-            <div class="slogan-1 m-b-20">Tìm kiếm, Lưu trữ và Chia sẻ dễ dàng</div>
-            <div class="slogan-2 m-b-32">Đăng tải, tìm kiếm và chia sẻ dữ liệu chưa bao giờ đơn giản đến thế!
-            </div>
-            <div class="d-flex align-items-center justify-content-center m-l-80">
-                <input class="search-input big-input" type="text" [(value)]="searchKey" placeholder="Tìm kiếm" (keyup.enter)="onSearch()" (input)="changeValue($event)">
-                <button type="button" class="search-button" (click)="onSearch()"></button>
-            </div>
-            <div class="or-label m-b-25">hoặc</div>
-            <div class="big-button w-b m-b-40" (click)="showUpload()">Tải lên tệp tin</div>
-            <div class="d-flex align-items-center justify-content-center m-b-40">
-                <a class="category-item m-r-24">
-                    <img style="width: 50px; height: 50px;"
-                        src="https://pamcit.unon.org/sites/default/files/2017-06/teach.png" alt="" />
-                    <div class="m-t-12">Bài giảng</div>
-                </a>
-                <a class="category-item m-r-24">
-                    <img style="width: 50px; height: 50px;"
-                        src="https://cdn.iconscout.com/icon/free/png-256/require-personal-qualities-planning-responsibility-checkmark-list-18-5628.png"
-                        alt="" />
-                    <div class="m-t-12">Đề thi</div>
-                </a>
-                <a class="category-item">
-                    <img style="width: 50px; height: 50px;"
-                        src="https://i.dlpng.com/static/png/1534271-circle-document-documents-extension-file-page-sheet-icon-document-png-512_512_preview.png"
-                        alt="" />
-                    <div class="m-t-12">Tài liệu</div>
-                </a>
-            </div>
-        </div>
-    </div>
     <!-- Chưa có tìm kiếm -->
-    <div class="common-doc" *ngIf="!searchDocument || !searchKey">
-        <div class="next-list-document mb-4">
-            <div class="go-next-button" (click)="scroll(recent)"></div>
-        </div>
+    <div class="common-doc m-t-35" *ngIf="!searchDocument || !searchKey">
         <div class="list-item mb-4" #recent>
             <div class="list-document-label">
                 <img src="https://cdn.iconscout.com/icon/free/png-256/documents-404-1163257.png"
@@ -125,7 +90,7 @@
         </div>
     </div>
     <!-- Có tìm kiếm -->
-    <div class="common-doc" *ngIf="searchDocument && searchKey">
+    <div class="common-doc m-t-35" *ngIf="searchDocument && searchKey">
         <div class="next-list-document mb-4">
             <div class="go-next-button" (click)="scroll(search)"></div>
         </div>
@@ -147,7 +112,3 @@
             </div>
         </div>
     </div>
-
-    <app-popup-upload *ngIf="showPopupUpload" [title]="'Đăng tài liệu'" [popupVisible]="showPopupUpload"
-        (hiddenPopup)="closePopup($event)">
-    </app-popup-upload>

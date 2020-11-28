@@ -53,11 +53,11 @@ export class PopupUploadComponent implements OnInit {
       },
       {
         ID: 3,
-        Name: "Phương pháp học tập"
+        Name: "Tài liệu"
       },
       {
         ID: 4,
-        Name: "Tài liệu tham khảo"
+        Name: "Phương pháp"
       },
     ]
   }
