@@ -5,11 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConfigService } from 'src/common/service/config.service';
 import { ForumAppConfig } from './share/model/config/forum-app-config';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { SafePipe } from './share/pipe/safe.pipe';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DocumentService } from './share/service/document.service';
+import { HeaderInterceptor } from 'src/common/interceptor/headerInterceptor';
 
 export function initializeApp(appConfig: ConfigService<ForumAppConfig>) {
   return () => appConfig.load();
@@ -32,13 +32,17 @@ export function initializeApp(appConfig: ConfigService<ForumAppConfig>) {
     }),
   ],
   providers: [
-    DocumentService,
     ConfigService,
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
       deps: [ConfigService],
       multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true,
     }
   ],
   bootstrap: [AppComponent]

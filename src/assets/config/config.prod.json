@@ -1,0 +1,6 @@
+{
+    "apiServer": "http://api/toedu/me",
+    "urlConfig": "http://g3.toedu.me",
+    "MaxLengthFile": 30,
+    "MaxFileSize": 10485760
+}
