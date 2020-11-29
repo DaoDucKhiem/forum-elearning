@@ -1,4 +1,4 @@
-@import './var-color.scss';
+@import "./var-color.scss";
 
 .cursor-pointer {
     cursor: pointer;
@@ -22,6 +22,10 @@
 
 .font-24 {
     font-size: 24px;
+}
+
+.font-32 {
+    font-size: 32px !important;
 }
 
 .bold {
@@ -57,8 +61,7 @@
                 padding: #{$i}px;
             }
         }
-    }
-    @else {
+    } @else {
         // nếu là một phía cụ thể
         @for $i from 1 through 300 {
             .padding-#{$side}-#{$i} {
@@ -82,8 +85,7 @@
                 margin: #{$i}px;
             }
         }
-    }
-    @else {
+    } @else {
         // nếu là một phía cụ thể
         @for $i from 1 through 300 {
             .margin-#{$side}-#{$i} {
@@ -100,10 +102,8 @@
 @include margin-element(left);
 @include margin-element(all);
 
-
-
 @mixin m-element($side) {
-        // nếu là một phía cụ thể
+    // nếu là một phía cụ thể
     @for $i from 1 through 300 {
         @if $side == t {
             .m-#{$side}-#{$i} {
@@ -128,7 +128,6 @@
                 margin-right: #{$i}px;
             }
         }
-        
     }
 }
 
@@ -137,7 +136,6 @@
 @include m-element(r);
 @include m-element(b);
 @include m-element(l);
-
 
 @mixin p-element($side) {
     // nếu là một phía cụ thể
@@ -165,7 +163,6 @@
                 padding-right: #{$i}px;
             }
         }
-        
     }
 }
 
@@ -174,3 +171,13 @@
 @include p-element(r);
 @include p-element(b);
 @include p-element(l);
+
+@mixin border-radius {
+    @for $i from 1 through 300 {
+        .border-radius-#{$i} {
+            border-radius: #{$i}px;
+        }
+    }
+}
+
+@include border-radius();

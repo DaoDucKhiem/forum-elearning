@@ -1,5 +1,19 @@
 .document-container {
     width: 100%;
+    .dashboard {
+        height: calc(100vh - 60px);
+        background-color: #59c2ff;
+        .dashboard-item {
+            padding: 24px;
+            border-radius: 50%;
+            width: 180px;
+            height: 180px;
+            background-color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 0 10px rgba(108, 117, 125, 0.25);
+        }
+    }
+
     .category-item {
         height: 124px;
         width: 124px;
@@ -148,8 +162,9 @@
         .list-document-label {
             font-size: 24px;
             line-height: 1.4;
-            color: #1f1f1f;
-            margin-left: 66px;
+            color: #212529;
+            font-weight: bold;
+            margin-left: 4px;
         }
         .document-type {
             display: flex;
@@ -164,17 +179,13 @@
                 align-items: center;
                 flex-wrap: wrap;
             }
-            .show-more-button {
-                width: 50px;
-                height: 50px;
-                &:hover {
-                    cursor: pointer;
-                    border-radius: 50%;
-                    background-color: #f7f7f7;
-                    padding: 3px;
-                }
-            }
         }
+    }
+
+    .footer {
+        height: 150px;
+        background-color: #1c3340;
+        color: #fff !important;
     }
 }
 .flex {
