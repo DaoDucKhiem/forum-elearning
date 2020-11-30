@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private userSV: UserService, private authenSV: AuthenService) { }
   ngOnInit() {
     this.initApp();
-   // this.getUserLogin();
+    //this.getUserLogin();
   }
 
   /**
