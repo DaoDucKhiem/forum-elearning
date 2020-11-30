@@ -1,5 +1,5 @@
 {
-    "apiServer": "http://api.toedu/me",
+    "apiServer": "http://apigateway.toedu.me/nhom3/api/",
     "urlConfig": "http://g3.toedu.me",
     "MaxLengthFile": 30,
     "MaxFileSize": 10485760
