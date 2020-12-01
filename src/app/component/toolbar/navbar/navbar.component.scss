@@ -54,6 +54,16 @@ html {
                 cursor: pointer;
             }
         }
+
+        .search-enable {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.51);
+            top: 0px;
+            left: 0;
+            z-index: 1;
+        }
     }
     .forum-name {
         display: flex;
@@ -108,6 +118,7 @@ html {
         font-size: 14px;
         line-height: 20px;
         border-radius: 23px;
+        z-index: 2;
         box-shadow: none !important;
         outline: none !important;
     }

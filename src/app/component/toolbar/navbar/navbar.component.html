@@ -25,18 +25,19 @@
       <div class="forum-name">DShared</div>
     </div>
     <div class="flex-1 d-flex align-items-center m-l-40">
-      <div class="category-item" [class.active]="currentCategoryID == category.ID"
-        *ngFor="let category of listCategory" (click)="selectCategory(category.ID)">
+      <div class="category-item" [class.active]="currentCategoryID == category.ID" *ngFor="let category of listCategory"
+        (click)="selectCategory(category.ID)">
         <img style="width: 36px; height: 36px;" [src]="category?.Icon" alt="" />
         <div class="ml-2 bold">{{category?.Name}}</div>
       </div>
     </div>
   </div>
   <div class="d-flex nav-right">
-    <div class="mr-4 position-relative">
+    <div class="mr-4 position-relative z-index-2">
       <span class="icon position-absolute h-100 flex-c-m ml-4"><i class="fa fa-search"></i></span>
-      <input class="search-input small-input" type="text" placeholder="Tìm kiếm" [(ngModel)]="searchKey"
-        (ngModelChange)="search()">
+      <input #ValueSearch class="search-input small-input" type="text" placeholder="Tìm kiếm" (keyup)="search($event)"
+        (focusin)="openSearchEnable()">
+      <app-search-global *ngIf="searchEnable" [searchKey]="searchKey"></app-search-global>
     </div>
     <div class="flex-c-m">
       <img class="upload" src="../../../assets/icon/upload-in-cloud.svg" title="tải lên tài liệu" alt=""
@@ -44,6 +45,7 @@
       <img src="../../../../assets/images/Ditto.png" class="avatar" id="link1" (click)="togglePopover($event)">
     </div>
   </div>
+  <div *ngIf="searchEnable" class="search-enable" (click)="hiddenSearch()"></div>
 </div>
 
 <app-popup-upload *ngIf="showPopupUpload" [title]="'Đăng tài liệu'" [popupVisible]="showPopupUpload"

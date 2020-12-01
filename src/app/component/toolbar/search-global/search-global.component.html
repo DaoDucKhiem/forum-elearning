@@ -1,0 +1,14 @@
+<div class="position-absolute search-global padding-24">
+    <div *ngIf="!keySearch" class="font-20 text-center bold mb-4">Hãy nhập từ khóa để tìm kiếm tài liệu</div>
+    <div *ngIf="!keySearch" class="w-100 flex-c-m"><img class="search-image" src="../../../../assets/images/search.png"
+            alt=""></div>
+
+    <div *ngIf="keySearch" class="font-20 mb-4">Kết quả tìm kiếm với từ khóa: "<span
+            class="bold font-20">{{keySearch}}</span>"
+    </div>
+    <div *ngIf="keySearch">
+        <ng-container *ngFor="let doc of listSearchDocument">
+            <div>{{doc?.DocumentName}}</div>
+        </ng-container>
+    </div>
+</div>

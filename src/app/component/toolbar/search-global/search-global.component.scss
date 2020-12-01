@@ -1,0 +1,15 @@
+:host {
+    .search-global {
+        width: 900px;
+        height: 100vh;
+        background-color: #ffffff;
+        top: 53px;
+        margin-left: -600px;
+        z-index: 2;
+
+        .search-image {
+            width: 570px;
+            height: 400px;
+        }
+    }
+}

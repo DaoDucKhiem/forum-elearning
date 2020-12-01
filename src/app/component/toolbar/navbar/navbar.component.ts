@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   currentCategoryID = 0;
   showDetail = false;
   searchKey = '';
+  searchEnable = false;
 
   listCategory = [
     {
@@ -37,11 +38,19 @@ export class NavbarComponent implements OnInit {
     },
   ]
 
+  @ViewChild("ValueSearch", {static: false}) valueSearch: any;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private activedRouter: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.activedRouter.queryParams.subscribe(data => {
+      if (data) {
+        this.currentCategoryID = parseInt(data.CategoryID);
+      }
+    });
   }
 
 
@@ -74,12 +83,33 @@ export class NavbarComponent implements OnInit {
     this.showPopupUpload = false;
   }
 
-  search() {
+  search(e) {
+    if (e && e.event && e.event.keyCode === 13) {
+      
+    }
+
     console.log(this.searchKey);
   }
   selectCategory(data) {
     if (data) {
       this.currentCategoryID = data;
+      const queryParam = {
+        CategoryID: data
+      }
+      this.router.navigate([], {
+        relativeTo: this.activedRouter,
+        queryParams: queryParam,
+        queryParamsHandling: 'merge'
+      });
+
     }
+  }
+
+  openSearchEnable() {
+    this.searchEnable = true;
+  }
+
+  hiddenSearch() {
+    this.searchEnable = false;
   }
 }
