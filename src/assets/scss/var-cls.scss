@@ -185,3 +185,17 @@
 }
 
 @include border-radius();
+
+@mixin line-clamp {
+    // nếu là một phía cụ thể
+    @for $i from 1 through 50 {
+        .line-clamp-#{$i} {
+            display: -webkit-box;
+            -webkit-line-clamp: $i;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+}
+
+@include line-clamp();

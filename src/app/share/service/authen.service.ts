@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,22 @@ export class AuthenService {
         "Content-Type": "application/json",
       })
     };
-    return this.http.get(`http://apigateway.toedu.me/auth/api/intergrates/authen`, httpOptions);
+    return this.http.get(`http://apigateway.toedu.me/auth/api/intergrates/authen`, httpOptions).pipe(
+      catchError(err => {
+        if (err instanceof HttpErrorResponse) {
+
+          if (err.status === 401 || err.status === 403) {
+            // Invalidate user session and redirect to login/home
+            window.location.href = "http://toedu.me/";
+          }
+
+          // return the error back to the caller
+          return throwError(err);
+        }
+      }),
+      finalize(() => {
+        // any cleanup or final activities
+      })
+    );
   }
 }

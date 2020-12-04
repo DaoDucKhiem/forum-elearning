@@ -25,4 +25,12 @@ export class DocumentService extends BaseService<object>{
   getDocPaging(param: object): Observable<ServerResponse> {
     return this.http.post(`${this.getApiURL()}/documentPaging`, param)
   }
+
+  /**
+   * lấy thông tin chung ở dash board
+   * ddkhiem
+   */
+  getInfor(): Observable<ServerResponse> {
+    return this.http.get(`${this.getApiURL()}/countDocument`)
+  }
 }

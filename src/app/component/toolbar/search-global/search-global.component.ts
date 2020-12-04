@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { ParamDoc } from 'src/app/share/model/param/param-doc';
 import { DocumentService } from 'src/app/share/service/document.service';
 
@@ -19,7 +20,11 @@ export class SearchGlobalComponent implements OnInit {
 
   listSearchDocument: ParamDoc[] = [];
 
-  constructor(private documentService: DocumentService,) { }
+  nodata = false;
+
+  @Output() hiddenPopup = new EventEmitter<boolean>();
+
+  constructor(private documentService: DocumentService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -37,8 +42,23 @@ export class SearchGlobalComponent implements OnInit {
     this.documentService.getDocPaging(param).subscribe((res) => {
       if (res?.Success) {
         this.listSearchDocument = res.Data;
+        if (this.listSearchDocument.length === 0) {
+          this.nodata = true;
+        }
+        else {
+          this.nodata = false;
+        }
       }
     })
+  }
+
+  /**
+   * hiển thị chi tiết tài liệu
+   * @param data document
+   */
+  openDetail(data) {
+    this.hiddenPopup.emit(false);
+    this.router.navigate([`/${data.DocumentID}`]);
   }
 
 }

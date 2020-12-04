@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +15,8 @@ export class NavbarComponent implements OnInit {
   showDetail = false;
   searchKey = '';
   searchEnable = false;
+
+  timeSearch: any;
 
   listCategory = [
     {
@@ -38,19 +41,17 @@ export class NavbarComponent implements OnInit {
     },
   ]
 
-  @ViewChild("ValueSearch", {static: false}) valueSearch: any;
+  @ViewChild("ValueSearch", { static: false }) valueSearch: ElementRef;
 
   constructor(
     private router: Router,
-    private activedRouter: ActivatedRoute
+    private transferDataSV: DataTransferService
   ) { }
 
   ngOnInit(): void {
-    this.activedRouter.queryParams.subscribe(data => {
-      if (data) {
-        this.currentCategoryID = parseInt(data.CategoryID);
-      }
-    });
+    this.transferDataSV.categoryID.subscribe(data => {
+      this.currentCategoryID = data;
+    })
   }
 
 
@@ -85,23 +86,34 @@ export class NavbarComponent implements OnInit {
 
   search(e) {
     if (e && e.event && e.event.keyCode === 13) {
-      
+      this.searchKey = this.valueSearch.nativeElement.value;
     }
+    else {
+      clearTimeout(this.timeSearch);
+      this.timeSearch = setTimeout(() => {
+        let inputSearch = this.valueSearch.nativeElement.value;
+        if (inputSearch && inputSearch.trim() !== "") {
+          inputSearch = inputSearch.trim();
+        }
 
-    console.log(this.searchKey);
+        this.searchKey = inputSearch;
+
+      }, 200);
+    }
   }
+
   selectCategory(data) {
     if (data) {
       this.currentCategoryID = data;
-      const queryParam = {
-        CategoryID: data
-      }
-      this.router.navigate([], {
-        relativeTo: this.activedRouter,
-        queryParams: queryParam,
-        queryParamsHandling: 'merge'
-      });
-
+      // const queryParam = {
+      //   CategoryID: data
+      // }
+      // this.router.navigate([], {
+      //   relativeTo: this.activedRouter,
+      //   queryParams: queryParam,
+      //   queryParamsHandling: 'merge'
+      // });
+      this.router.navigate([`/document/categoryId/`, data]);
     }
   }
 
@@ -111,5 +123,10 @@ export class NavbarComponent implements OnInit {
 
   hiddenSearch() {
     this.searchEnable = false;
+  }
+
+  hiddenPopupSearch(e) {
+    this.searchEnable = e;
+    this.searchKey = "";
   }
 }

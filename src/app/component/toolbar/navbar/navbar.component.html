@@ -35,9 +35,10 @@
   <div class="d-flex nav-right">
     <div class="mr-4 position-relative z-index-2">
       <span class="icon position-absolute h-100 flex-c-m ml-4"><i class="fa fa-search"></i></span>
-      <input #ValueSearch class="search-input small-input" type="text" placeholder="Tìm kiếm" (keyup)="search($event)"
+      <input #ValueSearch class="search-input small-input" type="text" [value]="searchKey" placeholder="Tìm kiếm" (keyup)="search($event)"
         (focusin)="openSearchEnable()">
-      <app-search-global *ngIf="searchEnable" [searchKey]="searchKey"></app-search-global>
+      <app-search-global *ngIf="searchEnable" [searchKey]="searchKey" (hiddenPopup)="hiddenPopupSearch($event)">
+      </app-search-global>
     </div>
     <div class="flex-c-m">
       <img class="upload" src="../../../assets/icon/upload-in-cloud.svg" title="tải lên tài liệu" alt=""

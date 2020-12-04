@@ -10,19 +10,19 @@ const routes: Routes = [
     children: [
       {
         path: "document",
-        loadChildren: ()=> import('../document/document.module').then(x=>x.DocumentModule)
+        loadChildren: () => import('../document/document.module').then(x => x.DocumentModule)
       },
       {
         path: "user",
-        loadChildren: ()=> import('../user-management/user-management.module').then(x=>x.UserManagementModule)
+        loadChildren: () => import('../user-management/user-management.module').then(x => x.UserManagementModule)
       },
       {
         path: "help",
-        loadChildren: ()=> import('../help/help.module').then(x=>x.HelpModule)
+        loadChildren: () => import('../help/help.module').then(x => x.HelpModule)
       },
       {
         path: ":id",
-        loadChildren: ()=> import('../doc-detail/doc-detail.module').then(x=>x.DocDetailModule)
+        loadChildren: () => import('../doc-detail/doc-detail.module').then(x => x.DocDetailModule)
       },
       {
         path: "",

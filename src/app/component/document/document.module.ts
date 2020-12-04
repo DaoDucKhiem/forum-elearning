@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DocumentComponent } from './document.component';
-import { DocumentRoutingModule } from './document-routing.module';
+import { NgModule } from '@angular/core';
 import { DocInfoModule } from 'src/common/component/doc-info/doc-info.module';
-import { PopupUploadModule } from 'src/common/component/popup-upload/popup-upload.module';
+import { DocumentCategoryComponent } from './document-category/document-category.component';
+import { DocumentRoutingModule } from './document-routing.module';
+import { DocumentComponent } from './document.component';
 
 
 
 @NgModule({
-  declarations: [DocumentComponent],
+  declarations: [DocumentComponent, DocumentCategoryComponent],
   imports: [
     CommonModule,
     DocumentRoutingModule,

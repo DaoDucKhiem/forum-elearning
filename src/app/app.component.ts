@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
       this.authenSV.getToken(this.sid).subscribe(res => {
         if (res.data.code == 401) {
           // sid không hợp lệ
-         // window.location.href = "http://toedu.me/";
+          window.location.href = "http://toedu.me/";
         } else if (res.data.code == 200) {
           // Lấy token Thành công
           // Lưu token vào local storage
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
           this.getUserLogin();
         } else {
           // Lỗi khác
-         // window.location.href = "http://toedu.me/";
+          window.location.href = "http://toedu.me/";
         }
       })
     }
@@ -74,12 +74,12 @@ export class AppComponent implements OnInit {
       var token = window.localStorage.getItem("x-token");
       if (token && token.trim() !== "") {
         this.authenSV.checkToken(token).subscribe(res => {
-          if (res.data.code == 200) {
+          if (res.code === 200) {
             // Lấy token Thành công
             // Lưu token vào local storage
-            // window.localStorage.setItem("x-token", res.data.data.token);
+            window.localStorage.setItem("x-token", res.data.token);
             // // Tiếp tục những tác vụ khác của app
-            // this.getUserLogin();
+            this.getUserLogin();
           } else {
             // Lỗi khác
             window.location.href = "http://toedu.me/";

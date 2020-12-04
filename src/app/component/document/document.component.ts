@@ -3,6 +3,12 @@ import { ParamDoc } from 'src/app/share/model/param/param-doc';
 import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 import { DocumentService } from 'src/app/share/service/document.service';
 
+class GeneralInfor {
+  Total: number;
+  TotalView: number;
+  TotalDownload: number;
+}
+
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
@@ -17,12 +23,14 @@ export class DocumentComponent implements OnInit {
   //Danh sách theo xem nhiều nhất
   listMostDocument: ParamDoc[] = [];
 
+  infor = new GeneralInfor();
+
   constructor(
-    private documentService: DocumentService,
-    private dataTransferSV: DataTransferService
+    private documentService: DocumentService
   ) { }
 
   ngOnInit(): void {
+    this.getDocumentInfoGeneral();
     this.getDocument();
   }
 
@@ -38,5 +46,16 @@ export class DocumentComponent implements OnInit {
         this.listRecentDocument = res.Data;
       }
     })
+  }
+
+  /**
+   * lấy thông tin chung
+   */
+  getDocumentInfoGeneral() {
+    this.documentService.getInfor().subscribe(res => {
+      if (res && res.Success && res.Data) {
+        this.infor = res.Data;
+      }
+    });
   }
 }

@@ -12,4 +12,10 @@ export class DataTransferService {
   postDocumentSuccess() {
     this.postSuccess.emit(true);
   }
+
+  // emit categoryID
+  @Output() categoryID = new EventEmitter<number>();
+  transferCategoryID(id) {
+    this.categoryID.emit(id);
+  }
 }
