@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataTransferService } from 'src/app/share/service/data-transfer.service';
+import { UserService } from 'src/app/share/service/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +18,8 @@ export class NavbarComponent implements OnInit {
   searchEnable = false;
 
   timeSearch: any;
+
+  currentUser: any;
 
   listCategory = [
     {
@@ -45,7 +48,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private transferDataSV: DataTransferService
+    private transferDataSV: DataTransferService,
+    private userSV: UserService
   ) { }
 
   ngOnInit(): void {
@@ -56,9 +60,14 @@ export class NavbarComponent implements OnInit {
       else {
         this.currentCategoryID = null;
       }
-    })
+    });
+
+    this.getUser();
   }
 
+  getUser() {
+    this.currentUser = this.userSV.getUserInfor();
+  }
 
   showLogin() {
     this.router.navigate([`account/login`]);

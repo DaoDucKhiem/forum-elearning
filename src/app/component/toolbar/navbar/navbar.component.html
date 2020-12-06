@@ -35,15 +35,16 @@
   <div class="d-flex nav-right">
     <div class="ml-4 mr-4 position-relative z-index-2">
       <span class="icon position-absolute h-100 flex-c-m ml-4"><i class="fa fa-search"></i></span>
-      <input #ValueSearch class="search-input small-input" type="text" [value]="searchKey" placeholder="Tìm kiếm" (keyup)="search($event)"
-        (focusin)="openSearchEnable()">
+      <input #ValueSearch class="search-input small-input" type="text" [value]="searchKey" placeholder="Tìm kiếm"
+        (keyup)="search($event)" (focusin)="openSearchEnable()">
       <app-search-global *ngIf="searchEnable" [searchKey]="searchKey" (hiddenPopup)="hiddenPopupSearch($event)">
       </app-search-global>
     </div>
     <div class="flex-c-m">
       <img class="upload" src="../../../assets/icon/upload-in-cloud.svg" title="tải lên tài liệu" alt=""
         (click)="showUpload()" />
-      <img src="../../../../assets/images/Ditto.png" class="avatar" id="link1" (click)="togglePopover($event)">
+      <ngx-avatar [name]="currentUser?.FullName" id="link1" size="36" (click)="togglePopover($event)">
+      </ngx-avatar>
     </div>
   </div>
   <div *ngIf="searchEnable" class="search-enable" (click)="hiddenSearch()"></div>

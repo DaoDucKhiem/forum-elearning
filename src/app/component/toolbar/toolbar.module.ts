@@ -5,6 +5,7 @@ import { DxButtonModule, DxPopoverModule } from 'devextreme-angular';
 import { PopupUploadModule } from 'src/common/component/popup-upload/popup-upload.module';
 import { FormsModule } from '@angular/forms';
 import { SearchGlobalComponent } from './search-global/search-global.component';
+import { AvatarModule } from 'ngx-avatar';
 
 
 
@@ -15,7 +16,8 @@ import { SearchGlobalComponent } from './search-global/search-global.component';
     DxButtonModule,
     PopupUploadModule,
     DxPopoverModule,
-    FormsModule 
+    FormsModule,
+    AvatarModule
   ],
   exports: [NavbarComponent]
 })

@@ -1,3 +1,4 @@
+import { ParseError } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseService } from 'src/common/service/base.service';
@@ -22,5 +23,11 @@ export class UserService extends BaseService<object> {
    */
   getCurrentUser():Observable<ServerResponse> {
     return this.http.get(`${this.getApiURL()}/GetUserLogin`);
+  }
+
+  // lấy thông tin user lưu trong localstorage
+  getUserInfor() {
+    var userData = localStorage.getItem("UserData");
+    return JSON.parse(userData);
   }
 }

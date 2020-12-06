@@ -12,6 +12,7 @@ export class HeaderInterceptor implements HttpInterceptor {
         if (!token) {
             token = "";
         }
+        //token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJudmtoYWkyMDMiLCJ1c2VyX2lkIjoiMDhkODhhNTMtN2IyMC00ZGFjLTg2YTAtMmRkYjdlNjhiYjI4IiwiZW1haWwiOiJudmtoYWkyMDNAZ21haWwuY29tIiwibGlzdF9yb2xlcyI6InxTWVNfQURNSU4vxq_MgW5nIGR1zKNuZyBuaG_MgW0gMTJ8IiwibmJmIjoxNjA2Njc0MDE4LCJleHAiOjE2MDcyNzg4MTgsImlhdCI6MTYwNjY3NDAxOH0.CxoyZ8IKv80ffpNucDZVEHIqzt4_AuToOlxr3KmzLOA";
         // Clone the request to add the new header
         const clonedRequest = req.clone({ headers: req.headers.append('Authorization', token) });
 
