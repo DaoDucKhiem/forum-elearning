@@ -24,11 +24,8 @@ export class AppComponent implements OnInit {
   getUserLogin() {
     this.userSV.getCurrentUser().subscribe(data => {
       if (data && data.Success && data.Data) {
-        if (data.Data.UserData.StringeeToken) {
-          localStorage.setItem("StringeeToken", data.Data.UserData.StringeeToken);
-        }
-        if (data.Data.UserData.Token) {
-          localStorage.setItem("Token", data.Data.UserData.Token);
+        if (data.Data.UserData) {
+          localStorage.setItem('UserData', JSON.stringify(data.Data.UserData));
         }
       }
     })
@@ -57,10 +54,10 @@ export class AppComponent implements OnInit {
       window.localStorage.clear();
 
       this.authenSV.getToken(this.sid).subscribe(res => {
-        if (res.data.code == 401) {
+        if (res.code == 401) {
           // sid không hợp lệ
           window.location.href = "http://toedu.me/";
-        } else if (res.data.code == 200) {
+        } else if (res.code == 200) {
           // Lấy token Thành công
           // Lưu token vào local storage
           window.localStorage.setItem("x-token", res.data.data.token);

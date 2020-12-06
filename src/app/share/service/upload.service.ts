@@ -11,7 +11,8 @@ export class UploadService {
 
   //upload file lên serve stringee
   uploadFile(file: FormData): Observable<any> {
-    var token = localStorage.getItem("StringeeToken");
+    var userData = localStorage.getItem("UserData");
+    var token = JSON.parse(userData)["StringeeToken"];
     const httpOptions = {
       headers: new HttpHeaders({
         'X-STRINGEE-AUTH': token,

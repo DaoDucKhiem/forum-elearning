@@ -1,4 +1,4 @@
-<div class="container-doc h-100 w-100 d-flex padding-24">
+<div class="container-doc h-100 w-100 d-flex flex-column padding-24">
     <!-- <div class="flex-1">
         <div class="d-flex mb-4">
             <div class="title flex-1">{{ document?.FileName }}</div>
@@ -62,9 +62,10 @@
             <div class="active" [class.m-l-108]="currentTab==2"></div>
         </div>
         <div class="content">
-            <div *ngIf="currentTab == 1">Nội dung mô tả</div>
-            <div *ngIf="currentTab == 2">
-                <iframe class="w-100 content-doc" src="../../../assets/images/demo.pdf#toolbar=0"></iframe>
+            <div *ngIf="currentTab == 1">
+                <div class="w-100 text-break">
+                    {{currentDocument?.Description}}
+                </div>
                 <div class="comment-container m-t-50">
                     <div class="imput-comment d-flex align-items-centerm-b-32">
                         <ngx-avatar name="Hải Dương" size="50" class="m-r-16"></ngx-avatar>
@@ -97,6 +98,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div *ngIf="currentTab == 2 && currentDocument">
+                <iframe class="w-100 content-doc" [src]="urlSafe"></iframe>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseService } from 'src/common/service/base.service';
 import { HttpService } from 'src/common/service/http.service';
+import { ParamDoc } from '../model/param/param-doc';
 import { ServerResponse } from '../model/server-response';
 
 @Injectable({
@@ -39,5 +40,21 @@ export class DocumentService extends BaseService<object>{
    */
   getMostPopularDocument(param): Observable<ServerResponse> {
     return this.http.post(`${this.getApiURL()}/mostPopular`, param);
+  }
+
+  /**
+   * lấy tài liệu theo id
+   * @param id id của tài liệu
+   */
+  getDocumentById(id: number): Observable<ServerResponse> {
+    return this.http.get(`${this.getApiURL()}/getbyid/${id}`);
+  }
+
+  /**
+   * tăng lượt xem cho tài liệu
+   * @param doc tài liệu cần update
+   */
+  updateViewDoc(doc: ParamDoc): Observable<ServerResponse> {
+    return this.http.post(`${this.getApiURL()}/updateView`, doc);
   }
 }
