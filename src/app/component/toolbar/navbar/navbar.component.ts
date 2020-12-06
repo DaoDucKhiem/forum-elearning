@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 
 @Component({
@@ -50,7 +50,12 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.transferDataSV.categoryID.subscribe(data => {
-      this.currentCategoryID = data;
+      if (data) {
+        this.currentCategoryID = data;
+      }
+      else {
+        this.currentCategoryID = null;
+      }
     })
   }
 
@@ -69,6 +74,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate([`help`]);
   }
   backToHome() {
+    this.currentCategoryID = null;
     this.router.navigate([`document`]);
   }
   togglePopover(e) {

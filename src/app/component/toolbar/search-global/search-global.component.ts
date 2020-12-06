@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ParamDoc } from 'src/app/share/model/param/param-doc';
+import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 import { DocumentService } from 'src/app/share/service/document.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class SearchGlobalComponent implements OnInit {
 
   @Output() hiddenPopup = new EventEmitter<boolean>();
 
-  constructor(private documentService: DocumentService, private router: Router) { }
+  constructor(private documentService: DocumentService, private router: Router, private transferDataSV: DataTransferService) { }
 
   ngOnInit(): void {
   }
@@ -57,6 +58,7 @@ export class SearchGlobalComponent implements OnInit {
    * @param data document
    */
   openDetail(data) {
+    this.transferDataSV.transferCategoryID(0);
     this.hiddenPopup.emit(false);
     this.router.navigate([`/${data.DocumentID}`]);
   }

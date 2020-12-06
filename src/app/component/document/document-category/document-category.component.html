@@ -1,5 +1,52 @@
-<div class="padding-24">
-    <div *ngFor="let doc of documents">
-        <div>{{doc?.DocumentName}}</div>
+<div class="h-100 d-flex flex-column">
+    <div class="w-100 d-flex">
+        <div class="flex-c-m ml-4">
+            <div class="font-14 cursor-pointer" (click)="backHome()">Trang chủ</div>
+            <div class="ml-3 mr-3">></div>
+            <div class="font-16 bold">{{currentCategory?.Name}}</div>
+        </div>
+        <div class="flex-1 d-flex justify-content-end">
+            <div class="position-relative margin-16 border border-radius-4 w-25">
+                <span class="icon position-absolute h-100 flex-c-m m-l-12"><i class="fa fa-search"></i></span>
+                <input #ValueSearch class="w-100 p-l-32 pr-3 pt-2 pb-2" type="text" [value]="searchKey"
+                    placeholder="Tìm kiếm {{currentCategory?.Name}}" (keyup)="search($event)">
+            </div>
+        </div>
     </div>
+    <div *ngIf="currentCategory?.ID === 1 && hostBook && !searchKey" class="hostBook mb-4">
+        <div class="doccument cursor-pointer" (click)="openDetail(hostBook)">
+            <div *ngIf="!hostBook?.ImageFeature" class="icon-container mr-3">
+                <img *ngIf="hostBook?.DocumentType === 'docx'" src="../../../assets/images/docx.png" class="icon" />
+                <img *ngIf="hostBook?.DocumentType === 'xlsx'" src="../../../assets/images/xlsx.png" class="icon" />
+                <img *ngIf="hostBook?.DocumentType === 'pptx'" src="../../../assets/images/pptx.png" class="icon" />
+                <img *ngIf="hostBook?.DocumentType === 'pdf'" src="../../../assets/images/pdf.svg" class="icon" />
+            </div>
+            <div *ngIf="hostBook?.ImageFeature" class="icon-container mr-3">
+                <img [src]="hostBook?.ImageFeature" alt="" class="w-100 h-100 cover-fill">
+            </div>
+            <div class="flex-1">
+                <div class="w-100 bold font-16 line-clamp-2 mb-3">{{hostBook?.DocumentName}}</div>
+                <div class="w-100 font-14 line-clamp-7">{{hostBook?.Description}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex-1 pr-4 pl-4 pb-4">
+        <div *ngIf="searchKey ==='' && documents?.length !== 0" class="font-16 bold">Các {{currentCategory?.Name}} gần
+            đây</div>
+        <div *ngIf="searchKey!==''" class="font-16 bold">Kết quả tìm kiếm cho "{{searchKey}}":</div>
+        <div *ngIf="documents?.length > 0">
+            <ng-container *ngFor="let item of documents">
+                <app-doc-info [document]="item"></app-doc-info>
+            </ng-container>
+        </div>
+
+        <div class="flex-c-m m-t-100" *ngIf="searchKey!=='' && documents?.length === 0">
+            <div class="font-24 bold">Không có dữ liệu phù hợp</div>
+        </div>
+        <div class="flex-c-m m-t-100" *ngIf="searchKey ==='' && documents?.length === 0">
+            <div class="font-24 bold">Chưa có {{currentCategory?.Name}} nào</div>
+        </div>
+    </div>
+
 </div>

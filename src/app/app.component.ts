@@ -1,4 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenService } from './share/service/authen.service';
 import { UserService } from './share/service/user.service';
 
@@ -9,10 +11,10 @@ import { UserService } from './share/service/user.service';
 })
 export class AppComponent implements OnInit {
   sid: string;
-  constructor(private userSV: UserService, private authenSV: AuthenService) { }
+  constructor(private userSV: UserService, private authenSV: AuthenService, private router: Router) { }
   ngOnInit() {
-    this.initApp();
-    //this.getUserLogin();
+    //this.initApp();
+    this.getUserLogin();
   }
 
   /**
@@ -64,6 +66,7 @@ export class AppComponent implements OnInit {
           window.localStorage.setItem("x-token", res.data.data.token);
           // Tiếp tục những tác vụ khác của app
           this.getUserLogin();
+          this.router.navigate([""]);
         } else {
           // Lỗi khác
           window.location.href = "http://toedu.me/";
