@@ -18,6 +18,8 @@ export class DocumentComponent implements OnInit {
 
   documents: ParamDoc[] = [];
 
+  listRecentDoc: ParamDoc[] = []; // danh sách tài liệu gần đây và phổ biến
+
   //Danh sách theo gần nhất
   listRecentDocument: ParamDoc[] = [];
   //Danh sách theo xem nhiều nhất
@@ -31,31 +33,40 @@ export class DocumentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDocumentInfoGeneral();
-    this.getDocument();
-  }
-
-  getDocument(category = null) {
-    let param = {
-      SearchKey: "",
-      PageSize: 5,
-      PageIndex: 0
-    }
-    this.documentService.getDocPaging(param).subscribe((res) => {
-      if (res?.Success) {
-        this.listMostDocument = res.Data;
-        this.listRecentDocument = res.Data;
-      }
-    })
   }
 
   /**
    * lấy thông tin chung
    */
   getDocumentInfoGeneral() {
+    // lấy thông tin số tài liệu, lượt xem, lượt tải
     this.documentService.getInfor().subscribe(res => {
       if (res && res.Success && res.Data) {
         this.infor = res.Data;
       }
     });
+
+    const param = {
+      SearchKey: "",
+      CategoryID: 20,
+      PageSize: 10,
+      PageIndex: 0
+    }
+
+    // lấy danh sách tài liệu gần nhất
+    this.documentService.getMostPopularDocument(param).subscribe(data => {
+      if (data && data.Success && data.Data) {
+        this.listRecentDocument = data.Data;
+      }
+    });
+
+    param.CategoryID = 10;
+    // lấy danh sách tài liệu phổ biến nhất
+    this.documentService.getMostPopularDocument(param).subscribe(data => {
+      if (data && data.Success && data.Data) {
+        this.listMostDocument = data.Data;
+      }
+    });
+
   }
 }

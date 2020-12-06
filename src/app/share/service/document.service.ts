@@ -33,4 +33,11 @@ export class DocumentService extends BaseService<object>{
   getInfor(): Observable<ServerResponse> {
     return this.http.get(`${this.getApiURL()}/countDocument`)
   }
+  
+  /**
+   * lấy về danh sách các tài liệu phổ biến ở dash board
+   */
+  getMostPopularDocument(param): Observable<ServerResponse> {
+    return this.http.post(`${this.getApiURL()}/mostPopular`, param);
+  }
 }

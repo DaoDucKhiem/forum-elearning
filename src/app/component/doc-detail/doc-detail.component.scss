@@ -1,6 +1,6 @@
 :host {
     .container-doc {
-        background-color: #008bf6;
+        background-color: #f3f4f7;
         .content-doc {
             height: 770px;
             border-radius: 8px;
@@ -45,6 +45,22 @@
         .text-gray {
             color: gray;
             font-size: 13px;
+        }
+    }
+
+    .about {
+        width: 100%;
+        .tab-item {
+            width: 100px;
+            font-size: 20px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .active {
+            width: 100px;
+            height: 4px;
+            background-color: #51a8f3;
         }
     }
 }

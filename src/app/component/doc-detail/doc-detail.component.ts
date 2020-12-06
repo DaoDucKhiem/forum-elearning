@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ParamDoc } from 'src/app/share/model/param/param-doc';
 import { DocumentService } from 'src/app/share/service/document.service';
 
 @Component({
@@ -10,9 +11,10 @@ import { DocumentService } from 'src/app/share/service/document.service';
 export class DocDetailComponent implements OnInit {
 
   public documents = [];
-  public document: any;
+  public currentDocument: ParamDoc;
   public documentID: number;
   public showPopupUpload = false
+  currentTab = 1; // 1 mô tả, 2 là chi tiết
 
 
   constructor(
@@ -24,12 +26,14 @@ export class DocDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.documentID = Number.parseInt(params['id']);
-      this.documentService.getByID(this.documentID).subscribe((res)=>{
+      this.documentService.getByID(this.documentID).subscribe((res) => {
+        if (res && res.Success && res.Data) {
+          this.currentDocument = res.Data;
+        }
+      });
 
-      })
       let param = {
         SearchKey: "",
-        CategoryID: null,
         PageSize: 5,
         PageIndex: 1
       }
@@ -44,6 +48,10 @@ export class DocDetailComponent implements OnInit {
 
   showUpload() {
     this.showPopupUpload = true;
+  }
+
+  setTab(data) {
+    this.currentTab = data;
   }
 
 }

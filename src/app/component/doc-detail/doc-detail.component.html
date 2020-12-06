@@ -1,5 +1,5 @@
-<div class="container-doc w-100 d-flex padding-24">
-    <div class="flex-1">
+<div class="container-doc h-100 w-100 d-flex padding-24">
+    <!-- <div class="flex-1">
         <div class="d-flex mb-4">
             <div class="title flex-1">{{ document?.FileName }}</div>
             <dx-button stylingMode="contained" text="Tải xuống" type="normal" [width]="120" (onClick)="showUpload()">
@@ -48,5 +48,57 @@
         <ng-container *ngFor="let item of documents">
             <app-doc-info [document]="item"></app-doc-info>
         </ng-container>
+    </div> -->
+
+    <div class="doc-info d-flex">
+        <div>{{currentDocument?.DocumentName}}</div>
     </div>
+    <div class="about">
+        <div class="tab border-bottom mb-4">
+            <div class="d-flex">
+                <div class="tab-item mr-2" (click)="setTab(1)">Mô tả</div>
+                <div class="tab-item" (click)="setTab(2)">Chi tiết</div>
+            </div>
+            <div class="active" [class.m-l-108]="currentTab==2"></div>
+        </div>
+        <div class="content">
+            <div *ngIf="currentTab == 1">Nội dung mô tả</div>
+            <div *ngIf="currentTab == 2">
+                <iframe class="w-100 content-doc" src="../../../assets/images/demo.pdf#toolbar=0"></iframe>
+                <div class="comment-container m-t-50">
+                    <div class="imput-comment d-flex align-items-centerm-b-32">
+                        <ngx-avatar name="Hải Dương" size="50" class="m-r-16"></ngx-avatar>
+                        <input class="search-input big-input" type="text" placeholder="Nhập bình luận">
+                    </div>
+                    <div class="comment m-t-32">
+                        <div class="list-comment d-flex align-items-center m-b-20">
+                            <ngx-avatar name="John Doe" size="50"></ngx-avatar>
+                            <div class="item-comment m-l-16">
+                                <div class="d-flex align-items-center"><b>Trần Hải Dương</b>&nbsp;&nbsp;<span
+                                        class="text-gray">Cách đây 10 phút</span></div>
+                                <div>Nội dung bình luận</div>
+                            </div>
+                        </div>
+                        <div class="list-comment d-flex align-items-center m-b-20">
+                            <ngx-avatar name="John Doe" size="50"></ngx-avatar>
+                            <div class="item-comment m-l-16">
+                                <div class="d-flex align-items-center"><b>Trần Hải Dương</b>&nbsp;&nbsp;<span
+                                        class="text-gray">Cách đây 10 phút</span></div>
+                                <div>Nội dung bình luận</div>
+                            </div>
+                        </div>
+                        <div class="list-comment d-flex align-items-center m-b-20">
+                            <ngx-avatar name="John Doe" size="50"></ngx-avatar>
+                            <div class="item-comment m-l-16">
+                                <div class="d-flex align-items-center"><b>Trần Hải Dương</b>&nbsp;&nbsp;<span
+                                        class="text-gray">Cách đây 10 phút</span></div>
+                                <div>Nội dung bình luận</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment"></div>
 </div>

@@ -57,6 +57,7 @@ export class DocumentCategoryComponent implements OnInit {
         const ID = parseInt(data['id']);
         this.currentCategory = this.listCategory.filter(x => x.ID === ID)[0];
         this.transferDataSV.transferCategoryID(ID);
+        this.searchKey = "";
         this.getDocument();
       }
     });
