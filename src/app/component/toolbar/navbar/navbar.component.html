@@ -43,7 +43,8 @@
     <div class="flex-c-m">
       <img class="upload" src="../../../assets/icon/upload-in-cloud.svg" title="tải lên tài liệu" alt=""
         (click)="showUpload()" />
-      <ngx-avatar [name]="currentUser?.FullName" id="link1" size="36" (click)="togglePopover($event)">
+      <ngx-avatar [name]="currentUser?.FullName" id="link1" class="cursor-pointer" size="36"
+        (click)="togglePopover($event)">
       </ngx-avatar>
     </div>
   </div>
