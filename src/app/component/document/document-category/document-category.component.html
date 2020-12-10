@@ -35,7 +35,7 @@
         <div *ngIf="searchKey ==='' && documents?.length !== 0" class="font-16 bold">Các {{currentCategory?.Name}} gần
             đây</div>
         <div *ngIf="searchKey!==''" class="font-16 bold">Kết quả tìm kiếm cho "{{searchKey}}":</div>
-        <div *ngIf="documents?.length > 0">
+        <div *ngIf="documents?.length > 0" class="list-document">
             <ng-container *ngFor="let item of documents">
                 <app-doc-info [document]="item"></app-doc-info>
             </ng-container>

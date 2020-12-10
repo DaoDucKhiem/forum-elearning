@@ -49,7 +49,7 @@ export class DocumentComponent implements OnInit {
     const param = {
       SearchKey: "",
       CategoryID: 20,
-      PageSize: 10,
+      PageSize: 5,
       PageIndex: 0
     }
 

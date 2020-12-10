@@ -19,4 +19,13 @@
             }
         }
     }
+
+    .list-document {
+        width: 100%;
+        margin: auto;
+        min-width: 1220px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
 }
