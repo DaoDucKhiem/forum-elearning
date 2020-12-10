@@ -1,18 +1,18 @@
 <div class="document-management">
     <div class="header">Quản lý tài liệu</div>
-    <dx-data-grid id="gridContainer" [dataSource]="customers" [rowAlternationEnabled]="true" [showBorders]="true">
-        <dxi-column dataField="CompanyName" caption="Title"></dxi-column>
-        <dxi-column dataField="City"></dxi-column>
-        <dxi-column dataField="State"></dxi-column>
-        <dxi-column dataField="Phone"></dxi-column>
+    <dx-data-grid id="gridContainer" [dataSource]="listDocument" [rowAlternationEnabled]="true" [showBorders]="true">
+        <dxi-column caption="Tên tài liệu" dataField="DocumentName" alignment="left"></dxi-column>
+        <dxi-column caption="Mô tả"  dataField="Description" alignment="left"></dxi-column>
+        <dxi-column caption="Lượt xem" dataField="ViewCount" alignment="left"></dxi-column>
+        <dxi-column caption="Lượt tải" dataField="DownloadCount" alignment="left"></dxi-column>
         <dxi-column cellTemplate="deleteTemplate" [width]="46">
             <div *dxTemplate="let data of 'deleteTemplate'">
-                <img class="icon" src="../../../../../assets/images/delete.png" (click)="deleteVisible = true" />
+                <img class="icon" src="../../../../../assets/images/delete.png" (click)="deleteDocument(data)" />
             </div>
         </dxi-column>
         <dxi-column cellTemplate="editTemplate" [width]="46">
             <div *dxTemplate="let data of 'editTemplate'">
-                <img class="icon" src="../../../../../assets/images/edit.png" (click)="editVisible = true" />
+                <img class="icon" src="../../../../../assets/images/edit.png" (click)="editDocument(data)" />
             </div>
         </dxi-column>
     </dx-data-grid>
@@ -26,13 +26,47 @@
         align-items: center;
         justify-content: flex-end;
         padding: 12px;">
-        <dx-button stylingMode="contained" class="m-r-12" text="Hủy bỏ" type="normal" [width]="120" (onClick)="click($event)">
+        <dx-button stylingMode="contained" class="m-r-12" text="Hủy bỏ" type="normal" [width]="120" (onClick)="click(1)">
         </dx-button>
-        <dx-button stylingMode="contained" text="Xóa" type="danger" [width]="120" (onClick)="click($event)">
+        <dx-button stylingMode="contained" text="Xóa" type="danger" [width]="120" (onClick)="click(2)">
         </dx-button>
     </div>
 </dx-popup>
 
-<dx-popup [width]="300" [height]="250" [showTitle]="true" title="Chỉnh sửa tài liệu" [dragEnabled]="false"
+<dx-popup [width]="600" [height]="390" [showTitle]="true" title="Chỉnh sửa tài liệu" [dragEnabled]="false"
     [closeOnOutsideClick]="true" [(visible)]="editVisible">
+    <div class="description mb-3">
+        <div class="w-50">
+            <select-box title="Chuyên mục" [value]="curentDocument?.CategoryID" [required]="true" [placeholder]="'Chọn chuyên mục'"
+                [isError]="isCategoryError" [textError]="'Chuyên mục không được để trống'"
+                [dataSource]="listCategory" [displayExpr]="'Name'" [valueExpr]="'ID'"
+                (onValueChanged)="setCategory($event)"></select-box>
+        </div>
+    </div>
+    <div class="description document-name mb-3">
+        <text-box #documentName title="Tên tài liệu" [value]="curentDocument?.DocumentName" [required]="true" [isError]="isDocumentNameError"
+            [placeholder]="'Nhập tên tài liệu'" [textError]="'Tên tài liệu không được bỏ trống'" (onKeyUp)="onEnterTextBox($event)"
+            (onValueChanged)="setDocumentName($event)"></text-box>
+    </div>
+    <div class="description">
+        <div class="mb-2 bold">Mô tả <span class="text-error"> *</span>
+            <div class="font-weight-normal"> (mô tả chi tiết thuận tiện cho việc tìm kiếm tài liệu dễ dàng
+                hơn).
+            </div>
+        </div>
+        <dx-text-area [class.border-danger]="isDescriptionError" [height]="60" maxLength="355"
+            [value]="curentDocument?.Description" placeholder="Nhập mô tả" (onValueChanged)="validateDescription($event)">
+        </dx-text-area>
+        <div *ngIf="isDescriptionError" class="mt-2 text-error">Mô tả không được để trống</div>
+    </div>
+    <div class="button-action-popup" style="
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 12px;">
+        <dx-button stylingMode="contained" class="m-r-12" text="Hủy bỏ" type="normal" [width]="120" (onClick)="click(1)">
+        </dx-button>
+        <dx-button stylingMode="contained" text="Cập nhật" type="default" [width]="120" (onClick)="click(3)">
+        </dx-button>
+    </div>
 </dx-popup>

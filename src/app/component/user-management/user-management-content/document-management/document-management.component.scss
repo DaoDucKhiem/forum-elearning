@@ -45,6 +45,14 @@
                 margin: 16px;
                 align-items: center;
                 justify-content: flex-end;
+                padding-top: 12px;
+            }
+            .dx-datagrid .dx-column-lines > td {
+                border: none;
+            }
+            .description {
+                width: 80%;
+                margin: 0 auto;
             }
         }
         
