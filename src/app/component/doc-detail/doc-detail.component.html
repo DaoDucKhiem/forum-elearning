@@ -50,8 +50,54 @@
         </ng-container>
     </div> -->
 
-    <div class="doc-info d-flex">
-        <div>{{currentDocument?.DocumentName}}</div>
+    <div class="doc-info d-flex flex-column mb-4">
+        <div class="flex-c-m">
+            <div *ngIf="currentDocument?.ImageFeature" class="avatar-doc m-r-36">
+                <img class="w-100 h-100 cover-fill" [src]="currentDocument?.ImageFeature" alt="">
+            </div>
+            <div *ngIf="!currentDocument?.ImageFeature" class="avatar-doc m-r-36">
+                <img *ngIf="currentDocument?.DocumentType === 'docx'" src="../../assets/images/docx.png"
+                    class="w-100 h-100 cover-fill" />
+                <img *ngIf="currentDocument?.DocumentType === 'xlsx'" src="../../assets/images/xlsx.png"
+                    class="w-100 h-100 cover-fill" />
+                <img *ngIf="currentDocument?.DocumentType === 'pptx'" src="../../assets/images/pptx.png"
+                    class="w-100 h-100 cover-fill" />
+                <img *ngIf="currentDocument?.DocumentType === 'pdf'" src="../../assets/images/pdf.svg"
+                    class="w-100 h-100 cover-fill" />
+            </div>
+            <div class="flex-1 general-info">
+                <div class="font-24 bold text-break mb-3">{{currentDocument?.DocumentName}}</div>
+                <table class="table table-bordered mb-3">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Điểm</th>
+                            <th scope="col">Dung lượng</th>
+                            <th scope="col">Lượt xem</th>
+                            <th scope="col">Lượt tải</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{currentDocument?.Point}}</td>
+                            <td>{{currentDocument?.DocumentSize}} MB</td>
+                            <td>{{currentDocument?.ViewCount}}</td>
+                            <td>{{currentDocument?.DownloadCount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="flex mt-4 mb-3">
+                    <div class="mr-2">Chuyên mục: </div>
+                    <div class="bold">{{currentCategory?.Name}}</div>
+                </div>
+                <div class="flex m-b-50">
+                    <div class="mr-2">Người đăng: </div>
+                    <div class="bold">{{currentDocument?.UserName}}</div>
+                </div>
+                <dx-button stylingMode="contained" text="Tải xuống" type="default" [width]="120"
+                    (onClick)="showPopupDownload()">
+                </dx-button>
+            </div>
+        </div>
     </div>
     <div class="about">
         <div class="tab border-bottom mb-4">
@@ -68,7 +114,7 @@
                 </div>
                 <div class="comment-container m-t-50">
                     <div class="imput-comment d-flex align-items-centerm-b-32">
-                        <ngx-avatar name="Hải Dương" size="50" class="m-r-16"></ngx-avatar>
+                        <ngx-avatar [name]="currentUser?.FullName" size="50" class="m-r-16"></ngx-avatar>
                         <input class="search-input big-input" type="text" placeholder="Nhập bình luận">
                     </div>
                     <div class="comment m-t-32">
@@ -100,9 +146,31 @@
                 </div>
             </div>
             <div *ngIf="currentTab == 2 && currentDocument">
-                <iframe class="w-100 content-doc" [src]="urlSafe"></iframe>
+                <iframe *ngIf="currentDocument?.DocumentType == 'pdf'" class="w-100 content-doc"
+                    [src]="urlSafe"></iframe>
+                <iframe *ngIf="currentDocument?.DocumentType == 'docx'"
+                    src]="https://docs.google.com/gview?url=https://v2.stringee.com/stringeexchat/upload/7807/d367eef13f90793bd8121e2f675f0dc2/2020/12/07/CXGTHUDAZG-1607359411748.docx"></iframe>
             </div>
         </div>
     </div>
-    <div class="comment"></div>
 </div>
+
+<dx-popup *ngIf="showPopup" width="500" height="200" [dragEnabled]="true" [(visible)]="showPopup" title="Tải tài liệu"
+    (onHidden)="closePopup()">
+    <dxo-position of="window" offset="0 -190">
+    </dxo-position>
+    <div class="h-100 content-popup">
+        <div class="font-16">
+            Tải tài liệu này sẽ mất <span class="bold font-20">{{currentDocument?.Point}} điểm</span>. Bạn vẫn muốn tải
+            tài liệu này chứ?
+        </div>
+        <div class="w-100 d-flex justify-content-end footer">
+            <dx-button stylingMode="contained" class="mr-3" text="Hủy bỏ" type="normal" [width]="80"
+                (onClick)="closePopup()">
+            </dx-button>
+            <dx-button stylingMode="contained" text="Đồng ý" type="success" [width]="80"
+                (onClick)="dowloadDoc()">
+            </dx-button>
+        </div>
+    </div>
+</dx-popup>

@@ -4,6 +4,7 @@ import { ParamDoc } from 'src/app/share/model/param/param-doc';
 import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 import { DocumentService } from 'src/app/share/service/document.service';
 import { UploadService } from 'src/app/share/service/upload.service';
+import { UserService } from 'src/app/share/service/user.service';
 
 declare var $: any;
 
@@ -38,7 +39,8 @@ export class PopupUploadComponent implements OnInit {
     private documentSV: DocumentService,
     private uploadSV: UploadService,
     private toastr: ToastrService,
-    private datatransferSV: DataTransferService
+    private datatransferSV: DataTransferService,
+    private userSV: UserService
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +62,16 @@ export class PopupUploadComponent implements OnInit {
         Name: "Phương pháp"
       },
     ]
+
+    this.getUser();
+  }
+
+  getUser() {
+    const user = this.userSV.getUserInfor();
+    if (user) {
+      this.currentParam.UserID = user.UserID;
+      this.currentParam.UserName = user.FullName;
+    }
   }
 
   closePopup() {
