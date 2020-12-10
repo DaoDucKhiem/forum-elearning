@@ -51,10 +51,34 @@ export class DocumentService extends BaseService<object>{
   }
 
   /**
+   * lấy tài liệu theo id người dùng
+   * @param id id của tài liệu
+   */
+  getDocumentByUserId(id: string): Observable<ServerResponse> {
+    return this.http.get(`${this.getApiURL()}/${id}`);
+  }
+
+  /**
    * tăng lượt xem cho tài liệu
    * @param doc tài liệu cần update
    */
   updateViewDoc(doc: ParamDoc): Observable<ServerResponse> {
     return this.http.post(`${this.getApiURL()}/updateView`, doc);
+  }
+
+    /**
+   * tăng lượt xem cho tài liệu
+   * @param doc tài liệu cần update
+   */
+  deleteByID(id: number): Observable<ServerResponse> {
+    return this.http.delete(`${this.getApiURL()}/${id}`);
+  }
+
+  /**
+   * tăng lượt xem cho tài liệu
+   * @param doc tài liệu cần update
+   */
+  updateDocument(doc: ParamDoc): Observable<ServerResponse> {
+    return this.http.post(`${this.getApiURL()}/updateDocument`, doc);
   }
 }
