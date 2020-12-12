@@ -144,4 +144,9 @@ export class NavbarComponent implements OnInit {
     this.searchEnable = e;
     this.searchKey = "";
   }
+
+  logout() {
+    localStorage.clear();
+    window.location.href = "http://toedu.me/";
+  }
 }

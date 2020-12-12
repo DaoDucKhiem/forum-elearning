@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ParamDoc } from 'src/app/share/model/param/param-doc';
-import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 import { DocumentService } from 'src/app/share/service/document.service';
 
 class GeneralInfor {

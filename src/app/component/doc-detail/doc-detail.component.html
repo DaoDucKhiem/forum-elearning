@@ -89,12 +89,16 @@
                     <div class="mr-2">Chuyên mục: </div>
                     <div class="bold">{{currentCategory?.Name}}</div>
                 </div>
-                <div class="flex m-b-50">
+                <div class="flex mb-3">
                     <div class="mr-2">Người đăng: </div>
                     <div class="bold">{{currentDocument?.UserName}}</div>
                 </div>
-                <dx-button stylingMode="contained" text="Tải xuống" type="default" [width]="120"
-                    (onClick)="showPopupDownload()">
+                <div class="d-flex m-b-15">
+                    <div class="mr-2">Ngày đăng:</div>
+                    <div>{{currentDocument?.CreatedDate | date: 'dd/MM/yyyy'}}</div>
+                </div>
+                <dx-button *ngIf="currentDocument.UserID != currentUser?.UserID" stylingMode="contained"
+                    text="Tải xuống" type="default" [width]="120" (onClick)="showPopupDownload()">
                 </dx-button>
             </div>
         </div>
@@ -148,8 +152,8 @@
             <div *ngIf="currentTab == 2 && currentDocument">
                 <iframe *ngIf="currentDocument?.DocumentType == 'pdf'" class="w-100 content-doc"
                     [src]="urlSafe"></iframe>
-                <iframe *ngIf="currentDocument?.DocumentType == 'docx'"
-                    src]="https://docs.google.com/gview?url=https://v2.stringee.com/stringeexchat/upload/7807/d367eef13f90793bd8121e2f675f0dc2/2020/12/07/CXGTHUDAZG-1607359411748.docx"></iframe>
+                <div *ngIf="currentDocument?.DocumentType != 'pdf'" class="flex-c-m font-24 bold">Hiện không có bản xem
+                    trước nào. Vui lòng tải tài liệu để đọc!</div>
             </div>
         </div>
     </div>
@@ -168,8 +172,24 @@
             <dx-button stylingMode="contained" class="mr-3" text="Hủy bỏ" type="normal" [width]="80"
                 (onClick)="closePopup()">
             </dx-button>
-            <dx-button stylingMode="contained" text="Đồng ý" type="success" [width]="80"
-                (onClick)="dowloadDoc()">
+            <dx-button stylingMode="contained" text="Đồng ý" type="success" [width]="80" (onClick)="dowloadDoc()">
+            </dx-button>
+        </div>
+    </div>
+</dx-popup>
+
+<dx-popup *ngIf="showPopupNotify" width="500" height="200" [dragEnabled]="true" [(visible)]="showPopupNotify"
+    title="Thông báo" (onHidden)="closePopupNotify()">
+    <dxo-position of="window" offset="0 -190">
+    </dxo-position>
+    <div class="h-100 content-popup">
+        <div class="font-16">
+            Số điểm của bạn hiện không đủ để tải tài liệu này. Vui lòng đăng thêm tài liệu hoặc đợi đến tuần sau để tải
+            tài liệu.
+        </div>
+        <div class="w-100 d-flex justify-content-end footer">
+            <dx-button stylingMode="contained" class="mr-3" text="Đóng" type="normal" [width]="80"
+                (onClick)="closePopupNotify()">
             </dx-button>
         </div>
     </div>

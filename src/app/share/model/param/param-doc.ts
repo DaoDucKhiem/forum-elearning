@@ -11,6 +11,7 @@ export class ParamDoc {
     CategoryID: number; // chuyên mục
     Description: string; // mô tả
     UserID: string; // id tác giả
+    CreatedDate: Date; // ngày đăng
     UserName: string;
     ReportCount: number; // số lần bị report
 

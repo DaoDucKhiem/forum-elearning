@@ -204,7 +204,7 @@ export class PopupUploadComponent implements OnInit {
   prepareDataBeforeSave() {
     this.currentParam.Description = this.description.trim();
     this.currentParam.DocumentName = this.currentParam.DocumentName.trim();
-    this.currentParam.UserID = "64a59a25-2488-54b0-f6b4-c8af08a50cbf"; // fix cứng
+    this.currentParam.CreatedDate = new Date();
   }
 
   saveDocument() {

@@ -13,8 +13,8 @@
                 </div>
                 <div class="description document-name mb-3">
                     <text-box #documentName title="Tên tài liệu" [required]="true" [isError]="isDocumentNameError"
-                        [placeholder]="'Nhập tên tài liệu'" [textError]="'Tên tài liệu không được bỏ trống'" (onKeyUp)="onEnterTextBox($event)"
-                        (onValueChanged)="setDocumentName($event)"></text-box>
+                        [placeholder]="'Nhập tên tài liệu'" [textError]="'Tên tài liệu không được bỏ trống'"
+                        (onKeyUp)="onEnterTextBox($event)" (onValueChanged)="setDocumentName($event)"></text-box>
                 </div>
                 <div class="description">
                     <div class="mb-2 bold">Mô tả <span class="text-error"> *</span>
@@ -22,8 +22,8 @@
                             hơn).
                         </div>
                     </div>
-                    <dx-text-area [class.border-danger]="isDescriptionError" [height]="60" maxLength="355"
-                        [value]="description" placeholder="Nhập mô tả" (onValueChanged)="validateDescription($event)">
+                    <dx-text-area [class.border-danger]="isDescriptionError" [height]="60" [value]="description"
+                        placeholder="Nhập mô tả" (onValueChanged)="validateDescription($event)">
                     </dx-text-area>
                     <div *ngIf="isDescriptionError" class="mt-2 text-error">Mô tả không được để trống</div>
                 </div>

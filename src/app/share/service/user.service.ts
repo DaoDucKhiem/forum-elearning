@@ -1,4 +1,3 @@
-import { ParseError } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseService } from 'src/common/service/base.service';
@@ -29,5 +28,15 @@ export class UserService extends BaseService<object> {
   getUserInfor() {
     var userData = localStorage.getItem("UserData");
     return JSON.parse(userData);
+  }
+
+  // cập nhật điểm của người dùng tại localstorage
+  updatePointLocal(userInfo) {
+    localStorage.setItem('UserData', JSON.stringify(userInfo));
+  }
+
+  // cập nhật điểm khi tải tài liệu
+  updatePoint(param):Observable<ServerResponse> {
+    return this.http.post(`${this.getApiURL()}/updatePoint`, param);
   }
 }

@@ -11,7 +11,7 @@
             <img [src]="document.ImageFeature" alt="" class="w-100 h-100 cover-fill">
         </div>
         <div class="content w-100">
-            <div class="filename">{{ document?.DocumentName }}</div>
+            <div class="filename line-clamp-2" title="{{ document?.DocumentName }}">{{ document?.DocumentName }}</div>
             <div class="number">
                 <div class="flex-c-m m-r-16">
                     <img src="../../../assets/images/price.svg" class="sub-icon" />

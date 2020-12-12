@@ -22,6 +22,8 @@ export class DocDetailComponent implements OnInit {
   currentTab = 1; // 1 mô tả, 2 là chi tiết
   urlSafe: SafeResourceUrl;
 
+  showPopupNotify = false;
+
   currentUser: any;
 
   currentCategory: any;
@@ -94,21 +96,54 @@ export class DocDetailComponent implements OnInit {
     })
   }
 
+  //
   showPopupDownload() {
     this.showPopup = true;
   }
 
+  // tắt popup thông báo cần số điểm của tài liệu để tải
   closePopup() {
     this.showPopup = false;
   }
 
+  // ẩn thông báo số điểm không đủ để tải tài liệu
+  closePopupNotify() {
+    this.showPopupNotify = false;
+    this.closePopup();
+  }
+
+  // set tab hiển thị. mặc định là mô tả và list comment
   setTab(data) {
     this.currentTab = data;
   }
 
-  dowloadDoc() {
-    FileSaver.saveAs(this.currentDocument.DocumentLink, this.currentDocument.DocumentName);
-    this.showPopup = false;
+  // kiểm tra điều kiện trước khi tải tài liệu
+  checkBeforeDownload(): boolean {
+    if (this.currentUser.Point < this.currentDocument.Point) {
+      this.showPopupNotify = true;
+      return false;
+    }
+    return true;
   }
 
+  // tải tài liệu
+  dowloadDoc() {
+    if (this.checkBeforeDownload())
+      var param = {
+        Poster: this.currentDocument.UserID,
+        Downloader: this.currentUser.UserID,
+        Point: this.currentDocument.Point,
+        DocumentID: this.currentDocument.DocumentID
+      }
+
+    // cập nhật điểm
+    this.userSV.updatePoint(param).subscribe(res => {
+      if (res && res.Success) {
+        FileSaver.saveAs(this.currentDocument.DocumentLink, this.currentDocument.DocumentName);
+        this.currentUser.Point -= this.currentDocument.Point;
+        this.userSV.updatePointLocal(this.currentUser); // cập nhật lại thông tin tại client
+      }
+      this.showPopup = false;
+    });
+  }
 }
