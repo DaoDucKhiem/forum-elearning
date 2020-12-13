@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CommentData } from 'src/app/share/model/param/comment';
 import { ParamDoc } from 'src/app/share/model/param/param-doc';
+import { CommentService } from 'src/app/share/service/comment.service';
 import { DocumentService } from 'src/app/share/service/document.service';
 import { UserService } from 'src/app/share/service/user.service';
 
@@ -21,6 +24,11 @@ export class DocDetailComponent implements OnInit {
   public showPopup = false
   currentTab = 1; // 1 mô tả, 2 là chi tiết
   urlSafe: SafeResourceUrl;
+
+  listComment: CommentData[] = []; // danh sách comment
+  newComment: CommentData = new CommentData();
+
+  @ViewChild("ValueComment", { static: false }) valueComment: ElementRef;
 
   showPopupNotify = false;
 
@@ -56,7 +64,9 @@ export class DocDetailComponent implements OnInit {
     private documentService: DocumentService,
     private route: ActivatedRoute,
     public sanitizer: DomSanitizer,
-    private userSV: UserService
+    private userSV: UserService,
+    private commentSV: CommentService,
+    private toastr: ToastrService,
   ) {
     this.currentUser = this.userSV.getUserInfor();
   }
@@ -74,18 +84,17 @@ export class DocDetailComponent implements OnInit {
         }
       });
 
-      let param = {
-        SearchKey: "",
-        PageSize: 5,
-        PageIndex: 1
-      }
-      this.documentService.getDocPaging(param).subscribe((res) => {
-        if (res?.Success) {
-          this.documents = res.Data;
-        }
-      })
-    })
+      this.getComment();
+    });
+  }
 
+  // lấy danh sách comment
+  getComment() {
+    this.commentSV.getCommentByDocId(this.documentID).subscribe(data => {
+      if (data && data.Success) {
+        this.listComment = data.Data;
+      }
+    });
   }
 
   // cập nhật lượt view cho tài liệu
@@ -144,6 +153,52 @@ export class DocDetailComponent implements OnInit {
         this.userSV.updatePointLocal(this.currentUser); // cập nhật lại thông tin tại client
       }
       this.showPopup = false;
+    });
+  }
+
+  checkCommentBeforeSave(): boolean {
+    const content = this.valueComment.nativeElement.value;
+    if (content.trim() === '') {
+      return false;
+    }
+    else {
+      this.newComment.Content = content.trim();
+    }
+    return true;
+  }
+
+  prepareCommentDataBeforeSave() {
+    this.newComment.DocumentID = this.currentDocument.DocumentID;
+    this.newComment.UserID = this.currentUser.UserID;
+    this.newComment.UserName = this.currentUser.FullName;
+    this.newComment.CreatedDate = new Date();
+    console.log((this.newComment.CreatedDate).getHours());
+  }
+
+  saveComment() {
+    if (this.checkCommentBeforeSave()) {
+      this.prepareCommentDataBeforeSave();
+
+      this.commentSV.save(this.newComment).subscribe(res => {
+        if (res && res.Success) {
+          this.getComment();
+          this.newComment = new CommentData();
+        }
+        else {
+          this.toastr.error("Có lỗi trong quá trình xử lý");
+        }
+      });
+    }
+  }
+
+  deleteComment(comment) {
+    this.commentSV.deleteComment(comment.CommentID).subscribe(res => {
+      if (res && res.Success) {
+        this.getComment();
+      }
+      else {
+        this.toastr.error("Có lỗi trong quá trình xử lý");
+      }
     });
   }
 }

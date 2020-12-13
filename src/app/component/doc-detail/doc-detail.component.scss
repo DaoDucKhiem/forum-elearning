@@ -90,3 +90,14 @@
         right: 0;
     }
 }
+
+.btn-delete {
+    height: 32px;
+    width: 32px;
+    background-color: #dcdcdc;
+    border-radius: 50%;
+
+    &:hover {
+        background-color: #f38c8c;
+    }
+}

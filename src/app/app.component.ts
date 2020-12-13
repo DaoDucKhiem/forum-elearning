@@ -13,8 +13,8 @@ export class AppComponent implements OnInit {
   sid: string;
   constructor(private userSV: UserService, private authenSV: AuthenService, private router: Router) { }
   ngOnInit() {
-    //this.initApp();
-    this.getUserLogin();
+    this.initApp();
+    //this.getUserLogin();
   }
 
   /**

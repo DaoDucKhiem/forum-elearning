@@ -97,7 +97,7 @@
                     <div class="mr-2">Ngày đăng:</div>
                     <div>{{currentDocument?.CreatedDate | date: 'dd/MM/yyyy'}}</div>
                 </div>
-                <dx-button *ngIf="currentDocument.UserID != currentUser?.UserID" stylingMode="contained"
+                <dx-button *ngIf="currentDocument?.UserID != currentUser?.UserID" stylingMode="contained"
                     text="Tải xuống" type="default" [width]="120" (onClick)="showPopupDownload()">
                 </dx-button>
             </div>
@@ -119,33 +119,29 @@
                 <div class="comment-container m-t-50">
                     <div class="imput-comment d-flex align-items-centerm-b-32">
                         <ngx-avatar [name]="currentUser?.FullName" size="50" class="m-r-16"></ngx-avatar>
-                        <input class="search-input big-input" type="text" placeholder="Nhập bình luận">
+                        <input #ValueComment class="search-input big-input" type="text" placeholder="Nhập bình luận"
+                            [value]="newComment.Content" (keyup.enter)="saveComment()">
                     </div>
                     <div class="comment m-t-32">
-                        <div class="list-comment d-flex align-items-center m-b-20">
-                            <ngx-avatar name="John Doe" size="50"></ngx-avatar>
-                            <div class="item-comment m-l-16">
-                                <div class="d-flex align-items-center"><b>Trần Hải Dương</b>&nbsp;&nbsp;<span
-                                        class="text-gray">Cách đây 10 phút</span></div>
-                                <div>Nội dung bình luận</div>
+                        <ng-container *ngFor="let comment of listComment">
+                            <div class="list-comment d-flex m-b-20">
+                                <ngx-avatar [name]="comment?.UserName" size="50"></ngx-avatar>
+                                <div class="flex-1 m-l-16">
+                                    <div class="w-100 d-flex align-items-center mb-3">
+                                        <div class="flex-1">
+                                            <b>{{comment?.UserName}}</b>&nbsp;&nbsp;<span
+                                                class="text-gray">{{comment?.CreatedDate | date: 'MMM d, y, h:mm:ss
+                                                a'}}</span>
+                                        </div>
+                                        <div *ngIf="comment?.UserID === currentUser?.UserID"
+                                            (click)="deleteComment(comment)" name="delete" class="btn-delete flex-c-m">
+                                            <i class="fa fa-trash"></i>
+                                        </div>
+                                    </div>
+                                    <div>{{comment?.Content}}</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="list-comment d-flex align-items-center m-b-20">
-                            <ngx-avatar name="John Doe" size="50"></ngx-avatar>
-                            <div class="item-comment m-l-16">
-                                <div class="d-flex align-items-center"><b>Trần Hải Dương</b>&nbsp;&nbsp;<span
-                                        class="text-gray">Cách đây 10 phút</span></div>
-                                <div>Nội dung bình luận</div>
-                            </div>
-                        </div>
-                        <div class="list-comment d-flex align-items-center m-b-20">
-                            <ngx-avatar name="John Doe" size="50"></ngx-avatar>
-                            <div class="item-comment m-l-16">
-                                <div class="d-flex align-items-center"><b>Trần Hải Dương</b>&nbsp;&nbsp;<span
-                                        class="text-gray">Cách đây 10 phút</span></div>
-                                <div>Nội dung bình luận</div>
-                            </div>
-                        </div>
+                        </ng-container>
                     </div>
                 </div>
             </div>
