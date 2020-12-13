@@ -11,6 +11,7 @@ import { UserService } from './share/service/user.service';
 })
 export class AppComponent implements OnInit {
   sid: string;
+  routingFromMainApp = false;
   constructor(private userSV: UserService, private authenSV: AuthenService, private router: Router) { }
   ngOnInit() {
     this.initApp();
@@ -26,7 +27,13 @@ export class AppComponent implements OnInit {
       if (data && data.Success && data.Data) {
         if (data.Data.UserData) {
           localStorage.setItem('UserData', JSON.stringify(data.Data.UserData));
+          if (this.routingFromMainApp) {
+            this.router.navigate([""]);
+          }
         }
+      }
+      else {
+        window.location.href = "http://toedu.me/";
       }
     })
   }
@@ -50,7 +57,8 @@ export class AppComponent implements OnInit {
   }
 
   initApp() {
-    if (this.isRedirectedFromMainaApp()) {
+    this.routingFromMainApp = this.isRedirectedFromMainaApp();
+    if (this.routingFromMainApp) {
       window.localStorage.clear();
 
       this.authenSV.getToken(this.sid).subscribe(res => {
@@ -63,7 +71,6 @@ export class AppComponent implements OnInit {
           window.localStorage.setItem("x-token", res.data.token);
           // Tiếp tục những tác vụ khác của app
           this.getUserLogin();
-          this.router.navigate([""]);
         } else {
           // Lỗi khác
           window.location.href = "http://toedu.me/";
@@ -74,7 +81,7 @@ export class AppComponent implements OnInit {
       var token = window.localStorage.getItem("x-token");
       if (token && token.trim() !== "") {
         this.authenSV.checkToken(token).subscribe(res => {
-          if (res.code === 200) {
+          if (res.code == 200) {
             // // Tiếp tục những tác vụ khác của app
             this.getUserLogin();
           } else {

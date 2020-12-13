@@ -101,6 +101,7 @@ export class DocDetailComponent implements OnInit {
   updateViewDoc() {
     this.documentService.updateViewDoc(this.currentDocument).subscribe(res => {
       if (res && !res.Success) {
+        this.currentDocument.ViewCount ++;
       }
     })
   }

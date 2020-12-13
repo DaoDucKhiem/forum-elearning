@@ -12,7 +12,7 @@ export class HeaderInterceptor implements HttpInterceptor {
         if (!token) {
             token = "";
         }
-        // token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJudmtoYWkyMDMiLCJ1c2VyX2lkIjoiMDhkODhhNTMtN2IyMC00ZGFjLTg2YTAtMmRkYjdlNjhiYjI4IiwiZW1haWwiOiJudmtoYWkyMDNAZ21haWwuY29tIiwibGlzdF9yb2xlcyI6InxTWVNfQURNSU4vxq_MgW5nIGR1zKNuZyBuaG_MgW0gMTJ8IiwibmJmIjoxNjA2Njc0MDE4LCJleHAiOjE2MDcyNzg4MTgsImlhdCI6MTYwNjY3NDAxOH0.CxoyZ8IKv80ffpNucDZVEHIqzt4_AuToOlxr3KmzLOA";
+        // token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJkZGtoaWVtMTEwNCIsInVzZXJfaWQiOiIwOGQ4OWY3Yi1iYThlLTQ4NWYtODE2YS03MGNlYjllYjJjOGUiLCJlbWFpbCI6ImRhb2R1Y2toaWVtMTEwNEBnbWFpbC5jb20iLCJsaXN0X3JvbGVzIjoifEdST1VQX1VTRVIvR1JPVVAzfCIsIm5iZiI6MTYwNzg3MzMxOCwiZXhwIjoxNjA4NDc4MTE4LCJpYXQiOjE2MDc4NzMzMTh9.Gzx1TVtbHBramrkLuFqMdXgBXQ_Xkp_WrRONavZmMN0";
         // Clone the request to add the new header
         if (!req.headers.get("X-STRINGEE-AUTH")) {
             const clonedRequest = req.clone({ headers: req.headers.append('Authorization', token) });
