@@ -201,10 +201,32 @@ export class PopupUploadComponent implements OnInit {
     return true;
   }
 
+  caculationPointDoc() {
+    if (this.currentParam.DocumentSize < 1) {
+      this.currentParam.Point = 1;
+    }
+    else if (this.currentParam.DocumentSize < 4) {
+      this.currentParam.Point = 2;
+    }
+    else if (this.currentParam.DocumentSize < 8) {
+      this.currentParam.Point = 4;
+    }
+    else if (this.currentParam.DocumentSize < 15) {
+      this.currentParam.Point = 8
+    }
+    else if (this.currentParam.DocumentSize < 30) {
+      this.currentParam.Point = 16
+    }
+    else if (this.currentParam.DocumentSize < 50) {
+      this.currentParam.Point = 31
+    }
+  }
+
   prepareDataBeforeSave() {
     this.currentParam.Description = this.description.trim();
     this.currentParam.DocumentName = this.currentParam.DocumentName.trim();
     this.currentParam.CreatedDate = new Date();
+    this.caculationPointDoc();
   }
 
   saveDocument() {
