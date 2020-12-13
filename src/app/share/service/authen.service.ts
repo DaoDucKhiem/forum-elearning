@@ -27,7 +27,6 @@ export class AuthenService {
   checkToken(token: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': token,
         "Content-Type": "application/json",
       })
     };
