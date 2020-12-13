@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
         } else if (res.code == 200) {
           // Lấy token Thành công
           // Lưu token vào local storage
-          window.localStorage.setItem("x-token", res.data.data.token);
+          window.localStorage.setItem("x-token", res.data.token);
           // Tiếp tục những tác vụ khác của app
           this.getUserLogin();
           this.router.navigate([""]);
