@@ -151,6 +151,7 @@ export class DocDetailComponent implements OnInit {
       if (res && res.Success && res.Data) {
         FileSaver.saveAs(this.currentDocument.DocumentLink, this.currentDocument.DocumentName);
         this.currentUser.Point -= this.currentDocument.Point;
+        this.currentDocument.DownloadCount ++;
         this.userSV.updatePointLocal(this.currentUser); // cập nhật lại thông tin tại client
       }
       else {

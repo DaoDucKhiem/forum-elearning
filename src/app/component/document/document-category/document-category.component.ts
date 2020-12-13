@@ -61,6 +61,17 @@ export class DocumentCategoryComponent implements OnInit {
         this.getDocument();
       }
     });
+
+    this.subscribeUploadDoc();
+  }
+
+  // bắt sự thay đổi khi upload doc
+  subscribeUploadDoc() {
+    this.transferDataSV.postSuccess.subscribe(data => {
+      if (data) {
+        this.getDocument();
+      }
+    });
   }
 
   getDocument() {

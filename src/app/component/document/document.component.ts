@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ParamDoc } from 'src/app/share/model/param/param-doc';
+import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 import { DocumentService } from 'src/app/share/service/document.service';
 
 class GeneralInfor {
@@ -27,11 +28,22 @@ export class DocumentComponent implements OnInit {
   infor = new GeneralInfor();
 
   constructor(
-    private documentService: DocumentService
+    private documentService: DocumentService,
+    private transferDataSV: DataTransferService
   ) { }
 
   ngOnInit(): void {
     this.getDocumentInfoGeneral();
+    this.subscribeUploadDoc();
+  }
+
+  subscribeUploadDoc() {
+    this.transferDataSV.postSuccess.subscribe(data => {
+      if (data) {
+        if (window.location.pathname.includes("document") && !window.location.pathname.includes("categoryId"))
+          this.getDocumentInfoGeneral();
+      }
+    });
   }
 
   /**
