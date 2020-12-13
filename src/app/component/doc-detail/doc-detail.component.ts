@@ -147,10 +147,13 @@ export class DocDetailComponent implements OnInit {
 
     // cập nhật điểm
     this.userSV.updatePoint(param).subscribe(res => {
-      if (res && res.Success) {
+      if (res && res.Success && res.Data) {
         FileSaver.saveAs(this.currentDocument.DocumentLink, this.currentDocument.DocumentName);
         this.currentUser.Point -= this.currentDocument.Point;
         this.userSV.updatePointLocal(this.currentUser); // cập nhật lại thông tin tại client
+      }
+      else {
+        this.toastr.error("Có lỗi trong quá trình xử lý");
       }
       this.showPopup = false;
     });
@@ -172,7 +175,6 @@ export class DocDetailComponent implements OnInit {
     this.newComment.UserID = this.currentUser.UserID;
     this.newComment.UserName = this.currentUser.FullName;
     this.newComment.CreatedDate = new Date();
-    console.log((this.newComment.CreatedDate).getHours());
   }
 
   saveComment() {
@@ -180,7 +182,7 @@ export class DocDetailComponent implements OnInit {
       this.prepareCommentDataBeforeSave();
 
       this.commentSV.save(this.newComment).subscribe(res => {
-        if (res && res.Success) {
+        if (res && res.Success && res.Data) {
           this.getComment();
           this.newComment = new CommentData();
         }

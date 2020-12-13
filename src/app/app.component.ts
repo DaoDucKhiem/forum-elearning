@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   constructor(private userSV: UserService, private authenSV: AuthenService, private router: Router) { }
   ngOnInit() {
     this.initApp();
-    //this.getUserLogin();
+    // this.getUserLogin();
   }
 
   /**
@@ -75,9 +75,6 @@ export class AppComponent implements OnInit {
       if (token && token.trim() !== "") {
         this.authenSV.checkToken(token).subscribe(res => {
           if (res.code === 200) {
-            // Lấy token Thành công
-            // Lưu token vào local storage
-            window.localStorage.setItem("x-token", res.data.token);
             // // Tiếp tục những tác vụ khác của app
             this.getUserLogin();
           } else {
