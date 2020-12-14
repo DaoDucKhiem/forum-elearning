@@ -1,18 +1,16 @@
-<dx-popover target="#link1" position="top" [width]="300" [(visible)]="defaultVisible">
-  <div *dxTemplate="let data = model of 'content'">
-    <div class="popover-user">
-      <div class="tab-user d-flex align-items-center padding-8 cursor-pointer">
-        <i class="fa fa-user mr-2"></i>
-        <div (click)="showUserManegement()">Thông tin cá nhân</div>
-      </div>
-      <div class="tab-user d-flex align-items-center padding-8 cursor-pointer">
-        <i class="fa fa-info-circle mr-2"></i>
-        <div (click)="showHelpManegement()">Trợ giúp</div>
-      </div>
-      <div class="tab-user d-flex align-items-center padding-8 cursor-pointer" (click)="logout()">
-        <i class="fa fa-sign-out mr-2"></i>
-        <div>Đăng xuất</div>
-      </div>
+<dx-popover target="#link1" position="top" [width]="300" [visible]="visiblePopover">
+  <div class="popover-user">
+    <div class="tab-user d-flex align-items-center padding-8 cursor-pointer" (click)="showUserManegement()">
+      <i class="fa fa-user mr-2"></i>
+      <div>Thông tin cá nhân</div>
+    </div>
+    <div class="tab-user d-flex align-items-center padding-8 cursor-pointer" (click)="showHelpManegement()">
+      <i class="fa fa-info-circle mr-2"></i>
+      <div>Trợ giúp</div>
+    </div>
+    <div class="tab-user d-flex align-items-center padding-8 cursor-pointer" (click)="logout()">
+      <i class="fa fa-sign-out mr-2"></i>
+      <div>Đăng xuất</div>
     </div>
   </div>
 </dx-popover>
@@ -43,8 +41,8 @@
     <div class="flex-c-m">
       <img class="upload" src="../../../assets/icon/upload-in-cloud.svg" title="tải lên tài liệu" alt=""
         (click)="showUpload()" />
-      <ngx-avatar [name]="currentUser?.FullName" id="link1" class="cursor-pointer" size="36"
-        (click)="togglePopover($event)">
+      <ngx-avatar *ngIf="currentUser?.FullName" [name]="currentUser?.FullName" id="link1" class="cursor-pointer"
+        size="36" (click)="togglePopover($event)">
       </ngx-avatar>
     </div>
   </div>

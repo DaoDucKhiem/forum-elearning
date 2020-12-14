@@ -1,10 +1,60 @@
-<div class="user-container">
-    <div class="flex">
-        <div class="sidebar">
-            <app-user-management-sidebar (tab)="switchTab($event)"></app-user-management-sidebar>
+<div class="h-100 w-100 d-flex user-management">
+    <!-- sidebar left -->
+    <div class="sidebar-left">
+        <div class="avatar d-flex justify-content-center">
+            <ngx-avatar [name]="currentUser?.FullName" class="cursor-pointer" size="120">
+            </ngx-avatar>
         </div>
-        <div class="content">
-            <app-user-management-content [tab]="tab"></app-user-management-content>
+        <div class="name">
+            {{currentUser?.FullName}}
+        </div>
+        <div class="item-info">
+            <i class="fa fa-envelope mr-1"></i>Email:
+            <div class="font-16 ml-4 line-clamp-1" title="{{currentUser?.Email}}">{{currentUser?.Email}}</div>
+        </div>
+        <div *ngIf="me?.UserID != currentUser?.UserID" class="item-info">
+            <i class="fa fa-star mr-1"></i>
+            Điểm: {{currentUser?.Point}}
+        </div>
+    </div>
+    <!-- content -->
+    <div class="flex-1 content overflow-auto">
+        <div class="position-relative margin-16 border border-radius-4 w-25">
+            <span class="icon position-absolute h-100 flex-c-m m-l-12"><i class="fa fa-search"></i></span>
+            <input #ValueSearch class="w-100 p-l-32 pr-3 pt-2 pb-2" type="text" [value]="searchKey"
+                placeholder="Tìm kiếm" (keyup)="search($event)">
+        </div>
+
+        <div *ngIf="documents?.length > 0" class="list-document mt-3">
+            <ng-container *ngFor="let item of documents">
+                <div class="position-relative item">
+                    <app-doc-info [document]="item"></app-doc-info>
+                    <div *ngIf="me?.UserID == currentUser?.UserID" class="icon-trash flex-c-m" (click)="showPopupConfirmDelete(item)">
+                        <i class="fa fa-trash"></i>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div *ngIf="documents?.length == 0">
+            <div class="m-t-100 font-20 bold text-center">Chưa có tài liệu nào được đăng</div>
         </div>
     </div>
 </div>
+
+<dx-popup *ngIf="showPopup" width="500" height="180" [dragEnabled]="true" [(visible)]="showPopup" title="Xóa tài liệu"
+    (onHidden)="closePopup()">
+    <dxo-position of="window" offset="0 -190">
+    </dxo-position>
+    <div class="h-100 content-popup">
+        <div class="font-16 mb-3">
+            Bạn thực sự muốn xóa {{currentDoc?.DocumentName}} chứ?
+        </div>
+        <div class="w-100 d-flex justify-content-end footer">
+            <dx-button stylingMode="contained" class="mr-3" text="Hủy bỏ" type="normal" [width]="80"
+                (onClick)="closePopup()">
+            </dx-button>
+            <dx-button stylingMode="contained" text="Xóa" type="danger" [width]="80" (onClick)="deleteDoc()">
+            </dx-button>
+        </div>
+    </div>
+</dx-popup>

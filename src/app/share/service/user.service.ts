@@ -30,6 +30,11 @@ export class UserService extends BaseService<object> {
     return JSON.parse(userData);
   }
 
+  // lấy thông tin user từ id
+  getDataUserInfor(id: string):Observable<ServerResponse> {
+    return this.http.get(`${this.getApiURL()}?id=${id}`);
+  }
+
   // cập nhật điểm của người dùng tại localstorage
   updatePointLocal(userInfo) {
     localStorage.setItem('UserData', JSON.stringify(userInfo));

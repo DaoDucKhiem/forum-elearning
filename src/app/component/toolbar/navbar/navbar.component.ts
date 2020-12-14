@@ -11,7 +11,7 @@ import { UserService } from 'src/app/share/service/user.service';
 export class NavbarComponent implements OnInit {
 
   showPopupUpload = false;
-  defaultVisible: boolean = false;
+  visiblePopover: boolean = false;
   currentCategoryID = 0;
   showDetail = false;
   searchKey = '';
@@ -66,29 +66,31 @@ export class NavbarComponent implements OnInit {
   }
 
   getUser() {
+    // setTimeout(() => {
     this.currentUser = this.userSV.getUserInfor();
-  }
-
-  showLogin() {
-    this.router.navigate([`account/login`]);
+    // }, 200);
   }
 
   showRegister() {
     this.router.navigate([`account/register`]);
   }
+
   showUserManegement() {
-    this.router.navigate([`user`]);
+    this.visiblePopover = false;
+    this.router.navigate([`user`], { queryParams: { id: this.currentUser.UserID } });
   }
+
   showHelpManegement() {
+    this.visiblePopover = false;
     this.router.navigate([`help`]);
   }
   backToHome() {
     this.currentCategoryID = null;
     this.router.navigate([`document`]);
   }
+
   togglePopover(e) {
-    this.defaultVisible = !this.defaultVisible
-    e.stopPropagation()
+    this.visiblePopover = true;
   }
 
   showUpload() {
