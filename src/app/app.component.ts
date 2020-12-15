@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   constructor(private userSV: UserService, private authenSV: AuthenService, private router: Router) { }
   ngOnInit() {
     // this.initApp();
-     this.getUserLogin();
+    this.getUserLogin();
   }
 
   /**
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
         }
       }
       else {
-        window.location.href = "http://toedu.me/";
+        this.router.navigate(["/not-found"]);
       }
     })
   }

@@ -1,0 +1,14 @@
+:host {
+    .container-not-found {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(89, 194, 255, 0.8);
+
+        .back-main {
+            color: #ffffff;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
