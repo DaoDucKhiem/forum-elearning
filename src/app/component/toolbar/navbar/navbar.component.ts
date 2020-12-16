@@ -88,6 +88,10 @@ export class NavbarComponent implements OnInit {
     this.visiblePopover = false;
     this.router.navigate([`help`]);
   }
+  showReportManegement(){
+    this.visiblePopover = false;
+    this.router.navigate([`report`]);
+  }
   backToHome() {
     this.currentCategoryID = null;
     this.router.navigate([`document`]);
