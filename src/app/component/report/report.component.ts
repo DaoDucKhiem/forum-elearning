@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataTransferService } from 'src/app/share/service/data-transfer.service';
+import { ReportService } from 'src/app/share/service/report.service';
 
 @Component({
   selector: 'app-report',
@@ -7,21 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportComponent implements OnInit {
 
-  switchReport: boolean = false;
+  switchReport: boolean = true;
+  listReport: any[];
 
-  constructor() { }
+  constructor(
+    private reportSV: ReportService,
+    private router: Router, 
+    private transferDataSV: DataTransferService
+  ) { }
 
   ngOnInit(): void {
+    this.getAllReport();
   }
 
-  counter(i: number) {
-    return new Array(i);
-}
-
-  goToDocument(e){
-
+  getAllReport() {
+    this.reportSV.getAllReport().subscribe((res) => {
+      if (res?.Success) {
+        this.listReport = res.Data;
+      }
+    })
   }
-  DeleteReport(e){
+
+  changeStatus(e) {
+    this.reportSV.changeStatusReport(e).subscribe((res) => {
+      if (res?.Success) {
+        this.getAllReport();
+      }
+    })
+  }
+  goToDocument(docID){
+    this.transferDataSV.transferCategoryID(0);
+    this.router.navigate([`/${docID}`]);
+  }
+  DeleteReport(e) {
 
   }
 }
