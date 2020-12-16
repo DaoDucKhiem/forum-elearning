@@ -11,6 +11,8 @@ import { UserService } from 'src/app/share/service/user.service';
 declare var require: any
 const FileSaver = require('file-saver');
 
+declare var $: any;
+
 @Component({
   selector: 'app-doc-detail',
   templateUrl: './doc-detail.component.html',
@@ -26,6 +28,12 @@ export class DocDetailComponent implements OnInit {
   urlSafe: SafeResourceUrl;
 
   showPopupDelete = false;
+
+  showPopupReport = false;
+
+  reasonReport = '';
+
+  isReportError = false;
 
   listComment: CommentData[] = []; // danh sách comment
   newComment: CommentData = new CommentData();
@@ -240,5 +248,52 @@ export class DocDetailComponent implements OnInit {
   // đóng popup xóa tài liệu
   closePopupDelete() {
     this.showPopupDelete = false;
+  }
+
+  // hiển thị popup report
+  showPopupReportData() {
+    this.showPopupReport = true;
+    setTimeout(() => {
+      $("dx-text-area").find("textarea").focus();
+    }, 500);
+  }
+
+  closePopupReport() {
+    this.showPopupReport = false;
+  }
+
+  validateReason(e) {
+    if (e) {
+      if (e.value && e.value.trim() != '') {
+        this.isReportError = false;
+        $("dx-text-area").find("textarea").focus();
+      }
+      else {
+        this.isReportError = true;
+      }
+    }
+
+    this.reasonReport = e.value;
+  }
+
+  validateValueReasonBeforeSave(): boolean {
+    if (this.reasonReport.trim() == '') {
+      this.isReportError = true;
+      return false;
+    }
+
+    return true;
+  }
+
+  // chuẩn bị dữ liệu trước khi report
+  prepareReasonBeforeSend() {
+
+  }
+
+  // report
+  Report() {
+    if (this.validateValueReasonBeforeSave()) {
+      this.prepareReasonBeforeSend();
+    }
   }
 }

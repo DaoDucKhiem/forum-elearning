@@ -203,22 +203,22 @@ export class PopupUploadComponent implements OnInit {
 
   caculationPointDoc() {
     if (this.currentParam.DocumentSize < 1) {
-      this.currentParam.Point = 1;
-    }
-    else if (this.currentParam.DocumentSize < 4) {
-      this.currentParam.Point = 2;
-    }
-    else if (this.currentParam.DocumentSize < 8) {
       this.currentParam.Point = 4;
     }
+    else if (this.currentParam.DocumentSize < 4) {
+      this.currentParam.Point = 8;
+    }
+    else if (this.currentParam.DocumentSize < 8) {
+      this.currentParam.Point = 12;
+    }
     else if (this.currentParam.DocumentSize < 15) {
-      this.currentParam.Point = 8
+      this.currentParam.Point = 20
     }
     else if (this.currentParam.DocumentSize < 30) {
-      this.currentParam.Point = 16
+      this.currentParam.Point = 32
     }
     else if (this.currentParam.DocumentSize < 50) {
-      this.currentParam.Point = 31
+      this.currentParam.Point = 40
     }
   }
 

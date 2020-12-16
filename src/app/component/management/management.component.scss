@@ -1,7 +1,9 @@
 :host {
     .container-management {
+        width: 100vw;
         .content-management {
-            flex: 1;
+            height: calc(100vh - 60px);
+            width: 100%;
             background-color: #ffffff;
             overflow-y: auto;
         }

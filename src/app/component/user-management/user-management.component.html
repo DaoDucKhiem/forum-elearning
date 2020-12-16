@@ -12,7 +12,7 @@
             <i class="fa fa-envelope mr-1"></i>Email:
             <div class="font-16 ml-4 line-clamp-1" title="{{currentUser?.Email}}">{{currentUser?.Email}}</div>
         </div>
-        <div *ngIf="me?.UserID != currentUser?.UserID" class="item-info">
+        <div *ngIf="me?.UserID == currentUser?.UserID" class="item-info">
             <i class="fa fa-star mr-1"></i>
             Điểm: {{currentUser?.Point}}
         </div>

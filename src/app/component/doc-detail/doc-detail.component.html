@@ -100,10 +100,13 @@
                 </div>
                 <div>
                     <dx-button *ngIf="currentDocument?.UserID != currentUser?.UserID" stylingMode="contained"
-                        class="mr-4" text="Tải xuống" type="default" [width]="120" (onClick)="showPopupDownload()">
+                        class="mr-4" text="Tải xuống" type="default" [width]="140" (onClick)="showPopupDownload()">
                     </dx-button>
                     <dx-button *ngIf="currentDocument?.UserID == currentUser?.UserID || isAdmin" stylingMode="contained"
-                        text="Xóa tài liệu" type="danger" [width]="120" (onClick)="showPopupDeleteDoc()">
+                        text="Xóa tài liệu" class="mr-4" type="danger" [width]="140" (onClick)="showPopupDeleteDoc()">
+                    </dx-button>
+                    <dx-button *ngIf="currentDocument?.UserID == currentUser?.UserID || isAdmin" stylingMode="contained"
+                        text="Báo cáo vi phạm" type="normal" [width]="140" (onClick)="showPopupReportData()">
                     </dx-button>
                 </div>
             </div>
@@ -155,7 +158,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="currentTab == 2 && currentDocument">
+            <div *ngIf="currentTab == 2 && currentDocument" class="previewData">
                 <iframe *ngIf="currentDocument?.DocumentType == 'pdf'" class="w-100 content-doc"
                     [src]="urlSafe"></iframe>
                 <div *ngIf="currentDocument?.DocumentType != 'pdf'" class="flex-c-m font-24 bold">Hiện không có bản xem
@@ -214,6 +217,25 @@
                 (onClick)="closePopupDelete()">
             </dx-button>
             <dx-button stylingMode="contained" text="Xóa" type="danger" [width]="80" (onClick)="deleteDoc()">
+            </dx-button>
+        </div>
+    </div>
+</dx-popup>
+
+<dx-popup *ngIf="showPopupReport" width="500" height="220" [dragEnabled]="true" [(visible)]="showPopupReport"
+    title="Lý do vi phạm" (onHidden)="closePopupReport()">
+    <dxo-position of="window" offset="0 -190">
+    </dxo-position>
+    <div class="h-100 content-popup">
+        <dx-text-area [class.border-danger]="isReportError" [height]="80" [value]="reasonReport"
+            placeholder="Nhập lý do" (onValueChanged)="validateReason($event)">
+        </dx-text-area>
+        <div *ngIf="isReportError" class="mt-1" [class.text-error]="isReportError">Lý do không được để trống</div>
+        <div class="w-100 d-flex justify-content-end footer">
+            <dx-button stylingMode="contained" class="mr-3" text="Hủy bỏ" type="normal" [width]="80"
+                (onClick)="closePopupReport()">
+            </dx-button>
+            <dx-button stylingMode="contained" text="Gửi" type="default" [width]="80" (onClick)="Report()">
             </dx-button>
         </div>
     </div>
