@@ -19,6 +19,11 @@ const routes: Routes = [
       {
         path: "help",
         loadChildren: () => import('../help/help.module').then(x => x.HelpModule)
+      }
+      ,
+      {
+        path: "report",
+        loadChildren: () => import('../report/report.module').then(x => x.ReportModule)
       },
       {
         path: ":id",
