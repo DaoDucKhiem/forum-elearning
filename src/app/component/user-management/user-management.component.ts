@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ParamDoc } from 'src/app/share/model/param/param-doc';
 import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 import { DocumentService } from 'src/app/share/service/document.service';
@@ -29,6 +30,7 @@ export class UserManagementComponent implements OnInit {
   constructor(
     private activedRouter: ActivatedRoute,
     private userSV: UserService,
+    private toastSV: ToastrService,
     private documentSV: DocumentService,
     private transferDataSV: DataTransferService
   ) { }
@@ -107,7 +109,11 @@ export class UserManagementComponent implements OnInit {
     this.documentSV.deleteByID(this.currentDoc.DocumentID).subscribe(res => {
       if (res && res.Success) {
         this.closePopup();
+        this.toastSV.success("Đã xóa thành công!");
         this.getListDocByUserID(this.currentUser.UserID);
+      }
+      else {
+        this.toastSV.error("Đã xóa thất bại!");
       }
     });
   }

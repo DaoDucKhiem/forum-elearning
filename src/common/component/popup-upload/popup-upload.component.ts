@@ -90,7 +90,7 @@ export class PopupUploadComponent implements OnInit {
 
       const size = this.sizeUpload + element.size;
       // nếu tổng số dung lượng các file tải lên nhỏ hơn 5MB thì cho tải lên. ngược lại show toast báo không cho tải lên nữa
-      if (size < 5120000) {
+      if (size < 51200000) {
         this.uploadSV.uploadFile(formData).subscribe(res => {
           if (res.filename) {
             var file = {

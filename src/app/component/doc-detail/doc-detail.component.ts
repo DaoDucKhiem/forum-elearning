@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommentData } from 'src/app/share/model/param/comment';
 import { ParamDoc } from 'src/app/share/model/param/param-doc';
@@ -25,8 +25,12 @@ export class DocDetailComponent implements OnInit {
   currentTab = 1; // 1 mô tả, 2 là chi tiết
   urlSafe: SafeResourceUrl;
 
+  showPopupDelete = false;
+
   listComment: CommentData[] = []; // danh sách comment
   newComment: CommentData = new CommentData();
+
+  isAdmin: any;
 
   @ViewChild("ValueComment", { static: false }) valueComment: ElementRef;
 
@@ -67,8 +71,10 @@ export class DocDetailComponent implements OnInit {
     private userSV: UserService,
     private commentSV: CommentService,
     private toastr: ToastrService,
+    private router: Router
   ) {
     this.currentUser = this.userSV.getUserInfor();
+    this.isAdmin = this.currentUser.Role; // gán quyền có là admin hay không
   }
 
 
@@ -101,7 +107,7 @@ export class DocDetailComponent implements OnInit {
   updateViewDoc() {
     this.documentService.updateViewDoc(this.currentDocument).subscribe(res => {
       if (res && !res.Success) {
-        this.currentDocument.ViewCount ++;
+        this.currentDocument.ViewCount++;
       }
     })
   }
@@ -151,7 +157,7 @@ export class DocDetailComponent implements OnInit {
       if (res && res.Success && res.Data) {
         FileSaver.saveAs(this.currentDocument.DocumentLink, this.currentDocument.DocumentName);
         this.currentUser.Point -= this.currentDocument.Point;
-        this.currentDocument.DownloadCount ++;
+        this.currentDocument.DownloadCount++;
         this.userSV.updatePointLocal(this.currentUser); // cập nhật lại thông tin tại client
       }
       else {
@@ -159,6 +165,11 @@ export class DocDetailComponent implements OnInit {
       }
       this.showPopup = false;
     });
+  }
+
+  // hiện profile
+  showProfile(userID) {
+    this.router.navigate([`user`], { queryParams: { id: userID } });
   }
 
   checkCommentBeforeSave(): boolean {
@@ -204,5 +215,30 @@ export class DocDetailComponent implements OnInit {
         this.toastr.error("Có lỗi trong quá trình xử lý");
       }
     });
+  }
+
+  // xóa tài liệu
+  deleteDoc() {
+    this.documentService.deleteByID(this.currentDocument.DocumentID).subscribe(res => {
+      if (res && res.Success) {
+        this.closePopupDelete();
+        this.toastr.success("Đã xóa thành công!");
+        this.router.navigate([""]);
+      }
+      else {
+        this.closePopupDelete();
+        this.toastr.error("Đã xóa thất bại!");
+      }
+    });
+  }
+
+  // hiện popup delete
+  showPopupDeleteDoc() {
+    this.showPopupDelete = true;
+  }
+
+  // đóng popup xóa tài liệu
+  closePopupDelete() {
+    this.showPopupDelete = false;
   }
 }

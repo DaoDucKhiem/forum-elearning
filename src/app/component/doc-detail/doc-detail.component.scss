@@ -60,6 +60,12 @@
                 .table {
                     width: 600px;
                 }
+
+                .poster {
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
             }
         }
     }
@@ -77,6 +83,12 @@
             width: 100px;
             height: 4px;
             background-color: #51a8f3;
+        }
+
+        .commenter {
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }
