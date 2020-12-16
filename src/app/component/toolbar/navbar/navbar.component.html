@@ -1,4 +1,4 @@
-<dx-popover target="#link1" position="top" [width]="300" [visible]="visiblePopover">
+<dx-popover target="#link1" position="top" [width]="300" [visible]="visiblePopover" (onHidden)="hiddenPopover()">
   <div class="popover-user">
     <div class="tab-user d-flex align-items-center padding-8 cursor-pointer" (click)="showUserManegement()">
       <i class="fa fa-user mr-2"></i>

@@ -75,6 +75,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigate([`account/register`]);
   }
 
+  hiddenPopover() {
+    this.visiblePopover = false;
+  }
+
   showUserManegement() {
     this.visiblePopover = false;
     this.router.navigate([`user`], { queryParams: { id: this.currentUser.UserID } });

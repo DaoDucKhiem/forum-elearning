@@ -63,7 +63,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   getListDocByUserID(id: string) {
-    this.documentSV.getDocumentByUserId(id).subscribe(res => {
+    this.documentSV.getDocumentByUserId(id, this.searchKey).subscribe(res => {
       if (res && res.Success) {
         this.documents = res.Data;
       }
@@ -74,6 +74,7 @@ export class UserManagementComponent implements OnInit {
     if (e && e.event && e.event.keyCode === 13) {
       this.searchKey = this.valueSearch.nativeElement.value;
       // search here
+      this.getListDocByUserID(this.currentUser.UserID);
     }
     else {
       clearTimeout(this.timeSearch);
@@ -85,6 +86,7 @@ export class UserManagementComponent implements OnInit {
 
         this.searchKey = inputSearch;
         // search here
+        this.getListDocByUserID(this.currentUser.UserID);
 
       }, 200);
     }

@@ -54,8 +54,8 @@ export class DocumentService extends BaseService<object>{
    * lấy tài liệu theo id người dùng
    * @param id id của tài liệu
    */
-  getDocumentByUserId(id: string): Observable<ServerResponse> {
-    return this.http.get(`${this.getApiURL()}/${id}`);
+  getDocumentByUserId(id: string, search?: string): Observable<ServerResponse> {
+    return this.http.get(`${this.getApiURL()}/${id}?search=${search}`);
   }
 
   /**
