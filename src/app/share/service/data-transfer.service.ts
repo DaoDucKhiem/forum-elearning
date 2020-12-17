@@ -19,4 +19,16 @@ export class DataTransferService {
   transferCategoryID(id) {
     this.categoryID.emit(id);
   }
+
+  // emit documnet để update
+  @Output() docTranData = new EventEmitter<ParamDoc>();
+  transferDocument(data: ParamDoc) {
+    this.docTranData.emit(data);
+  }
+
+  // emit documnet để update
+  @Output() updateDoc = new EventEmitter<boolean>();
+  transferResultUpdate() {
+    this.updateDoc.emit(true);
+  }
 }

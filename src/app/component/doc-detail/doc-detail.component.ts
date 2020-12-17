@@ -6,6 +6,7 @@ import { CommentData } from 'src/app/share/model/param/comment';
 import { ParamDoc } from 'src/app/share/model/param/param-doc';
 import { Report } from 'src/app/share/model/param/report';
 import { CommentService } from 'src/app/share/service/comment.service';
+import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 import { DocumentService } from 'src/app/share/service/document.service';
 import { ReportService } from 'src/app/share/service/report.service';
 import { UserService } from 'src/app/share/service/user.service';
@@ -34,8 +35,8 @@ export class DocDetailComponent implements OnInit {
   showPopupReport = false;
 
   reasonReport = '';
-  
-  newReport = new Report(); 
+
+  newReport = new Report();
 
   isReportError = false;
 
@@ -84,7 +85,8 @@ export class DocDetailComponent implements OnInit {
     private commentSV: CommentService,
     private toastr: ToastrService,
     private router: Router,
-    private reportSV: ReportService
+    private reportSV: ReportService,
+    private transferSV: DataTransferService
   ) {
     this.currentUser = this.userSV.getUserInfor();
     this.isAdmin = this.currentUser.Role; // gán quyền có là admin hay không
@@ -104,6 +106,18 @@ export class DocDetailComponent implements OnInit {
       });
 
       this.getComment();
+
+      this.transferSV.updateDoc.subscribe(res => {
+        if (res) {
+          this.documentService.getDocumentById(this.documentID).subscribe((res) => {
+            if (res && res.Success && res.Data) {
+              this.currentDocument = res.Data;
+              this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.currentDocument.DocumentLink);
+              this.currentCategory = this.listCategory.filter(x => x.ID === this.currentDocument.CategoryID)[0];
+            }
+          });
+        }
+      })
     });
   }
 
@@ -330,5 +344,9 @@ export class DocDetailComponent implements OnInit {
         this.showPopupReport = false;
       });
     }
+  }
+
+  senDataToUpdate() {
+    this.transferSV.transferDocument(this.currentDocument);
   }
 }

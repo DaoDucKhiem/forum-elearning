@@ -17,6 +17,14 @@ export class DocumentService extends BaseService<object>{
   }
 
   /**
+   * cập nhật tài liệu
+   * @param param tài liệu cập nhật
+   */
+  updateDocumentData(param: ParamDoc): Observable<ServerResponse> {
+    return this.http.post(`${this.getApiURL()}/update`, param)
+  }
+
+  /**
    * lấy danh sách document paging
    * dùng cho tìm kiếm global,
    * tìm kiếm theo chuyên mục

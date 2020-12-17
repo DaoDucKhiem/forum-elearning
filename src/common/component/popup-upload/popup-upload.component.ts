@@ -21,6 +21,8 @@ export class PopupUploadComponent implements OnInit {
 
   files: any = [];
 
+  state = 1; // 1 là thêm mới, 2 là cập nhật
+
   listCategory = [];
 
   description = "";
@@ -29,6 +31,23 @@ export class PopupUploadComponent implements OnInit {
   isDocumentNameError = false;
 
   currentParam: ParamDoc = new ParamDoc();
+
+  @Input() set currentDoc(data) {
+    if (data) {
+      this.currentParam = this.cloneObject(data);
+      if (this.currentParam.DocumentID) {
+        this.state = 2;
+        this.description = this.currentParam.Description;
+        var file = {
+          name: this.currentParam.DocumentName
+        }
+        this.files.push(file);
+      }
+      else {
+        this.state = 1;
+      }
+    }
+  }
 
   sizeUpload = 0;
   isFileError = false;
@@ -64,6 +83,11 @@ export class PopupUploadComponent implements OnInit {
     ]
 
     this.getUser();
+  }
+
+  cloneObject(o) {
+    const temp = JSON.stringify(o);
+    return JSON.parse(temp);
   }
 
   getUser() {
@@ -102,7 +126,6 @@ export class PopupUploadComponent implements OnInit {
             this.sizeUpload += element.size;
             this.currentParam.DocumentLink = res.filename;
             this.currentParam.DocumentSize = (((file.size) / 1024) / 1024).toFixed(5);
-            ;
             this.files.push(file);
             this.isFileError = false;
           }
@@ -232,14 +255,32 @@ export class PopupUploadComponent implements OnInit {
   saveDocument() {
     if (this.validateBeforeSave()) {
       this.prepareDataBeforeSave();
-      this.documentSV.save(this.currentParam).subscribe(res => {
-        if (res && res.Data) {
-          this.toastr.success("Đăng tài liệu thành công!");
-          this.datatransferSV.postDocumentSuccess(); // thong bao dang tai lieu thanh cong cho document
-        }
-      });
+      if (this.state == 1) {
+        this.documentSV.save(this.currentParam).subscribe(res => {
+          if (res && res.Data) {
+            this.toastr.success("Đăng tài liệu thành công!");
+            this.datatransferSV.postDocumentSuccess(); // thong bao dang tai lieu thanh cong cho document
+          }
+          else {
+            this.toastr.error("Đăng tài liệu thất bại!");
+          }
+        });
 
-      this.closePopup();
+        this.closePopup();
+      }
+      else if (this.state == 2) {
+        this.documentSV.updateDocumentData(this.currentParam).subscribe(res => {
+          if (res && res.Data) {
+            this.toastr.success("Cập nhật tài liệu thành công!");
+            this.datatransferSV.transferResultUpdate(); // thong bao cập nhật tai lieu thanh cong cho document
+          }
+          else {
+            this.toastr.error("Cập nhật tài liệu thất bại!");
+          }
+        });
+
+        this.closePopup();
+      }
     }
   }
 

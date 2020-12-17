@@ -106,6 +106,10 @@
                         text="Xóa tài liệu" class="mr-4" type="danger" [width]="140" (onClick)="showPopupDeleteDoc()">
                     </dx-button>
                     <dx-button *ngIf="currentDocument?.UserID == currentUser?.UserID || !isAdmin"
+                        stylingMode="contained" class="mr-4" text="Chỉnh sửa tài liệu" type="normal" [width]="140"
+                        (onClick)="senDataToUpdate()">
+                    </dx-button>
+                    <dx-button *ngIf="currentDocument?.UserID != currentUser?.UserID || !isAdmin"
                         stylingMode="contained" text="Báo cáo vi phạm" type="normal" [width]="140"
                         (onClick)="showPopupReportData()">
                     </dx-button>

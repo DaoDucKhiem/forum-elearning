@@ -7,14 +7,15 @@
                     <div class="w-50">
                         <select-box title="Chuyên mục" [required]="true" [placeholder]="'Chọn chuyên mục'"
                             [isError]="isCategoryError" [textError]="'Chuyên mục không được để trống'"
-                            [dataSource]="listCategory" [displayExpr]="'Name'" [valueExpr]="'ID'"
-                            (onValueChanged)="setCategory($event)"></select-box>
+                            [value]="currentParam?.CategoryID" [dataSource]="listCategory" [displayExpr]="'Name'"
+                            [valueExpr]="'ID'" (onValueChanged)="setCategory($event)"></select-box>
                     </div>
                 </div>
                 <div class="description document-name mb-3">
                     <text-box #documentName title="Tên tài liệu" [required]="true" [isError]="isDocumentNameError"
-                        [placeholder]="'Nhập tên tài liệu'" [textError]="'Tên tài liệu không được bỏ trống'"
-                        (onKeyUp)="onEnterTextBox($event)" (onValueChanged)="setDocumentName($event)"></text-box>
+                        [value]="currentParam?.DocumentName" [placeholder]="'Nhập tên tài liệu'"
+                        [textError]="'Tên tài liệu không được bỏ trống'" (onKeyUp)="onEnterTextBox($event)"
+                        (onValueChanged)="setDocumentName($event)"></text-box>
                 </div>
                 <div class="description">
                     <div class="mb-2 bold">Mô tả <span class="text-error"> *</span>
@@ -37,7 +38,7 @@
                     <dx-scroll-view class="list-file">
                         <div class="files-list flex-c-m" *ngFor="let file of files;let i= index">
                             <p class="ml-4"> {{ file.name }} </p>
-                            <button class="delete-file mr-4" (click)="deleteAttachment(i)" name="upload">
+                            <button *ngIf="state == 1" class="delete-file mr-4" (click)="deleteAttachment(i)" name="upload">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </div>
@@ -67,9 +68,9 @@
             </div>
         </dx-scroll-view>
         <div class="d-flex justify-content-end">
-            <dx-button class="mr-3" text="Hủy bỏ" type="danger" (click)="closePopup()">
+            <dx-button class="mr-3" text="Hủy bỏ" type="danger" [width]="100" (click)="closePopup()">
             </dx-button>
-            <dx-button text="Đăng" type="success" [width]="80" (click)="saveDocument()">
+            <dx-button [text]="state == 1 ? 'Đăng' : 'Cập nhật'" type="success" [width]="100" (click)="saveDocument()">
             </dx-button>
         </div>
     </div>

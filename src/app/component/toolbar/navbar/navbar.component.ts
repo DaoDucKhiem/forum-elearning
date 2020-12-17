@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ParamDoc } from 'src/app/share/model/param/param-doc';
 import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 import { UserService } from 'src/app/share/service/user.service';
 
@@ -16,6 +17,8 @@ export class NavbarComponent implements OnInit {
   showDetail = false;
   searchKey = '';
   searchEnable = false;
+
+  currentDocument = new ParamDoc();
 
   isAdmin: any;
 
@@ -65,6 +68,13 @@ export class NavbarComponent implements OnInit {
     });
 
     this.getUser();
+
+    this.transferDataSV.docTranData.subscribe(data => {
+      if (data) {
+        this.currentDocument = data;
+        this.showPopupUpload = true;
+      }
+    });
   }
 
   getUser() {

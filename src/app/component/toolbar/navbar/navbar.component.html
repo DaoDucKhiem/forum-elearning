@@ -5,7 +5,8 @@
       <i class="fa fa-user mr-2"></i>
       <div>Quản lý thông tin và tài liệu</div>
     </div>
-    <div *ngIf="isAdmin" class="tab-user d-flex align-items-center padding-8 cursor-pointer" (click)="showReportManegement()">
+    <div *ngIf="isAdmin" class="tab-user d-flex align-items-center padding-8 cursor-pointer"
+      (click)="showReportManegement()">
       <i class="fa fa-list-ul mr-2"></i>
       <div>Danh sách báo cáo</div>
     </div>
@@ -54,6 +55,6 @@
   <div *ngIf="searchEnable" class="search-enable" (click)="hiddenSearch()"></div>
 </div>
 
-<app-popup-upload *ngIf="showPopupUpload" [title]="'Đăng tài liệu'" [popupVisible]="showPopupUpload"
-  (hiddenPopup)="closePopup($event)">
+<app-popup-upload *ngIf="showPopupUpload" [currentDoc]="currentDocument" [title]="'Đăng tài liệu'"
+  [popupVisible]="showPopupUpload" (hiddenPopup)="closePopup($event)">
 </app-popup-upload>
