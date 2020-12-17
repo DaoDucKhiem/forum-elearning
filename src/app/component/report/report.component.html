@@ -1,12 +1,12 @@
 <div class="report-container d-flex flex-column">
     <div class="btn-group" role="group" aria-label="Basic example" class="flex-c-m">
-        <div class="btn-tab btn-dark" (click)="chooseTab(1)">Tài liệu</div>
-        <div class="btn-tab btn-light" (click)="chooseTab(2)">Bình luận</div>
-        <div class="btn-tab btn-success" (click)="chooseTab(3)">Đã xử lý</div>
+        <div class="btn-tab btn-light" [class.btn-dark]="switchReport === 1" (click)="chooseTab(1)">Tài liệu</div>
+        <div class="btn-tab btn-light" [class.btn-dark]="switchReport === 2" (click)="chooseTab(2)">Bình luận</div>
+        <div class="btn-tab btn-light" [class.btn-dark]="switchReport === 3" (click)="chooseTab(3)">Đã xử lý</div>
     </div>
 
     <div class="flex-1 content-report">
-        <div *ngIf="switchReport === 1 && listDocument">
+        <div *ngIf="switchReport === 1 && listDocument" class="h-100 w-100">
             <div class="flex-between full" *ngFor='let items of listDocument' (click)="goToDocument(items.DocumentID)">
                 <div>
                     <div class="align-items-center m-b-5">
@@ -16,13 +16,13 @@
                     </div>
                     <div class="italic-date m-l-32"><span class="m-r-16">Ngày tạo: {{items.CreatedDate | date:
                             'medium'}}</span><span>Người
-                            tạo: {{items.UserName}}</span></div>
+                            báo cáo: {{items.UserName}}</span></div>
                 </div>
                 <div class="flex-c-m">
-                    <div class="mr-3" (onClick)="changeStatus(items.ReportID)">
+                    <div class="mr-3" (click)="changeStatus(items.ReportID)">
                         <i class="fa fa-check-circle fa-2x"></i>
                     </div>
-                    <div (onClick)="changeStatus(items.ReportID)">
+                    <div (click)="changeStatus(items.ReportID)">
                         <i class="fa fa-times-circle fa-2x"></i>
                     </div>
                 </div>
@@ -31,23 +31,23 @@
                 <div class="font-20 bold">Chưa có báo cáo tài liệu vi phạm nào</div>
             </div>
         </div>
-        <div *ngIf="switchReport === 2 && listComment">
-            <div class="flex-between full" *ngFor='let items of listComment'>
+        <div *ngIf="switchReport === 2 && listComment" class="h-100 w-100">
+            <div class="flex-between full" *ngFor='let items of listComment' (click)="goToDocument(items.DocumentID)">
                 <div>
                     <div class="align-items-center m-b-5">
                         <div class="status-green m-r-8 m-l-16"></div>
                         <div class="font-16 bold m-r-8">{{items.ReportContent}}</div>
-                        <div class="report-tag">{{items.DocumentName}}</div>
                     </div>
                     <div class="italic-date m-l-32"><span class="m-r-16">Ngày tạo:
-                            {{items.CreatedDate}}</span><span>Người
-                            tạo: {{items.UserName}}</span></div>
+                            {{items.CreatedDate}}</span><span class="m-r-16">Người vi phạm:
+                            {{items.CreatedDate | date: 'medium'}}</span><span>Người
+                            báo cáo: {{items.UserName}}</span></div>
                 </div>
                 <div class="flex-c-m">
-                    <div class="mr-3" (onClick)="changeStatus(items.ReportID)">
+                    <div class="mr-3" (click)="changeStatus(items.ReportID)">
                         <i class="fa fa-check-circle fa-2x"></i>
                     </div>
-                    <div (onClick)="changeStatus(items.ReportID)">
+                    <div (click)="changeStatus(items.ReportID)">
                         <i class="fa fa-times-circle fa-2x"></i>
                     </div>
                 </div>
@@ -56,21 +56,21 @@
                 <div class="font-20 bold">Chưa có báo cáo bình luận vi phạm nào</div>
             </div>
         </div>
-        <div *ngIf="switchReport === 3 && listDone">
-            <div class="flex-between full" *ngFor='let items of listDone'>
+        <div *ngIf="switchReport === 3 && listDone" class="h-100 w-100">
+            <div class="flex-between full" *ngFor='let items of listDone' (click)="goToDocument(items.DocumentID)">
                 <div>
                     <div class="align-items-center m-b-5">
                         <div class="status-green m-r-8 m-l-16"></div>
                         <div class="font-16 bold m-r-8">{{items.ReportContent}}</div>
-                        <div class="report-tag">{{items.DocumentName}}</div>
+                        <div class="report-tag" *ngIf="items.CommentID == 0">{{items.DocumentName}}</div>
                     </div>
                     <div class="italic-date m-l-32"><span class="m-r-16">Ngày tạo:
-                            {{items.CreatedDate}}</span><span>Người
-                            tạo: {{items.UserName}}</span>
+                            {{items.CreatedDate | date: 'medium'}}</span><span>Người
+                            báo cáo: {{items.UserName}}</span>
                     </div>
                 </div>
                 <div class="flex-c-m">
-                    <div (onClick)="changeStatus(items.ReportID)">
+                    <div (click)="changeStatus(items.ReportID)">
                         <i class="fa fa-times-circle fa-2x"></i>
                     </div>
                 </div>
