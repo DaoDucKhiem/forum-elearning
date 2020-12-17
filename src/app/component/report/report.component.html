@@ -22,7 +22,7 @@
                     <div class="mr-3" (click)="changeStatus(items.ReportID)">
                         <i class="fa fa-check-circle fa-2x"></i>
                     </div>
-                    <div (click)="changeStatus(items.ReportID)">
+                    <div (click)="showPopup(items.ReportID)">
                         <i class="fa fa-times-circle fa-2x"></i>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     <div class="mr-3" (click)="changeStatus(items.ReportID)">
                         <i class="fa fa-check-circle fa-2x"></i>
                     </div>
-                    <div (click)="changeStatus(items.ReportID)">
+                    <div (click)="showPopup(items.ReportID)">
                         <i class="fa fa-times-circle fa-2x"></i>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div *ngIf="switchReport === 3 && listDone" class="h-100 w-100">
-            <div class="flex-between full" *ngFor='let items of listDone' (click)="goToDocument(items.DocumentID)">
+            <div class="flex-between full position-relative" *ngFor='let items of listDone' (click)="goToDocument(items.DocumentID)">
                 <div>
                     <div class="align-items-center m-b-5">
                         <div class="status-green m-r-8 m-l-16"></div>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="flex-c-m">
-                    <div (click)="changeStatus(items.ReportID)">
+                    <div (click)="showPopup(items.ReportID)">
                         <i class="fa fa-times-circle fa-2x"></i>
                     </div>
                 </div>
@@ -81,3 +81,21 @@
         </div>
     </div>
 </div>
+
+<dx-popup *ngIf="showPopupDelete" width="500" height="180" [dragEnabled]="true" [(visible)]="showPopupDelete"
+    title="Xóa tài liệu" (onHidden)="closePopupDelete()">
+    <dxo-position of="window" offset="0 -190">
+    </dxo-position>
+    <div class="h-100 content-popup">
+        <div class="font-16 mb-3">
+            Bạn thực sự muốn xóa báo cáo này chứ?
+        </div>
+        <div class="w-100 d-flex justify-content-end footer">
+            <dx-button stylingMode="contained" class="mr-3" text="Hủy bỏ" type="normal" [width]="80"
+                (onClick)="closePopupDelete()">
+            </dx-button>
+            <dx-button stylingMode="contained" text="Xóa" type="danger" [width]="80" (onClick)="DeleteReport()">
+            </dx-button>
+        </div>
+    </div>
+</dx-popup>

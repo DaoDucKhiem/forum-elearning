@@ -16,6 +16,11 @@ export class ReportComponent implements OnInit {
   listComment: Report[] = [];
   listDone: Report[] = [];
 
+  currentReportID: number;
+
+  toolAction = false;
+
+  showPopupDelete = false;
 
   constructor(
     private reportSV: ReportService,
@@ -35,6 +40,11 @@ export class ReportComponent implements OnInit {
           this.listComment = res.Data.filter(x => x.Status == 0 && x.ReportType == 2);
           this.listDone = res.Data.filter(x => x.Status == 1);
         }
+        else {
+          this.listDocument = [];
+          this.listComment = [];
+          this.listDone = [];
+        }
       }
       else {
 
@@ -43,21 +53,42 @@ export class ReportComponent implements OnInit {
   }
 
   changeStatus(e) {
+    this.toolAction = true;
     this.reportSV.changeStatusReport(e).subscribe((res) => {
       if (res?.Success) {
         this.getAllReport();
+        this.toolAction = false;
       }
     })
   }
   goToDocument(docID) {
-    this.transferDataSV.transferCategoryID(0);
-    this.router.navigate([`/${docID}`]);
+    if (!this.toolAction) {
+      this.transferDataSV.transferCategoryID(0);
+      this.router.navigate([`/${docID}`]);
+    }
   }
-  DeleteReport(e) {
 
+  DeleteReport() {
+    this.reportSV.DeleteReport(this.currentReportID).subscribe((res) => {
+      if (res?.Success) {
+        this.getAllReport();
+        this.toolAction = false;
+      }
+      this.closePopupDelete();
+    })
   }
 
   chooseTab(id) {
     this.switchReport = id;
+  }
+
+  showPopup(e) {
+    this.toolAction = true;
+    this.currentReportID = e;
+    this.showPopupDelete = true;
+  }
+
+  closePopupDelete() {
+    this.showPopupDelete = false;
   }
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ReportRoutingModule } from './report-routing.module';
 import { ReportComponent } from './report.component';
-import {DxButtonModule} from 'devextreme-angular';
+import {DxButtonModule, DxPopupModule} from 'devextreme-angular';
 
 
 @NgModule({
@@ -11,7 +11,8 @@ import {DxButtonModule} from 'devextreme-angular';
   imports: [
     CommonModule,
     ReportRoutingModule,
-    DxButtonModule
+    DxButtonModule,
+    DxPopupModule
   ]
 })
 export class ReportModule { }

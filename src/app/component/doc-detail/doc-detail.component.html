@@ -148,7 +148,7 @@
                                                 a'}}</span>
                                         </div>
                                         <div class="flex-c-m tool-comment">
-                                            <div *ngIf="comment?.UserID != currentUser?.UserID && isAdmin"
+                                            <div *ngIf="comment?.UserID != currentUser?.UserID && !isAdmin"
                                                 (click)="showPopupReportComment(comment)" name="delete"
                                                 class="btn-delete flex-c-m cursor-pointer">
                                                 <i class="fa fa-info-circle"></i>

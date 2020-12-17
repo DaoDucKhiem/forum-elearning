@@ -22,7 +22,12 @@ export class ReportService extends BaseService<object>{
   getAllReport(): Observable<ServerResponse> {
     return this.http.get(`${this.getApiURL()}/getAll`);
   }
+
   changeStatusReport(id: number): Observable<ServerResponse> {
     return this.http.put(`${this.getApiURL()}/update/${id}`);
+  }
+
+  DeleteReport(id: number): Observable<ServerResponse> {
+    return this.http.delete(`${this.getApiURL()}/${id}`);
   }
 }
