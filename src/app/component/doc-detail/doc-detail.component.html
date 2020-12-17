@@ -105,8 +105,9 @@
                     <dx-button *ngIf="currentDocument?.UserID == currentUser?.UserID || isAdmin" stylingMode="contained"
                         text="Xóa tài liệu" class="mr-4" type="danger" [width]="140" (onClick)="showPopupDeleteDoc()">
                     </dx-button>
-                    <dx-button *ngIf="currentDocument?.UserID == currentUser?.UserID || isAdmin" stylingMode="contained"
-                        text="Báo cáo vi phạm" type="normal" [width]="140" (onClick)="showPopupReportData()">
+                    <dx-button *ngIf="currentDocument?.UserID == currentUser?.UserID || !isAdmin"
+                        stylingMode="contained" text="Báo cáo vi phạm" type="normal" [width]="140"
+                        (onClick)="showPopupReportData()">
                     </dx-button>
                 </div>
             </div>
@@ -146,9 +147,17 @@
                                                 y, h:mm:ss
                                                 a'}}</span>
                                         </div>
-                                        <div *ngIf="comment?.UserID === currentUser?.UserID || isAdmin"
-                                            (click)="deleteComment(comment)" name="delete" class="btn-delete flex-c-m">
-                                            <i class="fa fa-trash"></i>
+                                        <div class="flex-c-m tool-comment">
+                                            <div *ngIf="comment?.UserID != currentUser?.UserID && isAdmin"
+                                                (click)="showPopupReportComment(comment)" name="delete"
+                                                class="btn-delete flex-c-m cursor-pointer">
+                                                <i class="fa fa-info-circle"></i>
+                                            </div>
+                                            <div *ngIf="comment?.UserID === currentUser?.UserID || isAdmin"
+                                                (click)="deleteComment(comment)" name="delete"
+                                                class="btn-delete flex-c-m ml-2 cursor-pointer">
+                                                <i class="fa fa-trash"></i>
+                                            </div>
                                         </div>
                                     </div>
                                     <div>{{comment?.Content}}</div>

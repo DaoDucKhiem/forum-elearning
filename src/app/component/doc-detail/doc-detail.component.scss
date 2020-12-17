@@ -85,9 +85,21 @@
             background-color: #51a8f3;
         }
 
-        .commenter {
+        .comment {
+            .commenter {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .tool-comment {
+                visibility: hidden;
+            }
+
             &:hover {
-                text-decoration: underline;
+                .tool-comment {
+                    visibility: visible;
+                }
             }
         }
 

@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommentData } from 'src/app/share/model/param/comment';
 import { ParamDoc } from 'src/app/share/model/param/param-doc';
+import { Report } from 'src/app/share/model/param/report';
 import { CommentService } from 'src/app/share/service/comment.service';
 import { DocumentService } from 'src/app/share/service/document.service';
+import { ReportService } from 'src/app/share/service/report.service';
 import { UserService } from 'src/app/share/service/user.service';
 
 declare var require: any
@@ -32,6 +34,8 @@ export class DocDetailComponent implements OnInit {
   showPopupReport = false;
 
   reasonReport = '';
+  
+  newReport = new Report(); 
 
   isReportError = false;
 
@@ -79,7 +83,8 @@ export class DocDetailComponent implements OnInit {
     private userSV: UserService,
     private commentSV: CommentService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private reportSV: ReportService
   ) {
     this.currentUser = this.userSV.getUserInfor();
     this.isAdmin = this.currentUser.Role; // gán quyền có là admin hay không
@@ -253,6 +258,17 @@ export class DocDetailComponent implements OnInit {
   // hiển thị popup report
   showPopupReportData() {
     this.showPopupReport = true;
+    this.newReport.ReportType = 1; // loại báo cáo
+    setTimeout(() => {
+      $("dx-text-area").find("textarea").focus();
+    }, 500);
+  }
+
+  showPopupReportComment(comment) {
+    this.showPopupReport = true;
+    this.newReport.ReportType = 2; // loại báo cáo bình luận
+    this.newReport.CommentID = comment.CommentID;
+    this.newReport.UserComment = comment.UserName;
     setTimeout(() => {
       $("dx-text-area").find("textarea").focus();
     }, 500);
@@ -287,13 +303,32 @@ export class DocDetailComponent implements OnInit {
 
   // chuẩn bị dữ liệu trước khi report
   prepareReasonBeforeSend() {
-
+    this.newReport.UserID = this.currentUser.UserID;
+    this.newReport.UserName = this.currentUser.FullName;
+    this.newReport.DocumentID = this.currentDocument.DocumentID;
+    this.newReport.CreatedDate = new Date();
+    this.newReport.DocumentName = this.currentDocument.DocumentName;
+    this.newReport.ReportContent = this.reasonReport.trim();
+    this.newReport.Status = 0;
   }
 
   // report
   Report() {
     if (this.validateValueReasonBeforeSave()) {
       this.prepareReasonBeforeSend();
+      this.reportSV.save(this.newReport).subscribe(res => {
+        if (res && res.Success) {
+          this.toastr.success("Báo cáo thành công!");
+        }
+        else {
+          this.toastr.error("Có lỗi trong khi xử lý");
+        }
+
+        this.newReport = new Report();
+        this.reasonReport = '';
+
+        this.showPopupReport = false;
+      });
     }
   }
 }

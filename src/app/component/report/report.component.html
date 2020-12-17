@@ -1,58 +1,82 @@
-<div style="background-color: #59c2ff; width: 100%; height: 100%; padding-top: 32px;">
+<div class="report-container d-flex flex-column">
     <div class="btn-group" role="group" aria-label="Basic example" class="flex-c-m">
-        <button type="button" class="btn btn-dark" style="width: 120px;" (click)="switchReport = true">Tài liệu</button>
-        <button type="button" class="btn btn-light" style="width: 120px;" (click)="switchReport = false">Bình
-            luận</button>
+        <div class="btn-tab btn-dark" (click)="chooseTab(1)">Tài liệu</div>
+        <div class="btn-tab btn-light" (click)="chooseTab(2)">Bình luận</div>
+        <div class="btn-tab btn-success" (click)="chooseTab(3)">Đã xử lý</div>
     </div>
-    <!-- CommentID: 0
-            CreatedDate: "2020-01-12T00:00:00"
-            DocumentID: 24
-            DocumentName: "Recommender System Introdution"
-            ReportContent: "Báo cáo tài liệu vi phạm"
-            ReportID: 1
-            ReportType: "1"
-            Status: 1
-            UserID: "08d8a1d2-961c-4478-8d6a-0e04facdfa00"
-            UserName: "Đào Đức Khiêm" -->
-    <div *ngFor='let items of listReport'>
-        <div class="flex-between full" *ngIf="switchReport && items.CommentID == 0" (click)="goToDocument(items.DocumentID)">
-            <div>
-                <div class="align-items-center m-b-5">
-                    <div class="status-green m-r-8 m-l-16"></div>
-                    <div class="font-16 bold m-r-8">{{items.ReportContent}}</div>
-                    <div class="report-tag">{{items.DocumentName}}</div>
+
+    <div class="flex-1 content-report">
+        <div *ngIf="switchReport === 1 && listDocument">
+            <div class="flex-between full" *ngFor='let items of listDocument' (click)="goToDocument(items.DocumentID)">
+                <div>
+                    <div class="align-items-center m-b-5">
+                        <div class="status-green m-r-8 m-l-16"></div>
+                        <div class="font-16 bold m-r-8">{{items.ReportContent}}</div>
+                        <div class="report-tag">{{items.DocumentName}}</div>
+                    </div>
+                    <div class="italic-date m-l-32"><span class="m-r-16">Ngày tạo: {{items.CreatedDate | date:
+                            'medium'}}</span><span>Người
+                            tạo: {{items.UserName}}</span></div>
                 </div>
-                <div class="italic-date m-l-32"><span class="m-r-16">Ngày tạo: {{items.CreatedDate}}</span><span>Người
-                        tạo: {{items.UserName}}</span></div>
+                <div class="flex-c-m">
+                    <div class="mr-3" (onClick)="changeStatus(items.ReportID)">
+                        <i class="fa fa-check-circle fa-2x"></i>
+                    </div>
+                    <div (onClick)="changeStatus(items.ReportID)">
+                        <i class="fa fa-times-circle fa-2x"></i>
+                    </div>
+                </div>
             </div>
-            <div class="">
-                <dx-button icon="check" *ngIf="items.Status == 1" class="m-r-8" type="success" text="Đã xử lý">
-                </dx-button>
-                <dx-button icon="check" *ngIf="items.Status == 0" class="m-r-8" text="Chưa xử lý" (onClick)="changeStatus(items.ReportID)">
-                </dx-button>
-                <!-- <dx-button stylingMode="contained" text="Xóa" type="danger" [width]="120"
-                    (onClick)="DeleteReport($event)">
-                </dx-button> -->
+            <div *ngIf="listDocument.length == 0" class="flex-c-m h-100 w-100">
+                <div class="font-20 bold">Chưa có báo cáo tài liệu vi phạm nào</div>
             </div>
         </div>
-        <div class="flex-between full" *ngIf="!switchReport && items.CommentID != 0">
-            <div>
-                <div class="align-items-center m-b-5">
-                    <div class="status-green m-r-8 m-l-16"></div>
-                    <div class="font-16 bold m-r-8">{{items.ReportContent}}</div>
-                    <div class="report-tag">{{items.DocumentName}}</div>
+        <div *ngIf="switchReport === 2 && listComment">
+            <div class="flex-between full" *ngFor='let items of listComment'>
+                <div>
+                    <div class="align-items-center m-b-5">
+                        <div class="status-green m-r-8 m-l-16"></div>
+                        <div class="font-16 bold m-r-8">{{items.ReportContent}}</div>
+                        <div class="report-tag">{{items.DocumentName}}</div>
+                    </div>
+                    <div class="italic-date m-l-32"><span class="m-r-16">Ngày tạo:
+                            {{items.CreatedDate}}</span><span>Người
+                            tạo: {{items.UserName}}</span></div>
                 </div>
-                <div class="italic-date m-l-32"><span class="m-r-16">Ngày tạo: {{items.CreatedDate}}</span><span>Người
-                        tạo: {{items.UserName}}</span></div>
+                <div class="flex-c-m">
+                    <div class="mr-3" (onClick)="changeStatus(items.ReportID)">
+                        <i class="fa fa-check-circle fa-2x"></i>
+                    </div>
+                    <div (onClick)="changeStatus(items.ReportID)">
+                        <i class="fa fa-times-circle fa-2x"></i>
+                    </div>
+                </div>
             </div>
-            <div class="">
-                <dx-button icon="check" *ngIf="items.Status == 1" class="m-r-8" type="success" text="Đã xử lý">
-                </dx-button>
-                <dx-button icon="check" *ngIf="items.Status == 0" class="m-r-8" text="Chưa xử lý" (onClick)="changeStatus(items.ReportID)">
-                </dx-button>
-                <!-- <dx-button stylingMode="contained" text="Xóa" type="danger" [width]="120"
-                    (onClick)="DeleteReport($event)">
-                </dx-button> -->
+            <div *ngIf="listComment.length == 0" class="flex-c-m h-100 w-100">
+                <div class="font-20 bold">Chưa có báo cáo bình luận vi phạm nào</div>
+            </div>
+        </div>
+        <div *ngIf="switchReport === 3 && listDone">
+            <div class="flex-between full" *ngFor='let items of listDone'>
+                <div>
+                    <div class="align-items-center m-b-5">
+                        <div class="status-green m-r-8 m-l-16"></div>
+                        <div class="font-16 bold m-r-8">{{items.ReportContent}}</div>
+                        <div class="report-tag">{{items.DocumentName}}</div>
+                    </div>
+                    <div class="italic-date m-l-32"><span class="m-r-16">Ngày tạo:
+                            {{items.CreatedDate}}</span><span>Người
+                            tạo: {{items.UserName}}</span>
+                    </div>
+                </div>
+                <div class="flex-c-m">
+                    <div (onClick)="changeStatus(items.ReportID)">
+                        <i class="fa fa-times-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="listDone.length == 0" class="flex-c-m h-100 w-100">
+                <div class="font-20 bold">Chưa xử lý báo cáo vi phạm nào</div>
             </div>
         </div>
     </div>

@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit {
   searchKey = '';
   searchEnable = false;
 
+  isAdmin: any;
+
   timeSearch: any;
 
   currentUser: any;
@@ -68,6 +70,7 @@ export class NavbarComponent implements OnInit {
   getUser() {
     // setTimeout(() => {
     this.currentUser = this.userSV.getUserInfor();
+    this.isAdmin = this.currentUser.Role;
     // }, 200);
   }
 

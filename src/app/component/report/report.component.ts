@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Report } from 'src/app/share/model/param/report';
 import { DataTransferService } from 'src/app/share/service/data-transfer.service';
 import { ReportService } from 'src/app/share/service/report.service';
 
@@ -10,12 +11,15 @@ import { ReportService } from 'src/app/share/service/report.service';
 })
 export class ReportComponent implements OnInit {
 
-  switchReport: boolean = true;
-  listReport: any[];
+  switchReport = 1;
+  listDocument: Report[] = [];
+  listComment: Report[] = [];
+  listDone: Report[] = [];
+
 
   constructor(
     private reportSV: ReportService,
-    private router: Router, 
+    private router: Router,
     private transferDataSV: DataTransferService
   ) { }
 
@@ -25,8 +29,15 @@ export class ReportComponent implements OnInit {
 
   getAllReport() {
     this.reportSV.getAllReport().subscribe((res) => {
-      if (res?.Success) {
-        this.listReport = res.Data;
+      if (res?.Success && res?.Data) {
+        if (res.Data.length > 0) {
+          this.listDocument = res.Data.filter(x => x.Status == 0 && x.ReportType == 1);
+          this.listComment = res.Data.filter(x => x.Status == 0 && x.ReportType == 2);
+          this.listDone = res.Data.filter(x => x.Status == 1);
+        }
+      }
+      else {
+
       }
     })
   }
@@ -38,11 +49,15 @@ export class ReportComponent implements OnInit {
       }
     })
   }
-  goToDocument(docID){
+  goToDocument(docID) {
     this.transferDataSV.transferCategoryID(0);
     this.router.navigate([`/${docID}`]);
   }
   DeleteReport(e) {
 
+  }
+
+  chooseTab(id) {
+    this.switchReport = id;
   }
 }
