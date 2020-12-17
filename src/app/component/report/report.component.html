@@ -6,7 +6,7 @@
     </div>
 
     <div class="flex-1 content-report">
-        <div *ngIf="switchReport === 1 && listDocument" class="h-100 w-100">
+        <div *ngIf="switchReport === 1 && listDocument" class="w-100">
             <div class="flex-between full" *ngFor='let items of listDocument' (click)="goToDocument(items.DocumentID)">
                 <div>
                     <div class="align-items-center m-b-5">
@@ -31,7 +31,7 @@
                 <div class="font-20 bold">Chưa có báo cáo tài liệu vi phạm nào</div>
             </div>
         </div>
-        <div *ngIf="switchReport === 2 && listComment" class="h-100 w-100">
+        <div *ngIf="switchReport === 2 && listComment" class="w-100">
             <div class="flex-between full" *ngFor='let items of listComment' (click)="goToDocument(items.DocumentID)">
                 <div>
                     <div class="align-items-center m-b-5">
@@ -56,7 +56,7 @@
                 <div class="font-20 bold">Chưa có báo cáo bình luận vi phạm nào</div>
             </div>
         </div>
-        <div *ngIf="switchReport === 3 && listDone" class="h-100 w-100">
+        <div *ngIf="switchReport === 3 && listDone" class="w-100">
             <div class="flex-between full position-relative" *ngFor='let items of listDone' (click)="goToDocument(items.DocumentID)">
                 <div>
                     <div class="align-items-center m-b-5">
