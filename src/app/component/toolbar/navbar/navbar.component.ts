@@ -67,7 +67,9 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    this.getUser();
+    setTimeout(() => {
+      this.getUser();
+    }, 200);
 
     this.transferDataSV.docTranData.subscribe(data => {
       if (data) {
