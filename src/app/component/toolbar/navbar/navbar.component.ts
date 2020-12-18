@@ -82,8 +82,8 @@ export class NavbarComponent implements OnInit {
   getUser() {
     // setTimeout(() => {
     this.currentUser = this.userSV.getUserInfor();
-    if (this.currentUser?.Role) {
-      this.isAdmin = this.currentUser.Role;
+    if (this.currentUser["Role"]) {
+      this.isAdmin = this.currentUser["Role"];
     }
     else {
       this.isAdmin = 0;
