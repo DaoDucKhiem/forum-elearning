@@ -27,7 +27,10 @@ export class UserService extends BaseService<object> {
   // lấy thông tin user lưu trong localstorage
   getUserInfor() {
     var userData = localStorage.getItem("UserData");
-    return JSON.parse(userData);
+    if (userData) {
+      return JSON.parse(userData);
+    }
+    else return null;
   }
 
   // lấy thông tin user từ id

@@ -82,7 +82,12 @@ export class NavbarComponent implements OnInit {
   getUser() {
     // setTimeout(() => {
     this.currentUser = this.userSV.getUserInfor();
-    this.isAdmin = this.currentUser.Role;
+    if (this.currentUser?.Role) {
+      this.isAdmin = this.currentUser.Role;
+    }
+    else {
+      this.isAdmin = 0;
+    }
     // }, 200);
   }
 
@@ -103,7 +108,7 @@ export class NavbarComponent implements OnInit {
     this.visiblePopover = false;
     this.router.navigate([`help`]);
   }
-  showReportManegement(){
+  showReportManegement() {
     this.visiblePopover = false;
     this.router.navigate([`report`]);
   }
