@@ -89,7 +89,12 @@ export class DocDetailComponent implements OnInit {
     private transferSV: DataTransferService
   ) {
     this.currentUser = this.userSV.getUserInfor();
-    this.isAdmin = this.currentUser.Role; // gán quyền có là admin hay không
+    if (this.currentUser?.Role) {
+      this.isAdmin = this.currentUser.Role; // gán quyền có là admin hay không
+    }
+    else {
+      this.isAdmin = 0;
+    }
   }
 
 
