@@ -88,17 +88,17 @@ export class DocDetailComponent implements OnInit {
     private reportSV: ReportService,
     private transferSV: DataTransferService
   ) {
-    this.currentUser = this.userSV.getUserInfor();
-    if (this.currentUser["Role"]) {
-      this.isAdmin = this.currentUser["Role"]; // gán quyền có là admin hay không
-    }
-    else {
-      this.isAdmin = 0;
-    }
   }
 
 
   ngOnInit(): void {
+    this.currentUser = this.userSV.getUserInfor();
+    if (this.currentUser?.Role) {
+      this.isAdmin = this.currentUser?.Role; // gán quyền có là admin hay không
+    }
+    else {
+      this.isAdmin = 0;
+    }
     this.route.params.subscribe(params => {
       this.documentID = Number.parseInt(params['id']);
       this.documentService.getDocumentById(this.documentID).subscribe((res) => {
